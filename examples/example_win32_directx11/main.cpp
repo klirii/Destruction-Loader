@@ -1,6 +1,6 @@
 #include "main.h"
 
-int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {
     WNDCLASSEXW wc;
     wc.cbSize = sizeof(WNDCLASSEXW);
@@ -9,15 +9,15 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     wc.cbClsExtra = NULL;
     wc.cbWndExtra = NULL;
     wc.hInstance = nullptr;
-    wc.hIcon = LoadIcon(0, IDI_APPLICATION);
-    wc.hCursor = LoadCursor(0, IDC_ARROW);
+    wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+    wc.hCursor = LoadCursor(hInstance, IDC_ARROW);
     wc.hbrBackground = nullptr;
-    wc.lpszMenuName = L"ImGui";
-    wc.lpszClassName = L"Example";
-    wc.hIconSm = LoadIcon(0, IDI_APPLICATION);
+    wc.lpszMenuName = L"Loader";
+    wc.lpszClassName = L"Main";
+    wc.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
 
     RegisterClassExW(&wc);
-    hwnd = CreateWindowExW(NULL, wc.lpszClassName, L"Example", WS_POPUP, (GetSystemMetrics(SM_CXSCREEN) / 2) - (WIDTH / 2), (GetSystemMetrics(SM_CYSCREEN) / 2) - (HEIGHT / 2), WIDTH, HEIGHT, 0, 0, 0, 0);
+    hwnd = CreateWindowExW(NULL, wc.lpszClassName, L"Destruction Loader", WS_POPUP, (GetSystemMetrics(SM_CXSCREEN) / 2) - (WIDTH / 2), (GetSystemMetrics(SM_CYSCREEN) / 2) - (HEIGHT / 2), WIDTH, HEIGHT, 0, 0, 0, 0);
 
     SetWindowLongA(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
     SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 255, LWA_ALPHA);

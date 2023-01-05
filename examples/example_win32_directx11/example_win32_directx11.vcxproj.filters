@@ -16,6 +16,9 @@
     <Filter Include="icons">
       <UniqueIdentifier>{ea85fd09-6bce-457a-bbe4-4970b7bff116}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{469dade3-6acf-4bad-af6e-f433f3a044a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imconfig.h">
@@ -54,6 +57,9 @@
     <ClInclude Include="segue.h">
       <Filter>fonts</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
@@ -85,5 +91,15 @@
     <None Include="..\..\misc\debuggers\imgui.natvis">
       <Filter>imgui</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="example_win32_directx11.rc">
+      <Filter>resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\resources\logo.ico">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -14,6 +14,7 @@
 #include "Dots.h"
 #include "segue.h"
 #include <string>
+#include "resource.h"
 static ID3D11Device* g_pd3dDevice = NULL;
 static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
 static IDXGISwapChain* g_pSwapChain = NULL;

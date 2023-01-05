@@ -159,6 +159,7 @@
     <ClInclude Include="icon.h" />
     <ClInclude Include="inter.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="segue.h" />
     <ClInclude Include="user_circle.h" />
   </ItemGroup>
@@ -174,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\misc\debuggers\imgui.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="example_win32_directx11.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\resources\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
