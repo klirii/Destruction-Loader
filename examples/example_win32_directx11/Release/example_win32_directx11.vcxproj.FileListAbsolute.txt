@@ -1,0 +1,2 @@
+C:\Users\kliri\Documents\kliri loader lastlast\examples\example_win32_directx11\Release\example_win32_directx11.exe
+D:\Projects\Destruction Loader\examples\example_win32_directx11\Release\example_win32_directx11.exe
