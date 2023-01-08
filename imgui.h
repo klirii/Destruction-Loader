@@ -505,6 +505,7 @@ namespace ImGui
     IMGUI_API bool          Button(const char* label, const ImVec2& size = ImVec2(0, 0));   // button
     IMGUI_API bool          CButton(const char* ico0, const char* label, bool bg, const ImVec2& size = ImVec2(0, 0));   // button
     IMGUI_API bool          CBAutton(const char* ico0, const char* label, bool bg, const ImVec2& size_arg = ImVec2(0, 0));
+    IMGUI_API bool          CBAAutton(const char* ico0, const char* label, bool bg, const ImVec2& size_arg = ImVec2(0, 0));
     IMGUI_API bool          Tab(const char* ico0, const char* label, bool selected, const ImVec2& size = ImVec2(0, 0));   // button
     IMGUI_API bool          SmallButton(const char* label);                                 // button with FramePadding=(0,0) to easily embed within text
     IMGUI_API bool          InvisibleButton(const char* str_id, const ImVec2& size, ImGuiButtonFlags flags = 0); // flexible button behavior without the visuals, frequently useful to build custom behaviors using the public api (along with IsItemActive, IsItemHovered, etc.)

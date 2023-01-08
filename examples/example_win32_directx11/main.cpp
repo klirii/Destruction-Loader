@@ -146,13 +146,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.6f, 0.6f, 0.6f, 1.f));
                     ImGui::PushFont(contact_logo);
 
-                    ImGui::SetCursorPos(ImVec2(695, 10));
+                    ImGui::SetCursorPos(ImVec2(745, 9));
+                    if (ImGui::CBAAutton("##vk", "J", false, ImVec2(40, 40)))
+                        ShellExecute(NULL, L"open", L"https://vk.com/destructiqn", NULL, NULL, SW_SHOW);
 
-                    if (ImGui::CButton("##vk", "J", false, ImVec2(80, 50))) ShellExecute(NULL, L"open", L"https://vk.com/destructiqn", NULL, NULL, SW_SHOW);
-
-                    ImGui::SetCursorPos(ImVec2(745, 10));
-
-                    if (ImGui::CButton("##discord", "K", false, ImVec2(80, 50))) ShellExecute(NULL, L"open", L"https://discord.gg/esWZAA3cBC", NULL, NULL, SW_SHOW);
+                    ImGui::SetCursorPos(ImVec2(795, 10));
+                    if (ImGui::CBAAutton("##discord", "K", false, ImVec2(40, 40)))
+                        ShellExecute(NULL, L"open", L"https://discord.gg/esWZAA3cBC", NULL, NULL, SW_SHOW);
 
                     ImGui::PopFont();
                     ImGui::PopStyleColor();

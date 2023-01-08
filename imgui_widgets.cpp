@@ -1239,6 +1239,8 @@ bool ImGui::CButtonEx(const char* ico0, const char* label, bool bg, const ImVec2
 
     PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0, 0.5f));
 
+    if (!bg) PushStyleColor(ImGuiCol_Text, GetColorU32(it_anim->second.background_color));
+
     PushFont(ico);
     RenderTextClipped(bb.Min + ImVec2(18, -5), bb.Max, ico0, NULL, &label_size, style.ButtonTextAlign, &bb);
     PopFont();
@@ -1246,6 +1248,8 @@ bool ImGui::CButtonEx(const char* ico0, const char* label, bool bg, const ImVec2
     RenderTextClipped(bb.Min + ImVec2(48, 0), bb.Max + ImVec2(50, 0), label, NULL, &label_size, style.ButtonTextAlign, &bb);
 
     PopStyleVar();
+
+    if (!bg) PopStyleColor(1);
 
     IMGUI_TEST_ENGINE_ITEM_INFO(id, label, g.LastItemData.StatusFlags);
     return pressed;
@@ -1292,6 +1296,59 @@ bool ImGui::CBAutton(const char* ico0, const char* label, bool bg, const ImVec2&
 
     it_anim->second.background_color = ImLerp(it_anim->second.background_color, IsItemActive() ? color::button_active : hovered ? color::button_hovered : color::button, g.IO.DeltaTime * 6.f);
     it_anim->second.text_color = ImLerp(it_anim->second.text_color, IsItemActive() ? color::textB_active : hovered ? color::textB_hov : color::textB, g.IO.DeltaTime * 6.f);
+
+    if (bg) RenderFrame(bb.Min, bb.Max, GetColorU32(it_anim->second.background_color), true, style.FrameRounding);
+
+    PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0, 0.5f));
+    PushStyleColor(ImGuiCol_Text, GetColorU32(it_anim->second.text_color));
+    PushFont(ico);
+    RenderTextClipped(bb.Min + ImVec2(18, -5), bb.Max, ico0, NULL, &label_size, style.ButtonTextAlign, &bb);
+    PopFont();
+
+    RenderTextClipped(bb.Min + ImVec2(0, 0), bb.Max + ImVec2(0, 0), label, NULL, &label_size, style.ButtonTextAlign, &bb);
+
+    PopStyleColor();
+    PopStyleVar();
+
+    IMGUI_TEST_ENGINE_ITEM_INFO(id, label, g.LastItemData.StatusFlags);
+    return pressed;
+}
+
+bool ImGui::CBAAutton(const char* ico0, const char* label, bool bg, const ImVec2& size_arg)
+{
+    ImGuiWindow* window = GetCurrentWindow();
+    if (window->SkipItems)
+        return false;
+
+    ImGuiContext& g = *GImGui;
+    const ImGuiStyle& style = g.Style;
+    const ImGuiID id = window->GetID(label);
+    const ImVec2 label_size = CalcTextSize(label, NULL, true);
+
+    ImVec2 pos = window->DC.CursorPos;
+    if (style.FramePadding.y < window->DC.CurrLineTextBaseOffset) // Try to vertically align buttons that are smaller/have no padding so that text baseline matches (bit hacky, since it shouldn't be a flag)
+        pos.y += window->DC.CurrLineTextBaseOffset - style.FramePadding.y;
+    ImVec2 size = CalcItemSize(size_arg, label_size.x + style.FramePadding.x * 2.0f, label_size.y + style.FramePadding.y * 2.0f);
+
+    const ImRect bb(pos, pos + size);
+    ItemSize(size, style.FramePadding.y);
+    if (!ItemAdd(bb, id))
+        return false;
+
+    bool hovered, held;
+    bool pressed = ButtonBehavior(bb, id, &hovered, &held);
+
+    static std::map<ImGuiID, button_state> anim;
+    auto it_anim = anim.find(id);
+
+    if (it_anim == anim.end())
+    {
+        anim.insert({ id, button_state() });
+        it_anim = anim.find(id);
+    }
+
+    it_anim->second.background_color = ImLerp(it_anim->second.background_color, IsItemActive() ? color::button_active : hovered ? color::button_hovered : color::button, g.IO.DeltaTime * 6.f);
+    it_anim->second.text_color = ImLerp(it_anim->second.text_color, IsItemActive() ? color::textZ_active : hovered ? color::textZ_hov : color::textZ, g.IO.DeltaTime * 6.f);
 
     if (bg) RenderFrame(bb.Min, bb.Max, GetColorU32(it_anim->second.background_color), true, style.FrameRounding);
 

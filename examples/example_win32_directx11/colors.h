@@ -15,7 +15,7 @@ namespace color {
 
     inline ImVec4 InputText_Active = ImColor(40, 40, 40, 175);
     inline ImVec4 InputText_Hovered = ImColor(35, 35, 35, 175);
-    inline ImVec4 InputText = ImColor(30, 30, 30, 175);
+    inline ImVec4 InputText = ImColor(25, 25, 25, 175);
 
     inline ImVec4 button_active = ImColor(95, 95, 95, 255);
     inline ImVec4 button_hovered = ImColor(80, 80, 80, 255);
@@ -34,8 +34,8 @@ namespace color {
     inline ImVec4 car = ImColor(153, 153, 153, 255);
 
     inline ImVec4 check_active = ImColor(35, 35, 35, 175);
-    inline ImVec4 check_hov = ImColor(30, 30, 30, 175);
-    inline ImVec4 check = ImColor(25, 25, 25, 175);
+    inline ImVec4 check_hov = ImColor(25, 25, 25, 175);
+    inline ImVec4 check = ImColor(20, 20, 20, 175);
 
     inline ImVec4 AButton_active = ImColor(233, 151, 55, 255);
     inline ImVec4 AButton_hov = ImColor(223, 141, 45, 255);
@@ -45,4 +45,7 @@ namespace color {
     inline ImVec4 textB_hov = ImColor(58, 90, 215, 230);
     inline ImVec4 textB = ImColor(78, 120, 225, 230);
 
+    inline ImVec4 textZ_active = ImColor(242, 242, 242, 255);
+    inline ImVec4 textZ_hov = ImColor(192, 192, 192, 255);
+    inline ImVec4 textZ = ImColor(152, 152, 152, 255);
 }                 
