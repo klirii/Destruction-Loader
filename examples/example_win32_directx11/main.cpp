@@ -284,7 +284,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
                         nlohmann::json features;
                         if (client.GetFeatures(client.user.name, client.user.password, client.user.session, features)) {
- 
+                            
                         }
                         tabs = 5;
                     }
