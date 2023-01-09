@@ -19,6 +19,12 @@
     <Filter Include="resources">
       <UniqueIdentifier>{469dade3-6acf-4bad-af6e-f433f3a044a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\rest">
+      <UniqueIdentifier>{f4e4d4c7-31fb-46d9-a72e-faa14c57362b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\rest\utils">
+      <UniqueIdentifier>{f9720785-dd41-4434-903c-c8e406ef8882}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imconfig.h">
@@ -60,6 +66,15 @@
     <ClInclude Include="resource.h">
       <Filter>resources</Filter>
     </ClInclude>
+    <ClInclude Include="rest\client.hpp">
+      <Filter>sources\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\utils\utils.hpp">
+      <Filter>sources\rest\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\utils\errorhandler.hpp">
+      <Filter>sources\rest\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
@@ -85,6 +100,15 @@
     </ClCompile>
     <ClCompile Include="..\..\imgui_widgets.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\client.cpp">
+      <Filter>sources\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\utils\utils.cpp">
+      <Filter>sources\rest\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\utils\errorhandler.cpp">
+      <Filter>sources\rest\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

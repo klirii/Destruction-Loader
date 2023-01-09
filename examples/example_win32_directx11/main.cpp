@@ -1,7 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {
+    AllocConsole();
+    freopen("CONOUT$", "w", stdout);
     WNDCLASSEXW wc;
     wc.cbSize = sizeof(WNDCLASSEXW);
     wc.style = CS_CLASSDC;
@@ -135,7 +138,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     // USER CIRCLE  AND  USER NAME, LICENSE TIME
 
                     ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 455.000f + p.y), ImVec2(230 + p.x, 456 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
-                    ImGui::GetWindowDrawList()->AddText(minimize, 17, ImVec2(75 + p.x, 483 + p.y), ImGui::GetColorU32(color::text_circle), "User: kliri");
+                    ImGui::GetWindowDrawList()->AddText(minimize, 17, ImVec2(75 + p.x, 483 + p.y), ImGui::GetColorU32(color::text_circle), (string("User: ") + client.user.name).c_str());
                     ImGui::GetWindowDrawList()->AddText(minimize, 17, ImVec2(75 + p.x, 503 + p.y), ImGui::GetColorU32(color::text_circle), "License: lifetime");
 
                     // LOGO COMPANY  AND  NAME COMPANY
@@ -159,7 +162,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::BeginGroupPos(ImVec2(0, 120));
                     {
-
+                        
                         if (ImGui::Tab("A", "UnlimitedCPS", 2 == tabs || 5 == tabs, ImVec2(240, 40)))
                             tabs = 2;
 
@@ -186,11 +189,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::BeginGroup();
                     {
                         ImGui::PushFont(minimize2);
-                        ImGui::InputTextEx("##0", u8"Введите логин", login, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##0", u8"Введите логин", login, 12, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
                         ImGui::InputTextEx("##1", u8"Введите пароль", password, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
-                        if (ImGui::Button(u8"Войти", ImVec2(300, 40))) tabs = 2;
+                        if (ImGui::Button(u8"Войти", ImVec2(300, 40))) {
+                            string pass = md5(password);
+                            pass = md5(pass);
+                            if (client.login(login, pass.c_str())) {
+                                MessageBoxA(Destruction::RestAPI::ErrorHandler::window, "Вы были успешно авторизированы!", "Destruction Loader", MB_OK);
+                                tabs = 2;
+                            }
+                        }
 
                         ImGui::PopFont();
 
@@ -217,7 +227,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         //ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(200 + p.x, 100 + p.y), ImVec2(650 + p.x, 470 + p.y), ImColor(38, 37, 43, 100), s.WindowRounding, ImDrawFlags_None);
 
                         ImGui::PushFont(minimize2);
-                        ImGui::InputTextEx("##0", u8"Введите логин", reg_login, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##0", u8"Введите логин", reg_login, 12, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
                         ImGui::InputTextEx("##2", u8"Введите пароль", reg_password, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
@@ -225,7 +235,21 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         ImGui::InputTextEx("##4", u8"Введите почту", email, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
-                        if (ImGui::Button(u8"Создать аккаунт", ImVec2(300, 40))) tabs = 2;
+                        if (ImGui::Button(u8"Создать аккаунт", ImVec2(300, 40))) {
+                            if (strcmp(reg_password, reg_password1) == 0) {
+                                string pass = md5(reg_password);
+                                pass = md5(pass);
+                                if (client.reg(reg_login, pass.c_str(), email, "CAFEBABE")) {
+                                    MessageBoxA(Destruction::RestAPI::ErrorHandler::window, "Вы были успешно зарегистрированы!", "Destruction Loader", MB_OK);
+                                    if (client.login(reg_login, pass.c_str()))
+                                        tabs = 2;
+                                }
+                            }
+                            else {
+                                MessageBoxA(Destruction::RestAPI::ErrorHandler::window, "Пароли не совпадают!", "Destruction Loader", MB_ICONERROR);
+                            }
+                        }
+
                         ImGui::PopFont();
 
                         ImGui::PushFont(minimize);
@@ -257,7 +281,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
-                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) tabs = 5;
+                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                        nlohmann::json features;
+                        if (client.GetFeatures(client.user.name, client.user.password, client.user.session, features)) {
+ 
+                        }
+                        tabs = 5;
+                    }
                     ImGui::PopFont();
 
                     break;

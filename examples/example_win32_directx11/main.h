@@ -15,6 +15,17 @@
 #include "segue.h"
 #include <string>
 #include "resource.h"
+
+#include "rest/client.hpp"
+#include "rest/utils/errorhandler.hpp"
+
+#include <md5.h>
+#include <md5.cpp>
+
+#include <nlohmann/json.hpp>
+
+static Destruction::RestAPI::Client client("https://destructiqn.com:9990");
+
 static ID3D11Device* g_pd3dDevice = NULL;
 static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
 static IDXGISwapChain* g_pSwapChain = NULL;
@@ -28,6 +39,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 using namespace ImGui;
 using namespace std;
+using json = nlohmann::json;
 
 #define WIDTH  852 
 #define HEIGHT 550
@@ -42,11 +54,11 @@ int tabs = 0;
 bool menu = true;
 char key[64] = { "" };
 
-char login[64] = { "" };
+char login[12] = { "" };
 char password[64] = { "" };
 
 char email[64] = { "" };
-char reg_login[64] = { "" };
+char reg_login[12] = { "" };
 char reg_password[64] = { "" };
 char reg_password1[64] = { "" };
 
