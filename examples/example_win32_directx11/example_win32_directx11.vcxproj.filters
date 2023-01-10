@@ -19,11 +19,17 @@
     <Filter Include="resources">
       <UniqueIdentifier>{469dade3-6acf-4bad-af6e-f433f3a044a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sources\rest">
-      <UniqueIdentifier>{f4e4d4c7-31fb-46d9-a72e-faa14c57362b}</UniqueIdentifier>
+    <Filter Include="sources\RestAPI">
+      <UniqueIdentifier>{6c2948c9-8608-4480-b56f-022517c0a900}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sources\rest\utils">
-      <UniqueIdentifier>{f9720785-dd41-4434-903c-c8e406ef8882}</UniqueIdentifier>
+    <Filter Include="sources\RestAPI\Utils">
+      <UniqueIdentifier>{4ea970ed-e5ab-44fe-b177-9296b2f03e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\RestAPI\Errors">
+      <UniqueIdentifier>{17909478-5628-4b1a-b1a0-90c01aabee15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\RestAPI\ConfigManager">
+      <UniqueIdentifier>{57a040aa-332a-44ee-9c37-73b4fa096d37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,14 +72,14 @@
     <ClInclude Include="resource.h">
       <Filter>resources</Filter>
     </ClInclude>
-    <ClInclude Include="rest\client.hpp">
-      <Filter>sources\rest</Filter>
+    <ClInclude Include="RestAPI\Client.hpp">
+      <Filter>sources\RestAPI</Filter>
     </ClInclude>
-    <ClInclude Include="rest\utils\utils.hpp">
-      <Filter>sources\rest\utils</Filter>
+    <ClInclude Include="RestAPI\Utils\Utils.hpp">
+      <Filter>sources\RestAPI\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="rest\utils\errorhandler.hpp">
-      <Filter>sources\rest\utils</Filter>
+    <ClInclude Include="RestAPI\Errors\ErrorHandler.hpp">
+      <Filter>sources\RestAPI\Errors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,14 +107,14 @@
     <ClCompile Include="..\..\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="rest\client.cpp">
-      <Filter>sources\rest</Filter>
+    <ClCompile Include="RestAPI\Client.cpp">
+      <Filter>sources\RestAPI</Filter>
     </ClCompile>
-    <ClCompile Include="rest\utils\utils.cpp">
-      <Filter>sources\rest\utils</Filter>
+    <ClCompile Include="RestAPI\Utils\Utils.cpp">
+      <Filter>sources\RestAPI\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="rest\utils\errorhandler.cpp">
-      <Filter>sources\rest\utils</Filter>
+    <ClCompile Include="RestAPI\Errors\ErrorHandler.cpp">
+      <Filter>sources\RestAPI\Errors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

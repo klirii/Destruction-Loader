@@ -16,9 +16,9 @@
 #include <string>
 #include "resource.h"
 
-#include "rest/client.hpp"
-#include "rest/utils/errorhandler.hpp"
-#include "rest/utils/utils.hpp"
+#include "RestAPI/Client.hpp"
+#include "RestAPI/Errors/ErrorHandler.hpp"
+#include "RestAPI/Utils/Utils.hpp"
 
 #include <md5.h>
 #include <md5.cpp>

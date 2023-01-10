@@ -160,9 +160,9 @@
     <ClInclude Include="inter.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="rest\client.hpp" />
-    <ClInclude Include="rest\utils\errorhandler.hpp" />
-    <ClInclude Include="rest\utils\utils.hpp" />
+    <ClInclude Include="RestAPI\Client.hpp" />
+    <ClInclude Include="RestAPI\Errors\ErrorHandler.hpp" />
+    <ClInclude Include="RestAPI\Utils\Utils.hpp" />
     <ClInclude Include="segue.h" />
     <ClInclude Include="user_circle.h" />
   </ItemGroup>
@@ -175,9 +175,9 @@
     <ClCompile Include="..\..\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\..\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="rest\client.cpp" />
-    <ClCompile Include="rest\utils\errorhandler.cpp" />
-    <ClCompile Include="rest\utils\utils.cpp" />
+    <ClCompile Include="RestAPI\Client.cpp" />
+    <ClCompile Include="RestAPI\Errors\ErrorHandler.cpp" />
+    <ClCompile Include="RestAPI\Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\misc\debuggers\imgui.natvis" />

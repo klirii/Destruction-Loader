@@ -181,7 +181,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                 string savedPassword;
 
                 switch (active_tab) {
-
                 case 0:
 
                     AlignForWidth(300, 200);
