@@ -18,11 +18,13 @@
 
 #include "rest/client.hpp"
 #include "rest/utils/errorhandler.hpp"
+#include "rest/utils/utils.hpp"
 
 #include <md5.h>
 #include <md5.cpp>
 
 #include <nlohmann/json.hpp>
+#include <StringUtils.h>
 
 static Destruction::RestAPI::Client client("https://destructiqn.com:9990");
 
@@ -78,6 +80,27 @@ bool tabs_1_b = 0;
 float tab_alpha = 0, auth_alpha = 0.f;
 float tab_add = 0, auth_add = 0;
 int active_tab = 0, active_auth = 0;
+
+__forceinline bool isLicenseExist(string featureName, uint8_t tabNumber) {
+    json features;
+    if (client.GetFeatures(client.user.name, client.user.password, client.user.session, features)) {
+        if (features.contains(featureName)) {
+            if (features[featureName].get<int>()) {
+                tabs = tabNumber;
+                return true;
+            }
+            else {
+                MessageBoxA(Destruction::RestAPI::ErrorHandler::hWindow, "Лицензия истекла :(\nКупить новую можно здесь -> https://vk.com/destructiqn", "Destruction Loader", MB_ICONERROR);
+                return false;
+            }
+        }
+        else {
+            MessageBoxA(Destruction::RestAPI::ErrorHandler::hWindow, "У Вас нет лицензии :(\nПриобрести её можно здесь -> https://vk.com/destructiqn", "Destruction Loader", MB_ICONERROR);
+            return false;
+        }
+    }
+    return false;
+}
 
 void TextCentered(std::string text, float y) {
     auto windowWidth = ImGui::GetWindowSize().x;

@@ -5,15 +5,26 @@
 
 namespace Destruction {
     namespace RestAPI {
-        HWND ErrorHandler::window = FindWindowA("Main", "Destruction Loader");
+        HWND ErrorHandler::hWindow = FindWindowA("Main", "Destruction Loader");
 
         std::map<std::string, std::string> ErrorHandler::ruErrors{
+            // register
             {"given username is already in use", "Пользователь с таким логином уже зарегистрирован!"},
+
             {"char is prohibited to use in login", "В логине можно использовать только латинские буквы и цифры!"},
             {"char is prohibited to use in password", "Символ \"^\" запрещено использовать в пароле!"},
             {"char is prohibited to use in mail", "Почта может состоять только из латинских букв, цифр, и точек"},
+            {"char is prohibited to use in hash", "Ошибка #8"},
+            {"char is prohibited to use in session", "Ошибка #19"},
+
+            // login
             {"username doesn't exist or password is invalid", "Неверный логин или пароль"},
             {"unexpected exception while generating session", "Ошибка авторизации"},
+
+            // getfeatures
+            {"given username are not exist", "Ошибка #0"},
+            {"invalid password", "Ошибка #1"},
+            {"invalid session", "Ошибка #2"},
         };
 
         const char* ErrorHandler::GetErrorFromStatus(std::string status) {
@@ -40,7 +51,7 @@ namespace Destruction {
                 }
                 else ruError = ruErrors[error];
 
-                MessageBoxA(window, ruError.c_str(), "Destruction Loader", MB_ICONERROR);
+                MessageBoxA(hWindow, ruError.c_str(), "Destruction Loader", MB_ICONERROR);
                 return true;
             }
             return false;

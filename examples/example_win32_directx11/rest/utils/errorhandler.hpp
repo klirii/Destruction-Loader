@@ -7,11 +7,10 @@ namespace Destruction {
     namespace RestAPI {
         class ErrorHandler {
         public:
-            static HWND window;
-            static std::map<std::string, std::string> ruErrors;
-
+            static HWND hWindow;
             static bool handle(const char* status);
         private:
+            static std::map<std::string, std::string> ruErrors;
             static const char* GetErrorFromStatus(std::string status);
             static char GetProhibitedChar(std::string charIsProhibitedError);
         };

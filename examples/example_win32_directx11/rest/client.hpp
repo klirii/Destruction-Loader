@@ -7,9 +7,15 @@ namespace Destruction {
         using json = nlohmann::json;
 
         struct UserData {
-            std::string session;
             std::string name;
             std::string password;
+            std::string session;
+
+            static bool save(std::string name, std::string password);
+            static bool get(std::string& name, std::string& pass);
+            static bool del();
+        private:
+            static std::string path;
         };
 
         class Client {
@@ -17,14 +23,13 @@ namespace Destruction {
             UserData user;
             Client(std::string host) {this->host = host;}
 
-            bool reg(const char* username, const char* password, const char* email, std::string hash);
-            bool login(const char* username, const char* password);
-
+            bool Register(const char* username, const char* password, const char* email, std::string unHash);
+            bool Login(const char* username, const char* password);
             bool GetFeatures(std::string username, std::string password, std::string session, json& features);
         private:
             std::string host;
             static const char* prohibitedChars;
-            static bool checkFieldsChars(const char* username, const char* password, const char* email = nullptr);
+            static bool CheckFieldsChars(const char* username, const char* password, const char* email = nullptr);
         };
     }
 }

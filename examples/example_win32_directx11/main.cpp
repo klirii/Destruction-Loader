@@ -177,6 +177,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                 ImGui::PushStyleVar(ImGuiStyleVar_Alpha, tab_alpha * s.Alpha);
 
+                string savedLogin;
+                string savedPassword;
+
                 switch (active_tab) {
 
                 case 0:
@@ -194,10 +197,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         ImGui::InputTextEx("##1", u8"Введите пароль", password, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
                         if (ImGui::Button(u8"Войти", ImVec2(300, 40))) {
-                            string pass = md5(password);
-                            pass = md5(pass);
-                            if (client.login(login, pass.c_str())) {
-                                MessageBoxA(Destruction::RestAPI::ErrorHandler::window, "Вы были успешно авторизированы!", "Destruction Loader", MB_OK);
+                            string pass = md5(md5(password));
+                            if (client.Login(login, pass.c_str())) {
+                                Destruction::RestAPI::UserData::save(login, pass);
                                 tabs = 2;
                             }
                         }
@@ -214,6 +216,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     }
                     ImGui::EndGroup();
                     ImGui::PopStyleVar();
+
+                    if (tabs == 0) {
+                        Destruction::RestAPI::UserData::get(savedLogin, savedPassword);
+                        if (!savedLogin.empty() && !savedPassword.empty()) {
+                            if (client.Login(savedLogin.c_str(), savedPassword.c_str())) tabs = 2;
+                            else Destruction::RestAPI::UserData::del();
+                        }
+                    }
 
                     break;
 
@@ -237,16 +247,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         if (ImGui::Button(u8"Создать аккаунт", ImVec2(300, 40))) {
                             if (strcmp(reg_password, reg_password1) == 0) {
-                                string pass = md5(reg_password);
-                                pass = md5(pass);
-                                if (client.reg(reg_login, pass.c_str(), email, "CAFEBABE")) {
-                                    MessageBoxA(Destruction::RestAPI::ErrorHandler::window, "Вы были успешно зарегистрированы!", "Destruction Loader", MB_OK);
-                                    if (client.login(reg_login, pass.c_str()))
-                                        tabs = 2;
+                                string pass = md5(md5(reg_password));
+                                string unHash = Destruction::RestAPI::Utils::GetUnHash();
+
+                                if (client.Register(reg_login, pass.c_str(), StringUtils::toLower(email).c_str(), unHash.c_str())) {
+                                    Destruction::RestAPI::UserData::save(reg_login, pass);
+                                    if (client.Login(reg_login, pass.c_str())) tabs = 2;
                                 }
                             }
                             else {
-                                MessageBoxA(Destruction::RestAPI::ErrorHandler::window, "Пароли не совпадают!", "Destruction Loader", MB_ICONERROR);
+                                MessageBoxA(Destruction::RestAPI::ErrorHandler::hWindow, "Пароли не совпадают!", "Destruction Loader", MB_ICONERROR);
                             }
                         }
 
@@ -282,11 +292,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
-                        nlohmann::json features;
-                        if (client.GetFeatures(client.user.name, client.user.password, client.user.session, features)) {
-                            
-                        }
-                        tabs = 5;
+                        if (isLicenseExist("unlimitedcps", 5));
                     }
                     ImGui::PopFont();
 
@@ -308,7 +314,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
-                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) tabs = 4;
+                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                        if (isLicenseExist("spammer", 4));
+                    }
                     PopFont();
 
 
