@@ -322,56 +322,50 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::SetCursorPos(ImVec2(255, 20));
                     ImGui::BeginChild("child_widget", ImVec2(250, 400));
                     {
-                        static int key0;
-                        static bool enable = false;
-
                         if (ImGui::Checkbox("AntiMute", &spammer->antiMute)) Configs::ConfigManager::WriteFeatureSettings(spammer);
                         SetCursorPos(ImVec2(GetCursorPos().x + 242, GetCursorPos().y + -47));
 
                         if (ImGui::Keybind1("0", &spammer->keyCode)) Configs::ConfigManager::WriteFeatureSettings(spammer);
                         SetCursorPos(ImVec2(GetCursorPos().x + 0, GetCursorPos().y + 8));
 
-                        static int delay_millisecond = 0;
-                        static int delay_ssecond = 0;
-                        static int delay_minute = 0;
-                        static int delay_hour = 0;
+                        static int delay_ms = 0;
+                        static int delay_s = 0;
+                        static int delay_m = 0;
+                        static int delay_h = 0;
 
-                        if (!savedSettingsIsInitialized) {
-                            int count;
-                            string unit;
+                        static char message[100] = { "" };
+
+                        if (ImGui::SliderInt("millisecond", &delay_ms, 0, 100))
+                            Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);
+                        if (ImGui::SliderInt("second", &delay_s, 0, 60))
+                            Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);
+                        if (ImGui::SliderInt("minute", &delay_m, 0, 60))
+                            Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);
+                        if (ImGui::SliderInt("hour", &delay_h, 0, 24))
+                            Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);
+
+                        // Загрузка конфига
+                        if (!Configs::ConfigManager::configsIsLoaded) {
+                            int delayCount;
+                            string delayUnit;
+                            string msg;
 
                             // Если конфига спамера не существует - создаём его
                             struct _stat fiBuf;
                             if (_stat(Configs::ConfigManager::Spammer.c_str(), &fiBuf) == -1)
                                 Configs::ConfigManager::WriteFeatureSettings(spammer);
 
-                            if (Configs::ConfigManagerUtils::parseTimeFromConfig(count, unit)) {
-                                if (unit == "ms") delay_millisecond = count;
-                                else if (unit == "s") delay_ssecond = count;
-                                else if (unit == "m") delay_minute = count;
-                                else if (unit == "h") delay_hour = count;
-                                spammer->delay = Configs::ConfigManagerUtils::parseTime(delay_millisecond, delay_ssecond, delay_minute, delay_hour);
-                            }
-                        }
+                            // Парсим конфиг
+                            if (Configs::Spammer::Parse(spammer->antiMute, spammer->keyCode, delayCount, delayUnit, msg)) {
+                                // Парсим задержку
+                                Configs::Spammer::ParseDelayInSliders(delayCount, delayUnit, delay_ms, delay_s, delay_m, delay_h);
 
-                        if (ImGui::SliderInt("millisecond", &delay_millisecond, 0, 100))
-                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
-                        if (ImGui::SliderInt("second", &delay_ssecond, 0, 60))
-                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
-                        if (ImGui::SliderInt("minute", &delay_minute, 0, 60))
-                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
-                        if (ImGui::SliderInt("hour", &delay_hour, 0, 24))
-                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
-
-                        static char message[100] = {""};
-
-                        if (!savedSettingsIsInitialized) {
-                            string msg;
-                            if (Configs::ConfigManagerUtils::parseMessageFromConfig(msg)) {
+                                // Парсим сообщение
                                 msg = utf8_encode(ansi2unicode(msg)); // convert ANSI to unicode, then unicode to UTF-8
                                 strcpy(message, msg.c_str());
-                            };
-                            savedSettingsIsInitialized = true;
+                            }
+
+                            Configs::ConfigManager::configsIsLoaded = true;
                         }
 
                         if (ImGui::InputTextEx("##message", "", message, 100, ImVec2(202, 40), ImGuiInputTextFlags_None)) {
@@ -418,6 +412,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
         g_pSwapChain->Present(1, 0);
     }
 
+    unlimitedCPS->~UnlimitedCPS();
     spammer->~Spammer();
 
     ImGui_ImplDX11_Shutdown();

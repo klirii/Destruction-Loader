@@ -1,17 +1,7 @@
-﻿  imgui.cpp
-D:\Projects\Destruction Loader\imgui.cpp(12431,19): warning C4189: g: локальная переменная инициализирована, но не использована
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-D:\Projects\Destruction Loader\imgui_widgets.cpp(348,10): warning C4189: hovered_mode: локальная переменная инициализирована, но не использована
-D:\Projects\Destruction Loader\imgui_widgets.cpp(339,10): warning C4189: popup_open: локальная переменная инициализирована, но не использована
-  imgui_impl_dx11.cpp
-  imgui_impl_win32.cpp
-  ConfigManager.cpp
+﻿  ConfigManager.cpp
 D:\Projects\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(9,59): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 D:\Projects\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(10,54): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\Projects\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(82,85): warning C4244: аргумент: преобразование "int" в "unsigned char", возможна потеря данных
+D:\Projects\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(91,85): warning C4244: аргумент: преобразование "int" в "unsigned char", возможна потеря данных
 D:\Program Files\Microsoft Visual Studio\VC\Tools\MSVC\14.30.30705\include\utility(190,16): warning C4244: инициализация: преобразование "_Ty" в "_Ty1", возможна потеря данных
           with
           [
@@ -33,12 +23,27 @@ D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\Setting
               _Other1=int,
               _Other2=const char (&)[8]
           ]
-  License.cpp
-D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(25,1): warning C4458: объявление "features" скрывает член класса
-D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(13,48): message : см. объявление "Features::License::features"
-D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(29,23): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
-D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(56,22): warning C4458: объявление "features" скрывает член класса
-D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(13,48): message : см. объявление "Features::License::features"
+D:\Program Files\Microsoft Visual Studio\VC\Tools\MSVC\14.30.30705\include\utility(190,54): warning C4244: инициализация: преобразование "_Ty" в "_Ty2", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty2=uint8_t
+          ]
+D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\Settings\Keycodes.hpp(206): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<const std::string,uint8_t>::pair<const char(&)[8],int,0>(_Other1,_Other2 &&) noexcept(false)"
+          with
+          [
+              _Other1=const char (&)[8],
+              _Other2=int
+          ]
+D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\Settings\Keycodes.hpp(107): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<const std::string,uint8_t>::pair<const char(&)[8],int,0>(_Other1,_Other2 &&) noexcept(false)"
+          with
+          [
+              _Other1=const char (&)[8],
+              _Other2=int
+          ]
   main.cpp
 D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(25,1): warning C4458: объявление "features" скрывает член класса
 D:\Projects\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(13,48): message : см. объявление "Features::License::features"
@@ -62,14 +67,12 @@ D:\libs\md5cpp\include\md5.cpp(221,23): warning C4244: =: преобразова
 D:\libs\md5cpp\include\md5.cpp(222,23): warning C4244: =: преобразование "MD5_u32" в "unsigned char", возможна потеря данных
 D:\libs\md5cpp\include\md5.cpp(237,28): warning C4267: аргумент: преобразование из "size_t" в "unsigned long"; возможна потеря данных
 D:\libs\md5cpp\include\md5.cpp(262,27): warning C4267: аргумент: преобразование из "size_t" в "unsigned long"; возможна потеря данных
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(102,38): warning C4459: объявление "spammer" скрывает глобальное объявление
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(38,20): message : см. объявление "spammer"
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(139,17): warning C4189: style: локальная переменная инициализирована, но не использована
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(153,68): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(153,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(128,17): warning C4189: style: локальная переменная инициализирована, но не использована
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(142,68): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(142,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(117,89): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(125,64): warning C4244: аргумент: преобразование "int" в "BYTE", возможна потеря данных
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(369,39): warning C4456: объявление "msg" скрывает предыдущее локальное объявление
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(351,39): warning C4456: объявление "msg" скрывает предыдущее локальное объявление
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(74,13): message : см. объявление "msg"
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(294,99): warning C4390: ";": обнаружен пустой контролируемый оператор; это правильно?
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(316,94): warning C4390: ";": обнаружен пустой контролируемый оператор; это правильно?
@@ -78,24 +81,10 @@ D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(4,73): 
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(4,53): warning C4100: hPrevInstance: неиспользованный формальный параметр
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(68,10): warning C4189: show_demo_window: локальная переменная инициализирована, но не использована
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(69,10): warning C4189: show_another_window: локальная переменная инициализирована, но не использована
-  Client.cpp
-D:\Projects\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Utils.hpp(10,28): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\Projects\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(21,46): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  ErrorHandler.cpp
-D:\Program Files\Microsoft Visual Studio\VC\Tools\MSVC\14.30.30705\include\algorithm(2862,24): warning C4244: =: преобразование "int" в "char", возможна потеря данных
-D:\libs\cpp_string_utils-main\include\StringUtils.cpp(83): message : выполняется компиляция ссылки на экземпляр шаблон функции "_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,int(__cdecl *)(int)>(const _InIt,const _InIt,_OutIt,_Fn)"
-          with
-          [
-              _OutIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Elem=char,
-              _InIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Fn=int (__cdecl *)(int)
-          ]
-  Utils.cpp
-D:\Projects\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Utils.hpp(10,28): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 LINK : warning LNK4098: библиотека по умолчанию "LIBCMT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
   Создание кода
-  Previous IPDB not found, fall back to full compilation.
-  All 4054 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  5 of 4154 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    41 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   example_win32_directx11.vcxproj -> D:\Projects\Destruction Loader\examples\example_win32_directx11\Release\example_win32_directx11.exe
