@@ -27,6 +27,7 @@ namespace RestAPI {
         bool Register(const char* username, const char* password, const char* email, std::string unHash);
         bool Login(const char* username, const char* password);
         bool GetFeatures(std::string username, std::string password, std::string session, json& features);
+
     private:
         std::string host;
         static const char* prohibitedChars;

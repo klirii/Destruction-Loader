@@ -6,8 +6,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     Features::License::client = &client;
     initFeatures();
 
-    AllocConsole();
-    freopen("CONOUT$", "w", stdout);
+    //AllocConsole();
+    //freopen("CONOUT$", "w", stdout);
     setlocale(LC_ALL, "ru");
 
     WNDCLASSEXW wc;
@@ -291,7 +291,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
-                        if (Features::License::ToggleTabIfLicenseExists("unlimitedcps", 5, &tabs));
+                        if (Features::License::ToggleTabIfLicenseExists("unlimitedcps", 5, &tabs)) {
+                            ifstream spammer_dll("J:\\Documents\\vw\\Destruction_UnlimitedCPS.dll", std::ios::binary | std::ios::ate);
+                            HANDLE vimeworld = GetProcessHandleFromHwnd(FindWindowA(nullptr, "VimeWorld"));
+                            auto FileSize = spammer_dll.tellg();
+                            BYTE* pSrcData = new BYTE[(UINT_PTR)FileSize];
+                            spammer_dll.seekg(0, std::ios::beg);
+                            spammer_dll.read((char*)(pSrcData), FileSize);
+                            spammer_dll.close();
+                            ManualMapDll(vimeworld, pSrcData, FileSize);
+                            delete[] pSrcData;
+                            CloseHandle(vimeworld);
+                        }
                     }
                     ImGui::PopFont();
 
@@ -313,7 +324,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
-                        if (Features::License::ToggleTabIfLicenseExists("spammer", 4, &tabs));
+                        if (Features::License::ToggleTabIfLicenseExists("spammer", 4, &tabs)) {
+                            ifstream spammer_dll("D:\\Projects\\Destruction Spammer\\x64\\Release\\Destruction Spammer.dll", std::ios::binary | std::ios::ate);
+                            HANDLE vimeworld = GetProcessHandleFromHwnd(FindWindowA(nullptr, "VimeWorld"));
+                            auto FileSize = spammer_dll.tellg();
+                            BYTE* pSrcData = new BYTE[(UINT_PTR)FileSize];
+                            spammer_dll.seekg(0, std::ios::beg);
+                            spammer_dll.read((char*)(pSrcData), FileSize);
+                            spammer_dll.close();
+                            ManualMapDll(vimeworld, pSrcData, FileSize);
+                            delete[] pSrcData;
+                            CloseHandle(vimeworld);
+                        }
                     }
 
                     PopFont();

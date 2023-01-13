@@ -162,6 +162,7 @@
     <ClInclude Include="Features\License\License.hpp" />
     <ClInclude Include="Features\Settings\Keycodes.hpp" />
     <ClInclude Include="icon.h" />
+    <ClInclude Include="Inject\Injector.hpp" />
     <ClInclude Include="inter.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="..\..\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="Configs\ConfigManager.cpp" />
     <ClCompile Include="Features\License\License.cpp" />
+    <ClCompile Include="Inject\Injector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RestAPI\Core\Client.cpp" />
     <ClCompile Include="RestAPI\Errors\ErrorHandler.cpp" />

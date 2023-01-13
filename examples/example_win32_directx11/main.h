@@ -23,6 +23,8 @@
 #include "RestAPI/Utils/Utils.hpp"
 
 #include "Configs/ConfigManager.hpp"
+#include "Inject/Injector.hpp"
+
 #include "Features/Features.hpp"
 #include "Features/License/License.hpp"
 
@@ -91,8 +93,8 @@ float tab_add = 0, auth_add = 0;
 int active_tab = 0, active_auth = 0;
 
 void initFeatures() {
-    Features::License::features[StringUtils::toLower(unlimitedCPS->name)] = unlimitedCPS;
-    Features::License::features[StringUtils::toLower(spammer->name)] = spammer;
+    Features::License::features[unlimitedCPS->name] = unlimitedCPS;
+    Features::License::features[spammer->name] = spammer;
 }
 
 void TextCentered(std::string text, float y) {

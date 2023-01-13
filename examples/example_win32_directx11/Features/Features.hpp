@@ -16,7 +16,7 @@ namespace Features {
     class Spammer : public Feature {
     public:
         Spammer() {
-            this->name = "Spammer";
+            this->name = "spammer";
             this->license = "License: ...";
 
             this->tabs[0] = 3;
@@ -38,7 +38,7 @@ namespace Features {
     class UnlimitedCPS : public Feature {
     public:
         UnlimitedCPS() {
-            this->name = "UnlimitedCPS";
+            this->name = "unlimitedcps";
             this->license = "License: ...";
 
             this->tabs[0] = 2;

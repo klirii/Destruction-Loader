@@ -43,6 +43,9 @@
     <Filter Include="sources\Features\License">
       <UniqueIdentifier>{03cd0351-e959-4ef9-97bd-ebb7d5997842}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\Inject">
+      <UniqueIdentifier>{1e96fdf5-c018-40e5-a492-1d3c1c18969b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imconfig.h">
@@ -108,6 +111,9 @@
     <ClInclude Include="Features\License\License.hpp">
       <Filter>sources\Features\License</Filter>
     </ClInclude>
+    <ClInclude Include="Inject\Injector.hpp">
+      <Filter>sources\Inject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
@@ -148,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="Features\License\License.cpp">
       <Filter>sources\Features\License</Filter>
+    </ClCompile>
+    <ClCompile Include="Inject\Injector.cpp">
+      <Filter>sources\Inject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

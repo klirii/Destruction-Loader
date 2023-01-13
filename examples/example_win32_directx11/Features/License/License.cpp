@@ -26,10 +26,10 @@ namespace Features {
     std::string License::GetLicenseTime(int seconds) {
         std::string license = "License: ";
 
-        float minutes = seconds / 60;
-        float hours = minutes / 60;
-        float days = hours / 24;
-        float months = days / 30;
+        int minutes = round(seconds / 60);
+        int hours = round(minutes / 60);
+        int days = round(hours / 24);
+        int months = round(days / 30);
 
         if (seconds < 60) license += std::to_string(seconds) + " second(s)";
         else if (minutes < 60) license += std::to_string(minutes) + " minute(s)";
@@ -42,16 +42,12 @@ namespace Features {
     }
 
     void License::SetLicenseTimes(int* tabs) {
-        static std::string arg;
-        for (const auto& kv : features) {
-            if (kv.second->license == "License: ..." && (*tabs == kv.second->tabs[0] || *tabs == kv.second->tabs[1]) && !isSetting) {
-                arg = StringUtils::toLower(kv.second->name);
-                CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(License::SetLicenseTime), &arg, NULL, nullptr);
-            }
-        }
+        for (const auto& kv : features)
+            if (kv.second->license == "License: ..." && (*tabs == kv.second->tabs[0] || *tabs == kv.second->tabs[1]) && !isSetting)
+                CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(License::SetLicenseTime), &kv.second->name, NULL, nullptr);
     }
 
-    bool License::SetLicenseTime(std::string& feature) {
+    void License::SetLicenseTime(std::string& feature) {
         isSetting = true;
         json features;
 
@@ -63,16 +59,13 @@ namespace Features {
                         License::features[feature]->license = GetLicenseTime(seconds);
                 }
             }
-
-            for (const auto& kv : License::features) {
-                if (kv.second->license == "License: ..." && kv.second->name == feature)
-                    kv.second->license = "License: none";
-            }
-
-            isSetting = false;
-            return true;
         }
 
-        return false;
+        for (const auto& kv : License::features) {
+            if (kv.second->license == "License: ..." && kv.second->name == feature)
+                kv.second->license = "License: none";
+        }
+
+        isSetting = false;
     }
 }

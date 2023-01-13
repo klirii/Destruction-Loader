@@ -20,7 +20,7 @@ namespace Features {
         static std::string GetLicenseTime(int seconds);
 
         static void SetLicenseTimes(int* tabs);
-        static bool SetLicenseTime(std::string& feature);
+        static void SetLicenseTime(std::string& feature);
         static __forceinline bool ToggleTabIfLicenseExists(const char* feature, std::uint8_t tab, int* tabs) {
             json features;
             if (client->GetFeatures(client->user.name, client->user.password, client->user.session, features)) {

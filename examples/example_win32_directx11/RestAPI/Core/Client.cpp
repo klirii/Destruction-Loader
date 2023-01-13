@@ -166,10 +166,7 @@ namespace RestAPI {
 
         curl_easy_cleanup(curl);
         if (ErrorHandler::handle(status.c_str())) return false;
-        if (jsonResponse["features"].empty()) {
-            MessageBoxA(RestAPI::ErrorHandler::hWindow, "У Вас нет лицензии :(\nПриобрести её можно здесь -> https://vk.com/destructiqn", "Destruction Loader", MB_ICONERROR);
-            return false;
-        }
+        if (jsonResponse["features"].empty()) return false;
 
         features = json::parse(jsonResponse["features"].dump());
         return true;

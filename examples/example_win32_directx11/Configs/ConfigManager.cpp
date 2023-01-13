@@ -84,7 +84,7 @@ namespace Configs {
     }
 
     bool ConfigManager::WriteFeatureSettings(Features::Feature* feature) {
-        if (feature->name == "Spammer") {
+        if (feature->name == "spammer") {
             Features::Spammer* spammer = reinterpret_cast<Features::Spammer*>(feature);
             std::ofstream config(ConfigManager::Spammer, std::ios::trunc);
 
@@ -96,7 +96,7 @@ namespace Configs {
             config.close();
             return true;
         }
-        else if (feature->name == "UnlimitedCPS") {
+        else if (feature->name == "unlimitedcps") {
 
             return true;
         }
