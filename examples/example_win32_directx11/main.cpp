@@ -3,8 +3,13 @@
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {
+    Features::License::client = &client;
+    initFeatures();
+
     AllocConsole();
     freopen("CONOUT$", "w", stdout);
+    setlocale(LC_ALL, "ru");
+
     WNDCLASSEXW wc;
     wc.cbSize = sizeof(WNDCLASSEXW);
     wc.style = CS_CLASSDC;
@@ -65,12 +70,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     bool done = false;
-    while (!done)
-    {
-
+    while (!done) {
         MSG msg;
-        while (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
-        {
+        while (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
             ::TranslateMessage(&msg);
             ::DispatchMessage(&msg);
             if (msg.message == WM_QUIT)
@@ -125,7 +127,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                 // TABS HANDLE
 
                 if (tabs > 1) {
-
                     if (lg == nullptr) D3DX11CreateShaderResourceViewFromMemory(g_pd3dDevice, user_circle, sizeof(user_circle), &info, pump, &lg, 0);
 
                     ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(0.000f + p.x, 0.000f + p.y), ImVec2(235 + p.x, HEIGHT + p.y), ImGui::GetColorU32(color::border), s.WindowRounding, ImDrawCornerFlags_Left); // Background
@@ -139,7 +140,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 455.000f + p.y), ImVec2(230 + p.x, 456 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
                     ImGui::GetWindowDrawList()->AddText(minimize, 17, ImVec2(75 + p.x, 483 + p.y), ImGui::GetColorU32(color::text_circle), (string("User: ") + client.user.name).c_str());
-                    ImGui::GetWindowDrawList()->AddText(minimize, 17, ImVec2(75 + p.x, 503 + p.y), ImGui::GetColorU32(color::text_circle), "License: lifetime");
+                    ImGui::GetWindowDrawList()->AddText(minimize, 17, ImVec2(75 + p.x, 503 + p.y), ImGui::GetColorU32(color::text_circle), Features::License::GetLicenseTime(&tabs).c_str());
+
+                    if (!Features::License::updaterIsInitialized) {
+                        CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(Features::License::UpdateLicenseTimes), nullptr, NULL, nullptr);
+                        Features::License::updaterIsInitialized = true;
+                    }
+
+                    Features::License::SetLicenseTimes(&tabs);
 
                     // LOGO COMPANY  AND  NAME COMPANY
 
@@ -162,13 +170,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::BeginGroupPos(ImVec2(0, 120));
                     {
-                        
-                        if (ImGui::Tab("A", "UnlimitedCPS", 2 == tabs || 5 == tabs, ImVec2(240, 40)))
-                            tabs = 2;
-
-                        if (ImGui::Tab("B", "Spammer", 3 == tabs || 4 == tabs, ImVec2(240, 40)))
-                            tabs = 3;
-
+                        if (ImGui::Tab("A", "UnlimitedCPS", 2 == tabs || 5 == tabs, ImVec2(240, 40))) tabs = 2;
+                        if (ImGui::Tab("B", "Spammer", 3 == tabs || 4 == tabs, ImVec2(240, 40))) tabs = 3;
                     }
                     ImGui::EndGroupPos();
 
@@ -182,7 +185,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                 switch (active_tab) {
                 case 0:
-
                     AlignForWidth(300, 200);
 
                     //ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(200 + p.x, 100 + p.y), ImVec2(650 + p.x, 470 + p.y), ImColor(38, 37, 43, 100), s.WindowRounding, ImDrawFlags_None);
@@ -198,7 +200,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         if (ImGui::Button(u8"Войти", ImVec2(300, 40))) {
                             string pass = md5(md5(password));
                             if (client.Login(login, pass.c_str())) {
-                                Destruction::RestAPI::UserData::save(login, pass);
+                                RestAPI::UserData::save(login, pass);
                                 tabs = 2;
                             }
                         }
@@ -217,17 +219,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PopStyleVar();
 
                     if (tabs == 0) {
-                        Destruction::RestAPI::UserData::get(savedLogin, savedPassword);
+                        RestAPI::UserData::get(savedLogin, savedPassword);
                         if (!savedLogin.empty() && !savedPassword.empty()) {
                             if (client.Login(savedLogin.c_str(), savedPassword.c_str())) tabs = 2;
-                            else Destruction::RestAPI::UserData::del();
+                            else RestAPI::UserData::del();
                         }
                     }
 
                     break;
 
                 case 1:
-
                     AlignForWidth(300, 150);
 
                     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 13));
@@ -247,15 +248,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         if (ImGui::Button(u8"Создать аккаунт", ImVec2(300, 40))) {
                             if (strcmp(reg_password, reg_password1) == 0) {
                                 string pass = md5(md5(reg_password));
-                                string unHash = Destruction::RestAPI::Utils::GetUnHash();
+                                string unHash = RestAPI::Utils::GetUnHash();
 
                                 if (client.Register(reg_login, pass.c_str(), StringUtils::toLower(email).c_str(), unHash.c_str())) {
-                                    Destruction::RestAPI::UserData::save(reg_login, pass);
+                                    RestAPI::UserData::save(reg_login, pass);
                                     if (client.Login(reg_login, pass.c_str())) tabs = 2;
                                 }
                             }
                             else {
-                                MessageBoxA(Destruction::RestAPI::ErrorHandler::hWindow, "Пароли не совпадают!", "Destruction Loader", MB_ICONERROR);
+                                MessageBoxA(RestAPI::ErrorHandler::hWindow, "Пароли не совпадают!", "Destruction Loader", MB_ICONERROR);
                             }
                         }
 
@@ -275,7 +276,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     break;
 
                 case 2:
-
                     if (tabs_2_b) tabs = 5;
 
                     ImGui::PushFont(dots);
@@ -291,14 +291,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
-                        if (isLicenseExist("unlimitedcps", 5));
+                        if (Features::License::ToggleTabIfLicenseExists("unlimitedcps", 5, &tabs));
                     }
                     ImGui::PopFont();
 
                     break;
 
                 case 3:
-
                     if (tabs_1_b) tabs = 4;
 
                     ImGui::PushFont(dots);
@@ -314,39 +313,71 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
-                        if (isLicenseExist("spammer", 4));
+                        if (Features::License::ToggleTabIfLicenseExists("spammer", 4, &tabs));
                     }
+
                     PopFont();
-
-
                     break;
-
                 case 4:
-
                     ImGui::SetCursorPos(ImVec2(255, 20));
-
                     ImGui::BeginChild("child_widget", ImVec2(250, 400));
                     {
-                        //ImGui::PushFont(dots);
-                        //Text(u8"Spammer", 20);
-                        //ImGui::PopFont();
                         static int key0;
                         static bool enable = false;
-                        ImGui::HotKeybox("Enable", "0", &enable, &key0);
 
-                        static int delay_millisecond = 60;
+                        if (ImGui::Checkbox("AntiMute", &spammer->antiMute)) Configs::ConfigManager::WriteFeatureSettings(spammer);
+                        SetCursorPos(ImVec2(GetCursorPos().x + 242, GetCursorPos().y + -47));
+
+                        if (ImGui::Keybind1("0", &spammer->keyCode)) Configs::ConfigManager::WriteFeatureSettings(spammer);
+                        SetCursorPos(ImVec2(GetCursorPos().x + 0, GetCursorPos().y + 8));
+
+                        static int delay_millisecond = 0;
                         static int delay_ssecond = 0;
                         static int delay_minute = 0;
                         static int delay_hour = 0;
 
-                        ImGui::SliderInt("millisecond", &delay_millisecond, 1, 100);
-                        ImGui::SliderInt("second", &delay_ssecond, 0, 60);
-                        ImGui::SliderInt("minute", &delay_minute, 0, 60);
-                        ImGui::SliderInt("hour", &delay_hour, 0, 24);
+                        if (!savedSettingsIsInitialized) {
+                            int count;
+                            string unit;
 
+                            // Если конфига спамера не существует - создаём его
+                            struct _stat fiBuf;
+                            if (_stat(Configs::ConfigManager::Spammer.c_str(), &fiBuf) == -1)
+                                Configs::ConfigManager::WriteFeatureSettings(spammer);
 
-                        static char message[200] = { "" };
-                        ImGui::InputTextEx("##message", "", message, 200, ImVec2(202, 40), ImGuiInputTextFlags_None);
+                            if (Configs::ConfigManagerUtils::parseTimeFromConfig(count, unit)) {
+                                if (unit == "ms") delay_millisecond = count;
+                                else if (unit == "s") delay_ssecond = count;
+                                else if (unit == "m") delay_minute = count;
+                                else if (unit == "h") delay_hour = count;
+                                spammer->delay = Configs::ConfigManagerUtils::parseTime(delay_millisecond, delay_ssecond, delay_minute, delay_hour);
+                            }
+                        }
+
+                        if (ImGui::SliderInt("millisecond", &delay_millisecond, 0, 100))
+                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
+                        if (ImGui::SliderInt("second", &delay_ssecond, 0, 60))
+                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
+                        if (ImGui::SliderInt("minute", &delay_minute, 0, 60))
+                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
+                        if (ImGui::SliderInt("hour", &delay_hour, 0, 24))
+                            saveDelayInConfig(spammer, delay_millisecond, delay_ssecond, delay_minute, delay_hour);
+
+                        static char message[100] = {""};
+
+                        if (!savedSettingsIsInitialized) {
+                            string msg;
+                            if (Configs::ConfigManagerUtils::parseMessageFromConfig(msg)) {
+                                msg = utf8_encode(ansi2unicode(msg)); // convert ANSI to unicode, then unicode to UTF-8
+                                strcpy(message, msg.c_str());
+                            };
+                            savedSettingsIsInitialized = true;
+                        }
+
+                        if (ImGui::InputTextEx("##message", "", message, 100, ImVec2(202, 40), ImGuiInputTextFlags_None)) {
+                            spammer->message = unicode2ansi(utf8_decode(message)); // convert UTF-8 to unicode, then unicode to ANSI
+                            spammer->message = string(spammer->message.begin(), spammer->message.end() - 1);
+                        }
 
                         tabs_1_b = true;
                     }
@@ -355,15 +386,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     break;
 
                 case 5:
-
                     ImGui::SetCursorPos(ImVec2(255, 20));
 
                     ImGui::BeginChild("child_widget", ImVec2(250, 400));
                     {
-                        //ImGui::PushFont(dots);
-                        //Text(u8"UnlimitedCPS", 20);
-                        //ImGui::PopFont();
-
                         static int key0;
                         static bool enable_unlimited = false;
                         ImGui::HotKeybox("Enable", "0", &enable_unlimited, &key0);
@@ -391,6 +417,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
         g_pSwapChain->Present(1, 0);
     }
+
+    spammer->~Spammer();
 
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();

@@ -155,12 +155,17 @@
     <ClInclude Include="..\..\backends\imgui_impl_dx11.h" />
     <ClInclude Include="..\..\backends\imgui_impl_win32.h" />
     <ClInclude Include="colors.h" />
+    <ClInclude Include="Configs\ConfigManager.hpp" />
+    <ClInclude Include="conversion.hpp" />
     <ClInclude Include="Dots.h" />
+    <ClInclude Include="Features\Features.hpp" />
+    <ClInclude Include="Features\License\License.hpp" />
+    <ClInclude Include="Features\Settings\Keycodes.hpp" />
     <ClInclude Include="icon.h" />
     <ClInclude Include="inter.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="RestAPI\Client.hpp" />
+    <ClInclude Include="RestAPI\Core\Client.hpp" />
     <ClInclude Include="RestAPI\Errors\ErrorHandler.hpp" />
     <ClInclude Include="RestAPI\Utils\Utils.hpp" />
     <ClInclude Include="segue.h" />
@@ -174,8 +179,10 @@
     <ClCompile Include="..\..\imgui_widgets.cpp" />
     <ClCompile Include="..\..\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\..\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Configs\ConfigManager.cpp" />
+    <ClCompile Include="Features\License\License.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RestAPI\Client.cpp" />
+    <ClCompile Include="RestAPI\Core\Client.cpp" />
     <ClCompile Include="RestAPI\Errors\ErrorHandler.cpp" />
     <ClCompile Include="RestAPI\Utils\Utils.cpp" />
   </ItemGroup>

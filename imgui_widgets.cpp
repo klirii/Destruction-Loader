@@ -1799,12 +1799,13 @@ bool ImGui::Checkbox(const char* label, bool* v)
     return pressed;
 }
 
-void ImGui::HotKeybox(const char* label, const char* label_key, bool* v, int* key)
+bool ImGui::HotKeybox(const char* label, const char* label_key, bool* v, int* key)
 {
     ImGui::Checkbox(label, v);
     SetCursorPos(GetCursorPos() + ImVec2(242, -47));
     ImGui::Keybind1(label_key, key);
     SetCursorPos(GetCursorPos() + ImVec2(0, 8));
+    return true;
 
 }
 

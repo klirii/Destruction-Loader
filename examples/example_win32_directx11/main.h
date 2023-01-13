@@ -14,11 +14,17 @@
 #include "Dots.h"
 #include "segue.h"
 #include <string>
-#include "resource.h"
 
-#include "RestAPI/Client.hpp"
+#include "resource.h"
+#include "conversion.hpp"
+
+#include "RestAPI/Core/Client.hpp"
 #include "RestAPI/Errors/ErrorHandler.hpp"
 #include "RestAPI/Utils/Utils.hpp"
+
+#include "Configs/ConfigManager.hpp"
+#include "Features/Features.hpp"
+#include "Features/License/License.hpp"
 
 #include <md5.h>
 #include <md5.cpp>
@@ -26,7 +32,12 @@
 #include <nlohmann/json.hpp>
 #include <StringUtils.h>
 
-static Destruction::RestAPI::Client client("https://destructiqn.com:9990");
+static RestAPI::Client client("https://destructiqn.com:9990");
+
+Features::UnlimitedCPS* unlimitedCPS = new Features::UnlimitedCPS();
+Features::Spammer* spammer = new Features::Spammer();
+
+bool savedSettingsIsInitialized = false;
 
 static ID3D11Device* g_pd3dDevice = NULL;
 static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
@@ -81,23 +92,16 @@ float tab_alpha = 0, auth_alpha = 0.f;
 float tab_add = 0, auth_add = 0;
 int active_tab = 0, active_auth = 0;
 
-__forceinline bool isLicenseExist(string featureName, uint8_t tabNumber) {
-    json features;
-    if (client.GetFeatures(client.user.name, client.user.password, client.user.session, features)) {
-        if (features.contains(featureName)) {
-            if (features[featureName].get<int>()) {
-                tabs = tabNumber;
-                return true;
-            }
-            else {
-                MessageBoxA(Destruction::RestAPI::ErrorHandler::hWindow, "Лицензия истекла :(\nКупить новую можно здесь -> https://vk.com/destructiqn", "Destruction Loader", MB_ICONERROR);
-                return false;
-            }
-        }
-        else {
-            MessageBoxA(Destruction::RestAPI::ErrorHandler::hWindow, "У Вас нет лицензии :(\nПриобрести её можно здесь -> https://vk.com/destructiqn", "Destruction Loader", MB_ICONERROR);
-            return false;
-        }
+void initFeatures() {
+    Features::License::features[StringUtils::toLower(unlimitedCPS->name)] = unlimitedCPS;
+    Features::License::features[StringUtils::toLower(spammer->name)] = spammer;
+}
+
+bool saveDelayInConfig(Features::Feature* feature, int ms, int s, int m, int h) {
+    if (feature->name == "Spammer") {
+        Features::Spammer* spammer = reinterpret_cast<Features::Spammer*>(feature);
+        spammer->delay = Configs::ConfigManagerUtils::parseTime(ms, s, m, h);
+        if (Configs::ConfigManager::WriteFeatureSettings(spammer)) return true;
     }
     return false;
 }

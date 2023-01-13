@@ -28,8 +28,20 @@
     <Filter Include="sources\RestAPI\Errors">
       <UniqueIdentifier>{17909478-5628-4b1a-b1a0-90c01aabee15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sources\RestAPI\ConfigManager">
-      <UniqueIdentifier>{57a040aa-332a-44ee-9c37-73b4fa096d37}</UniqueIdentifier>
+    <Filter Include="sources\Features">
+      <UniqueIdentifier>{a5f571bc-041a-4092-8f72-5f809b561278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Configs">
+      <UniqueIdentifier>{5e86533a-4cbf-4e81-b908-b560b053952b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Features\Settings">
+      <UniqueIdentifier>{939c3ef4-a474-4c60-afd5-60211f5851b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\RestAPI\Core">
+      <UniqueIdentifier>{eae0d8df-9326-40ec-b22b-aba7a767db56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Features\License">
+      <UniqueIdentifier>{03cd0351-e959-4ef9-97bd-ebb7d5997842}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,14 +84,29 @@
     <ClInclude Include="resource.h">
       <Filter>resources</Filter>
     </ClInclude>
-    <ClInclude Include="RestAPI\Client.hpp">
-      <Filter>sources\RestAPI</Filter>
-    </ClInclude>
     <ClInclude Include="RestAPI\Utils\Utils.hpp">
       <Filter>sources\RestAPI\Utils</Filter>
     </ClInclude>
     <ClInclude Include="RestAPI\Errors\ErrorHandler.hpp">
       <Filter>sources\RestAPI\Errors</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Features.hpp">
+      <Filter>sources\Features</Filter>
+    </ClInclude>
+    <ClInclude Include="Configs\ConfigManager.hpp">
+      <Filter>sources\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Settings\Keycodes.hpp">
+      <Filter>sources\Features\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="conversion.hpp">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="RestAPI\Core\Client.hpp">
+      <Filter>sources\RestAPI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\License\License.hpp">
+      <Filter>sources\Features\License</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,14 +134,20 @@
     <ClCompile Include="..\..\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="RestAPI\Client.cpp">
-      <Filter>sources\RestAPI</Filter>
-    </ClCompile>
     <ClCompile Include="RestAPI\Utils\Utils.cpp">
       <Filter>sources\RestAPI\Utils</Filter>
     </ClCompile>
     <ClCompile Include="RestAPI\Errors\ErrorHandler.cpp">
       <Filter>sources\RestAPI\Errors</Filter>
+    </ClCompile>
+    <ClCompile Include="Configs\ConfigManager.cpp">
+      <Filter>sources\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="RestAPI\Core\Client.cpp">
+      <Filter>sources\RestAPI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\License\License.cpp">
+      <Filter>sources\Features\License</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
