@@ -1,5 +1,8 @@
 #pragma once
 
+#define DISABLE_OUTPUT
+#define DLL_VIMEWORLD_ATTACH 0x888
+
 #include <Windows.h>
 #include <iostream>
 #include <fstream>

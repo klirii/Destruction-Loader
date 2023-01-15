@@ -39,6 +39,8 @@ static RestAPI::Client client("https://destructiqn.com:9990");
 Features::UnlimitedCPS* unlimitedCPS = new Features::UnlimitedCPS();
 Features::Spammer* spammer = new Features::Spammer();
 
+static const char* injectWindowName = "VimeWorld";
+
 static ID3D11Device* g_pd3dDevice = NULL;
 static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
 static IDXGISwapChain* g_pSwapChain = NULL;

@@ -19,7 +19,9 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 	BYTE* pTargetBase = nullptr;
 
 	if (reinterpret_cast<IMAGE_DOS_HEADER*>(pSrcData)->e_magic != 0x5A4D) { //"MZ"
+
 		ILog("Invalid file\n");
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -29,6 +31,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 
 	if (pOldFileHeader->Machine != CURRENT_ARCH) {
 		ILog("Invalid platform\n");
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -37,6 +40,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 	pTargetBase = reinterpret_cast<BYTE*>(VirtualAllocEx(hProc, nullptr, pOldOptHeader->SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
 	if (!pTargetBase) {
 		ILog("Target process memory allocation failed (ex) 0x%X\n", GetLastError());
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -61,6 +65,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 	if (!WriteProcessMemory(hProc, pTargetBase, pSrcData, 0x1000, nullptr)) { //only first 0x1000 bytes for the header
 		ILog("Can't write file header 0x%X\n", GetLastError());
 		VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -70,6 +75,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 			if (!WriteProcessMemory(hProc, pTargetBase + pSectionHeader->VirtualAddress, pSrcData + pSectionHeader->PointerToRawData, pSectionHeader->SizeOfRawData, nullptr)) {
 				ILog("Can't map sections: 0x%x\n", GetLastError());
 				VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
+                CloseHandle(hProc);
 				return false;
 			}
 		}
@@ -80,6 +86,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 	if (!MappingDataAlloc) {
 		ILog("Target process mapping allocation failed (ex) 0x%X\n", GetLastError());
 		VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -87,6 +94,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 		ILog("Can't write mapping 0x%X\n", GetLastError());
 		VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
 		VirtualFreeEx(hProc, MappingDataAlloc, 0, MEM_RELEASE);
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -96,6 +104,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 		ILog("Memory shellcode allocation failed (ex) 0x%X\n", GetLastError());
 		VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
 		VirtualFreeEx(hProc, MappingDataAlloc, 0, MEM_RELEASE);
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -104,6 +113,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 		VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
 		VirtualFreeEx(hProc, MappingDataAlloc, 0, MEM_RELEASE);
 		VirtualFreeEx(hProc, pShellcode, 0, MEM_RELEASE);
+        CloseHandle(hProc);
 		return false;
 	}
 
@@ -125,6 +135,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 		VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
 		VirtualFreeEx(hProc, MappingDataAlloc, 0, MEM_RELEASE);
 		VirtualFreeEx(hProc, pShellcode, 0, MEM_RELEASE);
+        CloseHandle(hProc);
 		return false;
 	}
 	CloseHandle(hThread);
@@ -137,6 +148,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 		GetExitCodeProcess(hProc, &exitcode);
 		if (exitcode != STILL_ACTIVE) {
 			ILog("Process crashed, exit code: %d\n", exitcode);
+            CloseHandle(hProc);
 			return false;
 		}
 
@@ -149,6 +161,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 			VirtualFreeEx(hProc, pTargetBase, 0, MEM_RELEASE);
 			VirtualFreeEx(hProc, MappingDataAlloc, 0, MEM_RELEASE);
 			VirtualFreeEx(hProc, pShellcode, 0, MEM_RELEASE);
+            CloseHandle(hProc);
 			return false;
 		}
 		else if (hCheck == (HINSTANCE)0x505050) {
@@ -161,6 +174,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 	BYTE* emptyBuffer = (BYTE*)malloc(1024 * 1024 * 20);
 	if (emptyBuffer == nullptr) {
 		ILog("Unable to allocate memory\n");
+        CloseHandle(hProc);
 		return false;
 	}
 	memset(emptyBuffer, 0, 1024 * 1024 * 20);
@@ -225,6 +239,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeade
 		ILog("WARNING: can't release mapping data memory\n");
 	}
 
+    CloseHandle(hProc);
 	return true;
 }
 

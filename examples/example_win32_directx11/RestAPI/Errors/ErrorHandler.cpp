@@ -25,6 +25,9 @@ namespace RestAPI {
         {"given username are not exist", "Ошибка #0"},
         {"invalid password", "Ошибка #1"},
         {"invalid session", "Ошибка #2"},
+
+        // getsessionhash
+        {"feature not found", "Ошибка #3"}
     };
 
     const char* ErrorHandler::GetErrorFromStatus(std::string status) {

@@ -84,6 +84,7 @@
     <IncludePath>D:\libs\DirectX\Lib\x64;D:\libs\curl-7.87.0\builds\Release x64\include;D:\libs\json\include;D:\libs\cpp_string_utils-main\include;D:\libs\md5cpp\include;$(IncludePath)</IncludePath>
     <ExternalIncludePath>D:\libs\DirectX\Include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>D:\libs\DirectX\Lib\x64;$(LibraryPath)</LibraryPath>
+    <TargetName>Loader</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

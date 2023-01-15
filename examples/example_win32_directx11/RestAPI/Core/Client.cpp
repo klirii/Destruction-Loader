@@ -171,4 +171,36 @@ namespace RestAPI {
         features = json::parse(jsonResponse["features"].dump());
         return true;
     }
+
+    bool Client::GetSessionHash(std::string hash, std::string username, std::string password, std::string session, std::vector<std::uint8_t>& dll) {
+        CURL* curl = curl_easy_init();
+        CURLcode reqCode;
+
+        std::string url = this->host + "/getsessionhash=" + hash + "/login=" + username + "/password=" + password + "/session=" + session;
+        std::string response;
+        json jsonResponse;
+
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, CURLUtils::response2string);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+
+        reqCode = curl_easy_perform(curl);
+        if (reqCode != CURLE_OK) {
+            MessageBoxA(ErrorHandler::hWindow, "Проблемы с соединением!", "Destruction Loader", MB_ICONERROR);
+            return false;
+        }
+
+        jsonResponse = json::parse(response);
+        std::string status = jsonResponse["status"];
+
+        curl_easy_cleanup(curl);
+        if (ErrorHandler::handle(status.c_str())) return false;
+        if (!jsonResponse.contains("hash")) return false;
+
+        dll = Utils::hex2bytes(jsonResponse["hash"]);
+        dll = Utils::reverse_bytes(dll);
+        dll = Utils::rolling_xor(dll, true);
+
+        return true;
+    }
 }

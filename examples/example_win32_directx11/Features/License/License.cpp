@@ -35,7 +35,7 @@ namespace Features {
         else if (minutes < 60) license += std::to_string(minutes) + " minute(s)";
         else if (hours < 24) license += std::to_string(hours) + " hour(s)";
         else if (days < 30) license += std::to_string(days) + " day(s)";
-        else if (months < 12) license += std::to_string(months) + " month(s)";
+        else if (months <= 12) license += std::to_string(months) + " month(s)";
         else if (months > 12) license += "lifetime";
 
         return license;

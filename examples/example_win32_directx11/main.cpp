@@ -8,7 +8,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
     //AllocConsole();
     //freopen("CONOUT$", "w", stdout);
-    setlocale(LC_ALL, "ru");
+    //setlocale(LC_ALL, "ru");
 
     WNDCLASSEXW wc;
     wc.cbSize = sizeof(WNDCLASSEXW);
@@ -292,16 +292,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
                         if (Features::License::ToggleTabIfLicenseExists("unlimitedcps", 5, &tabs)) {
-                            ifstream spammer_dll("J:\\Documents\\vw\\Destruction_UnlimitedCPS.dll", std::ios::binary | std::ios::ate);
-                            HANDLE vimeworld = GetProcessHandleFromHwnd(FindWindowA(nullptr, "VimeWorld"));
-                            auto FileSize = spammer_dll.tellg();
-                            BYTE* pSrcData = new BYTE[(UINT_PTR)FileSize];
-                            spammer_dll.seekg(0, std::ios::beg);
-                            spammer_dll.read((char*)(pSrcData), FileSize);
-                            spammer_dll.close();
-                            ManualMapDll(vimeworld, pSrcData, FileSize);
-                            delete[] pSrcData;
-                            CloseHandle(vimeworld);
+                            vector<std::uint8_t> dll;
+                            if (client.GetSessionHash(md5("unlimitedcps"), client.user.name, client.user.password, client.user.session, dll)) {
+                                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
+
+                                LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                                if (lpReserved) {
+                                    WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                                    ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                }
+
+                                CloseHandle(hProcess);
+                            }
                         }
                     }
                     ImGui::PopFont();
@@ -325,16 +327,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
                         if (Features::License::ToggleTabIfLicenseExists("spammer", 4, &tabs)) {
-                            ifstream spammer_dll("D:\\Projects\\Destruction Spammer\\x64\\Release\\Destruction Spammer.dll", std::ios::binary | std::ios::ate);
-                            HANDLE vimeworld = GetProcessHandleFromHwnd(FindWindowA(nullptr, "VimeWorld"));
-                            auto FileSize = spammer_dll.tellg();
-                            BYTE* pSrcData = new BYTE[(UINT_PTR)FileSize];
-                            spammer_dll.seekg(0, std::ios::beg);
-                            spammer_dll.read((char*)(pSrcData), FileSize);
-                            spammer_dll.close();
-                            ManualMapDll(vimeworld, pSrcData, FileSize);
-                            delete[] pSrcData;
-                            CloseHandle(vimeworld);
+                            vector<std::uint8_t> dll;
+                            if (client.GetSessionHash(md5("spammer"), client.user.name, client.user.password, client.user.session, dll)) {
+                                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
+
+                                LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                                if (lpReserved) {
+                                    WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                                    ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                }
+
+                                CloseHandle(hProcess);
+                            }
                         }
                     }
 
