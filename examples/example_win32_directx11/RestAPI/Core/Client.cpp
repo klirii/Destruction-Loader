@@ -13,6 +13,7 @@
 #include <curl/curl.h>
 
 #include <fstream>
+#include <codecvt>
 #include <StringUtils.h>
 
 #pragma warning(disable:26812)
@@ -26,9 +27,11 @@ namespace RestAPI {
     bool UserData::save(std::string name, std::string password) {
         struct _stat fiBuf;
         if (_stat(path.c_str(), &fiBuf) == -1) {
-            std::ofstream data(path);
-            data << name << std::endl;
-            data << password << std::endl;
+            std::wofstream data(path);
+            data.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+
+            data << std::wstring(name.begin(), name.end()) << std::endl;
+            data << std::wstring(password.begin(), password.end()) << std::endl;
 
             data.close();
             return true;
@@ -37,16 +40,18 @@ namespace RestAPI {
     }
 
     bool UserData::get(std::string& name, std::string& pass) {
-        char username[12];
-        char password[33];
+        std::wstring username;
+        std::wstring password;
 
-        std::ifstream data(path);
-        data.getline(username, 12);
-        data.getline(password, 33);
+        std::wifstream data(path);
+        data.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 
-        if (*username && *password) {
-            name = username;
-            pass = password;
+        std::getline(data, username);
+        std::getline(data, password);
+
+        if (!username.empty() && !password.empty()) {
+            name = std::string(username.begin(), username.end());
+            pass = std::string(password.begin(), password.end());
         }
 
         if (!name.empty() && !pass.empty()) return true;

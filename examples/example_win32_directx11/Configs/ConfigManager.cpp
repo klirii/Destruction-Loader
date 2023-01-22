@@ -1,8 +1,11 @@
 #include "ConfigManager.hpp"
+
 #include "../Features/Settings/Keycodes.hpp"
+#include "../conversion.hpp"
 
 #include <string>
 #include <fstream>
+#include <codecvt>
 #include <StringUtils.h>
 
 namespace Configs {
@@ -55,28 +58,32 @@ namespace Configs {
     }
 
     bool Spammer::Parse(bool& antiMute, int& keyCode, int& delayCount, std::string& delayUnit, std::string& message) {
-        char line[108];
-        std::ifstream config(ConfigManager::Spammer);
+        std::string line;
+        std::wstring wline;
 
-        while (config.getline(line, 108)) {
+        std::wifstream config(ConfigManager::Spammer);
+        config.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+
+        while (std::getline(config, wline)) {
+            line = unicode2ansi(wline);
             char* lineParts[2];
-            StringUtils::split(line, '=', lineParts);
+            StringUtils::split(line.c_str(), '=', lineParts);
 
-            if (StringUtils::contains(line, "keybind")) {
+            if (StringUtils::contains(line.c_str(), "keybind")) {
                 if (!InverseKeycodes.count(lineParts[1])) return false;
                 keyCode = InverseKeycodes[lineParts[1]];
             }
-            else if (StringUtils::contains(line, "delay")) {
+            else if (StringUtils::contains(line.c_str(), "delay")) {
                 delayUnit = GetTimeUnit(lineParts[1]);
                 delayCount = GetTimeCount(lineParts[1]);
                 if (delayUnit.empty() || delayCount == 0) return false;
             }
-            else if (StringUtils::contains(line, "antimute")) {
+            else if (StringUtils::contains(line.c_str(), "antimute")) {
                 antiMute = strcmp(lineParts[1], "true") == 0 ? true : false;
             }
-            else if (StringUtils::contains(line, "message")) {
+            else if (StringUtils::contains(line.c_str(), "message")) {
                 message = lineParts[1];
-                if (message.empty() && message.length() > 100) return false;
+                if (message.empty() || message.length() > 100) return false;
             }
         }
 
@@ -86,12 +93,17 @@ namespace Configs {
     bool ConfigManager::WriteFeatureSettings(Features::Feature* feature) {
         if (feature->name == "spammer") {
             Features::Spammer* spammer = reinterpret_cast<Features::Spammer*>(feature);
-            std::ofstream config(ConfigManager::Spammer, std::ios::trunc);
 
-            config << "keybind=" + (spammer->keyCode == 0 ? "F10" : Keycodes[spammer->keyCode]) << std::endl;
-            config << "delay=" + Spammer::serialize_ms(spammer->delay) << std::endl;
-            config << std::string("antimute=") + (spammer->antiMute ? "true" : "false") << std::endl;
-            config << "message=" + spammer->message;
+            std::wofstream config(ConfigManager::Spammer, std::ios::trunc);
+            config.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+
+            std::string keybind = Keycodes[spammer->keyCode];
+            std::string delay = Spammer::serialize_ms(spammer->delay);
+
+            config << L"keybind=" + (spammer->keyCode == 0 ? L"F10" : ansi2unicode(keybind)) << std::endl;
+            config << L"delay=" + ansi2unicode(delay) << std::endl;
+            config << std::wstring(L"antimute=") + (spammer->antiMute ? L"true" : L"false") << std::endl;
+            config << L"message=" + ansi2unicode(spammer->message);
 
             config.close();
             return true;

@@ -1,14 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
-{
+std::string unicode2ansi(const std::wstring& wstr);
+std::wstring ansi2unicode(const std::string& str);
+std::string utf8_encode(const std::wstring& wstr);
+std::wstring utf8_decode(const std::string& str);
+
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
+    setlocale(LC_ALL, "ru");
     Features::License::client = &client;
     initFeatures();
-
-    //AllocConsole();
-    //freopen("CONOUT$", "w", stdout);
-    //setlocale(LC_ALL, "ru");
 
     WNDCLASSEXW wc;
     wc.cbSize = sizeof(WNDCLASSEXW);
@@ -396,7 +397,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         if (ImGui::InputTextEx("##message", "", message, 100, ImVec2(202, 40), ImGuiInputTextFlags_None)) {
                             spammer->message = unicode2ansi(utf8_decode(message)); // convert UTF-8 to unicode, then unicode to ANSI
-                            spammer->message = string(spammer->message.begin(), spammer->message.end() - 1);
+                            spammer->message = spammer->message.substr(0, spammer->message.size() - 1);
+                            Configs::ConfigManager::WriteFeatureSettings(spammer);
                         }
 
                         tabs_1_b = true;
