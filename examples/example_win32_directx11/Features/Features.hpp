@@ -9,7 +9,7 @@ namespace Features {
         std::string license;
         uint8_t tabs[2];
 
-        int isEnabled;
+        bool isEnabled;
         int keyCode;
     };
 
@@ -43,6 +43,9 @@ namespace Features {
 
             this->tabs[0] = 2;
             this->tabs[1] = 5;
+
+            this->isEnabled = true;
+            this->keyCode = VK_F8;
         }
         ~UnlimitedCPS() {delete this;}
     };

@@ -8,6 +8,7 @@ std::wstring utf8_decode(const std::string& str);
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     setlocale(LC_ALL, "ru");
+
     Features::License::client = &client;
     initFeatures();
 
@@ -296,14 +297,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("unlimitedcps"), client.user.name, client.user.password, client.user.session, dll)) {
                                 HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
-
                                 LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
                                 if (lpReserved) {
                                     WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
                                     ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
                                 }
-
-                                CloseHandle(hProcess);
                             }
                         }
                     }
@@ -331,14 +329,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("spammer"), client.user.name, client.user.password, client.user.session, dll)) {
                                 HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
-
                                 LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
                                 if (lpReserved) {
                                     WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
                                     ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
                                 }
-
-                                CloseHandle(hProcess);
                             }
                         }
                     }
@@ -372,7 +367,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                             Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);
 
                         // Загрузка конфига
-                        if (!Configs::ConfigManager::configsIsLoaded) {
+                        if (!Configs::Spammer::configIsLoaded) {
                             int delayCount;
                             string delayUnit;
                             string msg;
@@ -392,7 +387,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                                 strcpy(message, msg.c_str());
                             }
 
-                            Configs::ConfigManager::configsIsLoaded = true;
+                            Configs::Spammer::configIsLoaded = true;
                         }
 
                         if (ImGui::InputTextEx("##message", "", message, 100, ImVec2(202, 40), ImGuiInputTextFlags_None)) {
@@ -403,24 +398,38 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         tabs_1_b = true;
                     }
+
                     ImGui::EndChild();
-
                     break;
-
                 case 5:
                     ImGui::SetCursorPos(ImVec2(255, 20));
-
                     ImGui::BeginChild("child_widget", ImVec2(250, 400));
                     {
-                        static int key0;
-                        static bool enable_unlimited = false;
-                        ImGui::HotKeybox("Enable", "0", &enable_unlimited, &key0);
+                        if (!Configs::UnlimitedCPS::configIsLoaded) {
+                            // Если конфига не существует - создаём его
+                            struct _stat fiBuf;
+                            if (_stat(Configs::ConfigManager::UnlimitedCPS.c_str(), &fiBuf) == -1)
+                                Configs::ConfigManager::WriteFeatureSettings(unlimitedCPS);
 
+                            Configs::UnlimitedCPS::Parse(unlimitedCPS->isEnabled, unlimitedCPS->keyCode);
+                            Configs::UnlimitedCPS::configIsLoaded = true;
+                        }
+
+                        if (ImGui::Checkbox("Enable", &unlimitedCPS->isEnabled)) {
+                            unlimitedCPS->isEnabled = !unlimitedCPS->isEnabled;
+                            Configs::ConfigManager::WriteFeatureSettings(unlimitedCPS);
+                        }
+                        SetCursorPos(ImVec2(GetCursorPos().x + 242, GetCursorPos().y + -47));
+
+                        if (ImGui::Keybind1("0", &unlimitedCPS->keyCode))
+                            Configs::ConfigManager::WriteFeatureSettings(unlimitedCPS);
+                        SetCursorPos(ImVec2(GetCursorPos().x + 0, GetCursorPos().y + 8));
+
+                        Configs::UnlimitedCPS::Parse(unlimitedCPS->isEnabled, unlimitedCPS->keyCode);
                         tabs_2_b = true;
-
                     }
-                    ImGui::EndChild();
 
+                    ImGui::EndChild();
                     break;
                 }
                 ImGui::PopStyleVar(1);

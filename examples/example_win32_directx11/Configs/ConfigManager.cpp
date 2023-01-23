@@ -11,7 +11,9 @@
 namespace Configs {
     std::string ConfigManager::UnlimitedCPS = std::string(getenv("appdata")) + "\\.vimeworld\\minigames\\UnlimitedCPS.ini";
     std::string ConfigManager::Spammer = std::string(getenv("appdata")) + "\\.vimeworld\\minigames\\Spammer.ini";
-    bool ConfigManager::configsIsLoaded = false;
+
+    bool Spammer::configIsLoaded = false;
+    bool UnlimitedCPS::configIsLoaded = false;
 
     uint64_t Spammer::ParseDelayFromSliders(uint64_t ms, uint64_t s, uint64_t m, uint64_t h) {
         return ms + (s * 1000) + (m * 60000) + (h * 3600000);
@@ -87,6 +89,30 @@ namespace Configs {
             }
         }
 
+        config.close();
+        return true;
+    }
+
+    bool UnlimitedCPS::Parse(bool& isEnabled, int& keyCode) {
+        std::string line;
+        std::wstring wline;
+
+        std::wifstream config(ConfigManager::UnlimitedCPS);
+        config.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+
+        while (std::getline(config, wline)) {
+            line = unicode2ansi(wline);
+            char* lineParts[2];
+            StringUtils::split(line.c_str(), '=', lineParts);
+
+            if (StringUtils::contains(line.c_str(), "keybind"))
+                keyCode = InverseKeycodes[lineParts[1]];
+            else if (StringUtils::contains(line.c_str(), "enabled")) {
+                isEnabled = strcmp(lineParts[1], "true") == 0 ? true : false;
+            }
+        }
+
+        config.close();
         return true;
     }
 
@@ -97,11 +123,8 @@ namespace Configs {
             std::wofstream config(ConfigManager::Spammer, std::ios::trunc);
             config.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 
-            std::string keybind = Keycodes[spammer->keyCode];
-            std::string delay = Spammer::serialize_ms(spammer->delay);
-
-            config << L"keybind=" + (spammer->keyCode == 0 ? L"F10" : ansi2unicode(keybind)) << std::endl;
-            config << L"delay=" + ansi2unicode(delay) << std::endl;
+            config << L"keybind=" + (spammer->keyCode == NULL ? L"F10" : ansi2unicode(Keycodes[spammer->keyCode])) << std::endl;
+            config << L"delay=" + ansi2unicode(Spammer::serialize_ms(spammer->delay)) << std::endl;
             config << std::wstring(L"antimute=") + (spammer->antiMute ? L"true" : L"false") << std::endl;
             config << L"message=" + ansi2unicode(spammer->message);
 
@@ -109,9 +132,18 @@ namespace Configs {
             return true;
         }
         else if (feature->name == "unlimitedcps") {
+            Features::UnlimitedCPS* unlimited = reinterpret_cast<Features::UnlimitedCPS*>(feature);
 
+            std::wofstream config(ConfigManager::UnlimitedCPS, std::ios::trunc);
+            config.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+
+            config << L"keybind=" << (unlimited->keyCode == NULL ? L"F8" : ansi2unicode(Keycodes[unlimited->keyCode])) << std::endl;
+            config << std::wstring(L"enabled=") + (unlimited->isEnabled ? L"true" : L"false");
+
+            config.close();
             return true;
         }
+
         return false;
     }
 }

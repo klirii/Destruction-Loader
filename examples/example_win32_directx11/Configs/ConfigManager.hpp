@@ -7,12 +7,13 @@ namespace Configs {
     public:
         static std::string UnlimitedCPS;
         static std::string Spammer;
-        static bool configsIsLoaded;
         static bool WriteFeatureSettings(Features::Feature* feature);
     };
 
     class Spammer {
     public:
+        static bool configIsLoaded;
+
         static uint64_t ParseDelayFromSliders(uint64_t ms, uint64_t s, uint64_t m, uint64_t h);
         static void ParseDelayInSliders(int count, std::string unit, int& ms, int& s, int& m, int& h);
 
@@ -23,5 +24,11 @@ namespace Configs {
     private:
         static std::string GetTimeUnit(std::string delay);
         static int GetTimeCount(std::string delay);
+    };
+
+    class UnlimitedCPS {
+    public:
+        static bool configIsLoaded;
+        static bool Parse(bool& isEnabled, int& keyCode);
     };
 }
