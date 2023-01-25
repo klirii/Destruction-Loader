@@ -12,6 +12,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     Features::License::client = &client;
     initFeatures();
 
+    if (!client.GetVersion()) return FALSE;
+
     WNDCLASSEXW wc;
     wc.cbSize = sizeof(WNDCLASSEXW);
     wc.style = CS_CLASSDC;
@@ -28,6 +30,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
     RegisterClassExW(&wc);
     hwnd = CreateWindowExW(NULL, wc.lpszClassName, L"Destruction Loader", WS_POPUP, (GetSystemMetrics(SM_CXSCREEN) / 2) - (WIDTH / 2), (GetSystemMetrics(SM_CYSCREEN) / 2) - (HEIGHT / 2), WIDTH, HEIGHT, 0, 0, 0, 0);
+
+    if (client.version != "1.0.0")
+        if (MessageBoxA(hwnd, "Обновите лоадер!", "Destruction Loader", MB_ICONINFORMATION))
+            return FALSE;
 
     SetWindowLongA(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
     SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 255, LWA_ALPHA);
@@ -165,7 +171,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::SetCursorPos(ImVec2(795, 10));
                     if (ImGui::CBAAutton("##discord", "K", false, ImVec2(40, 40)))
-                        ShellExecute(NULL, L"open", L"https://discord.gg/esWZAA3cBC", NULL, NULL, SW_SHOW);
+                        MessageBoxA(hwnd, "Дискорд временно недоступен", "Destruction Loader", MB_ICONINFORMATION);
+                        //ShellExecute(NULL, L"open", L"https://discord.gg/esWZAA3cBC", NULL, NULL, SW_SHOW);
 
                     ImGui::PopFont();
                     ImGui::PopStyleColor();
@@ -178,7 +185,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::EndGroupPos();
 
                 }
-
 
                 ImGui::PushStyleVar(ImGuiStyleVar_Alpha, tab_alpha * s.Alpha);
 

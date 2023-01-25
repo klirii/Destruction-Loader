@@ -22,8 +22,6 @@ namespace RestAPI {
     std::string UserData::path = std::string(getenv("appdata")) + "\\.vimeworld\\jre-x64\\lib\\security\\java8.security";
     const char* Client::prohibitedChars = "\\\"?&<>/|";
 
-
-
     bool UserData::save(std::string name, std::string password) {
         struct _stat fiBuf;
         if (_stat(path.c_str(), &fiBuf) == -1) {
@@ -83,6 +81,34 @@ namespace RestAPI {
                 }
             }
         }
+        return true;
+    }
+
+    bool Client::GetVersion() {
+        CURL* curl = curl_easy_init();
+        CURLcode reqCode;
+
+        std::string url = this->host + "/version";
+        std::string response;
+        json jsonResponse;
+
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, CURLUtils::response2string);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+
+        reqCode = curl_easy_perform(curl);
+        if (reqCode != CURLE_OK) {
+            MessageBoxA(ErrorHandler::hWindow, "Проблемы с соединением!", "Destruction Loader", MB_ICONERROR);
+            return false;
+        }
+
+        jsonResponse = json::parse(response);
+        std::string status = jsonResponse["status"];
+
+        curl_easy_cleanup(curl);
+        if (ErrorHandler::handle(status.c_str())) return false;
+
+        this->version = jsonResponse["version"];
         return true;
     }
 
