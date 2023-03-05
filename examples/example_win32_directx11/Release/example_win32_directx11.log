@@ -112,15 +112,15 @@ D:\libs\md5cpp\include\md5.cpp(262,27): warning C4267: аргумент: пре�
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(131,17): warning C4189: style: локальная переменная инициализирована, но не использована
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(145,68): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.h(145,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(125,96): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(133,64): warning C4244: аргумент: преобразование "int" в "BYTE", возможна потеря данных
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(379,39): warning C4456: объявление "msg" скрывает предыдущее локальное объявление
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(82,13): message : см. объявление "msg"
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(130,96): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(138,64): warning C4244: аргумент: преобразование "int" в "BYTE", возможна потеря данных
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(399,39): warning C4456: объявление "msg" скрывает предыдущее локальное объявление
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(87,13): message : см. объявление "msg"
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(9,88): warning C4100: nCmdShow: неиспользованный формальный параметр
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(9,73): warning C4100: lpCmdLine: неиспользованный формальный параметр
 D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(9,53): warning C4100: hPrevInstance: неиспользованный формальный параметр
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(76,10): warning C4189: show_demo_window: локальная переменная инициализирована, но не использована
-D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(77,10): warning C4189: show_another_window: локальная переменная инициализирована, но не использована
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(81,10): warning C4189: show_demo_window: локальная переменная инициализирована, но не использована
+D:\Projects\Destruction Loader\examples\example_win32_directx11\main.cpp(82,10): warning C4189: show_another_window: локальная переменная инициализирована, но не использована
   Client.cpp
 D:\Projects\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Utils.hpp(11,28): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 D:\Projects\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(22,46): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -192,6 +192,6 @@ D:\Projects\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Ut
 LINK : warning LNK4098: библиотека по умолчанию "LIBCMT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
   Создание кода
   Previous IPDB not found, fall back to full compilation.
-  All 4321 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 4313 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Создание кода завершено
   example_win32_directx11.vcxproj -> D:\Projects\Destruction Loader\examples\example_win32_directx11\Release\Loader.exe

@@ -34,7 +34,7 @@ namespace RestAPI {
         const char* c_str = field.c_str();
         for (; *c_str; c_str++) {
             if (('a' <= *c_str && *c_str <= 'z') || ('A' <= *c_str && *c_str <= 'Z') || ('0' <= *c_str && *c_str <= '9')) {}
-            else if (email ? *c_str == '.' || *c_str == '@' : email) {}
+            else if (email ? *c_str == '.' || *c_str == '@' || *c_str == '-' : email) {}
             else return true;
         }
         return false;

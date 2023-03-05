@@ -33,7 +33,7 @@
 #include <nlohmann/json.hpp>
 #include <StringUtils.h>
 
-static RestAPI::Client client("https://destructiqn.com:9990");
+static RestAPI::Client client("https://destructiqn.com:9500");
 
 Features::UnlimitedCPS* unlimitedCPS = new Features::UnlimitedCPS();
 Features::Spammer* spammer = new Features::Spammer();

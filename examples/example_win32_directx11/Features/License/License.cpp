@@ -13,7 +13,7 @@ namespace Features {
     void License::UpdateLicenseTimes() {
         while (true) {
             for (const auto& kv : features) kv.second->license = "License: ...";
-            Sleep(30 * 1000);
+            Sleep(30000);
         }
     }
 
@@ -67,5 +67,6 @@ namespace Features {
         }
 
         isSetting = false;
+        CloseHandle(GetCurrentThread());
     }
 }

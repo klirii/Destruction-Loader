@@ -8,26 +8,21 @@ namespace RestAPI {
 
     std::map<std::string, std::string> ErrorHandler::ruErrors{
         // register
-        {"given username is already in use", "Пользователь с таким логином уже зарегистрирован!"},
-
-        {"char is prohibited to use in login", "В логине можно использовать только латинские буквы и цифры!"},
-        {"char is prohibited to use in password", "Символ \"^\" запрещено использовать в пароле!"},
-        {"char is prohibited to use in mail", "Почта может состоять только из латинских букв, цифр, и точек"},
-        {"char is prohibited to use in hash", "Ошибка #8"},
-        {"char is prohibited to use in session", "Ошибка #19"},
-        {"you can't register account right now", "Вы слишком часто регистрируете аккаунты, попробуйте позже"},
+        {"required in query params", "Ошибка #0"},
+        {"char is prohibited to use in params", "Ошибка #1"},
+        {"account with given username already exists", "Кто-то уже использует такой логин :("},
+        {"failed to register account", "Не получилось зарегистрировать аккаунт, обратитесь в сообщество"},
+        {"unresolvable exception occured", "Возникла неопознанная ошибка, обратитесь в сообщество"},
 
         // login
-        {"username doesn't exist or password is invalid", "Неверный логин или пароль"},
-        {"unexpected exception while generating session", "Ошибка авторизации"},
+        {"attempt to login non-existent account", "Аккаунта с таким логином не существует!"},
+        {"invalid password", "Неверный пароль!"},
 
         // getfeatures
-        {"given username are not exist", "Ошибка #0"},
-        {"invalid password", "Ошибка #1"},
-        {"invalid session", "Ошибка #2"},
+        {"invalid login, password or session", "Ошибка #2"},
 
         // getsessionhash
-        {"feature not found", "Ошибка #3"}
+        {"invalid hash", "Ошибка #3"}
     };
 
     const char* ErrorHandler::GetErrorFromStatus(std::string status) {
@@ -51,6 +46,9 @@ namespace RestAPI {
                     char prohibitedChar = GetProhibitedChar(error);
                     ruError[8] = prohibitedChar;
                 }
+            }
+            else if (StringUtils::contains(error, "required in query params")) {
+                ruError = ruErrors[error + 4];
             }
             else ruError = ruErrors[error];
 

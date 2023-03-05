@@ -348,6 +348,11 @@ void __stdcall Shellcode(MANUAL_MAPPING_DATA* pData) {
 }
 
 HANDLE GetProcessHandleFromHwnd(HWND hwnd) {
+    if (!hwnd) {
+        MessageBoxA(nullptr, "VimeWorld не найден!", "Destruction Loader", MB_ICONERROR);
+        return nullptr;
+    }
+
     DWORD pid;
     GetWindowThreadProcessId(hwnd, &pid);
     return OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);

@@ -13,6 +13,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     initFeatures();
 
     if (!client.GetVersion()) return FALSE;
+    if (!client.GetState()) return FALSE;
 
     WNDCLASSEXW wc;
     wc.cbSize = sizeof(WNDCLASSEXW);
@@ -31,8 +32,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     RegisterClassExW(&wc);
     hwnd = CreateWindowExW(NULL, wc.lpszClassName, L"Destruction Loader", WS_POPUP, (GetSystemMetrics(SM_CXSCREEN) / 2) - (WIDTH / 2), (GetSystemMetrics(SM_CYSCREEN) / 2) - (HEIGHT / 2), WIDTH, HEIGHT, 0, 0, 0, 0);
 
-    if (client.version != "1.0.0")
+    if (client.version != "1.1.0")
         if (MessageBoxA(hwnd, "Обновите лоадер!", "Destruction Loader", MB_ICONINFORMATION))
+            return FALSE;
+
+    if (client.state != "available")
+        if (MessageBoxA(hwnd, "В данный момент проводятся тех.работы", "Destruction Loader", MB_ICONINFORMATION))
             return FALSE;
 
     SetWindowLongA(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
@@ -171,8 +176,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::SetCursorPos(ImVec2(795, 10));
                     if (ImGui::CBAAutton("##discord", "K", false, ImVec2(40, 40)))
-                        MessageBoxA(hwnd, "Дискорд временно недоступен", "Destruction Loader", MB_ICONINFORMATION);
-                        //ShellExecute(NULL, L"open", L"https://discord.gg/esWZAA3cBC", NULL, NULL, SW_SHOW);
+                        ShellExecute(NULL, L"open", L"https://discord.gg/nhtg", NULL, NULL, SW_SHOW);
 
                     ImGui::PopFont();
                     ImGui::PopStyleColor();
@@ -303,11 +307,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("unlimitedcps"), client.user.name, client.user.password, client.user.session, dll)) {
                                 HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
-                                LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-                                if (lpReserved) {
-                                    WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
-                                    ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                if (hProcess) {
+                                    LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                                    if (lpReserved) {
+                                        WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                                        ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                    }
                                 }
+                                else {
+                                    tabs = 2;
+                                }
+                            }
+                            else {
+                                tabs = 2;
                             }
                         }
                     }
@@ -335,11 +347,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("spammer"), client.user.name, client.user.password, client.user.session, dll)) {
                                 HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
-                                LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-                                if (lpReserved) {
-                                    WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
-                                    ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                if (hProcess) {
+                                    LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                                    if (lpReserved) {
+                                        WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                                        ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                    }
                                 }
+                                else {
+                                    tabs = 3;
+                                }
+                            }
+                            else {
+                                tabs = 3;
                             }
                         }
                     }
@@ -363,7 +383,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         static char message[100] = { "" };
 
-                        if (ImGui::SliderInt("millisecond", &delay_ms, 0, 100))
+                        if (ImGui::SliderInt("millisecond", &delay_ms, 0, 1000))
                             Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);
                         if (ImGui::SliderInt("second", &delay_s, 0, 60))
                             Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);

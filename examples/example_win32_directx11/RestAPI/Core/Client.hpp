@@ -23,11 +23,14 @@ namespace RestAPI {
     public:
         UserData user;
         std::string version;
+        std::string state;
 
         Client() {}
         Client(std::string host) {this->host = host;}
 
         bool GetVersion();
+        bool GetState();
+
         bool Register(const char* username, const char* password, const char* email, std::string unHash);
         bool Login(const char* username, const char* password);
         bool GetFeatures(std::string username, std::string password, std::string session, json& features);

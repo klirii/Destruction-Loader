@@ -33,8 +33,8 @@ namespace color {
     inline ImVec4 car_hov = ImColor(193, 193, 193, 255);
     inline ImVec4 car = ImColor(153, 153, 153, 255);
 
-    inline ImVec4 check_active = ImColor(35, 35, 35, 175);
-    inline ImVec4 check_hov = ImColor(25, 25, 25, 175);
+    inline ImVec4 check_active = ImColor(255, 164, 0, 255);
+    inline ImVec4 check_hov = ImColor(35, 35, 35, 175);
     inline ImVec4 check = ImColor(20, 20, 20, 175);
 
     inline ImVec4 AButton_active = ImColor(233, 151, 55, 255);
