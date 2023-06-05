@@ -20,6 +20,7 @@ namespace Features {
     std::string License::GetLicenseTime(int* tabs) {
         if (*tabs == 2 || *tabs == 5) return features["unlimitedcps"]->license;
         else if (*tabs == 3 || *tabs == 4) return features["spammer"]->license;
+        else if (*tabs == 6) return features["kogtevran"]->license;
         return "License: no available";
     }
 

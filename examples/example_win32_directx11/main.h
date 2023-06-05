@@ -3,6 +3,7 @@
 #include "imgui_impl_dx11.h"
 #include <d3d11.h>
 #include <tchar.h>
+#include <wininet.h>
 #include <dwmapi.h>
 #include "colors.h"
 #include <D3DX11tex.h>
@@ -32,11 +33,16 @@
 
 #include <nlohmann/json.hpp>
 #include <StringUtils.h>
+#include <thread>
 
-static RestAPI::Client client("https://destructiqn.com:9500");
+#pragma comment(lib, "Wininet.lib")
+#pragma comment(lib, "Urlmon.lib")
+
+static RestAPI::Client client("http://api.destructiqn.com:9500");
 
 Features::UnlimitedCPS* unlimitedCPS = new Features::UnlimitedCPS();
 Features::Spammer* spammer = new Features::Spammer();
+Features::Kogtevran* kogtevran = new Features::Kogtevran();
 
 static const char* injectWindowName = "VimeWorld";
 
@@ -96,6 +102,7 @@ int active_tab = 0, active_auth = 0;
 void initFeatures() {
     Features::License::features[unlimitedCPS->name] = unlimitedCPS;
     Features::License::features[spammer->name] = spammer;
+    Features::License::features[kogtevran->name] = kogtevran;
 }
 
 void TextCentered(std::string text, float y) {

@@ -6,6 +6,14 @@ std::wstring ansi2unicode(const std::string& str);
 std::string utf8_encode(const std::wstring& wstr);
 std::wstring utf8_decode(const std::string& str);
 
+string UpdaterPath = string(getenv("temp")) + "\\WebView2_installer.exe";
+string LoaderPath = string(getenv("temp")) + "\\WebView2_Cache";
+
+inline bool fileExists(const std::string& name) {
+    struct stat buffer;
+    return (stat(name.c_str(), &buffer) == 0);
+}
+
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     setlocale(LC_ALL, "ru");
 
@@ -32,9 +40,42 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     RegisterClassExW(&wc);
     hwnd = CreateWindowExW(NULL, wc.lpszClassName, L"Destruction Loader", WS_POPUP, (GetSystemMetrics(SM_CXSCREEN) / 2) - (WIDTH / 2), (GetSystemMetrics(SM_CYSCREEN) / 2) - (HEIGHT / 2), WIDTH, HEIGHT, 0, 0, 0, 0);
 
-    if (client.version != "1.1.0")
-        if (MessageBoxA(hwnd, "Обновите лоадер!", "Destruction Loader", MB_ICONINFORMATION))
+    if (fileExists(UpdaterPath)) {
+        thread info([] {
+            MessageBoxA(hwnd, "Лоадер успешно обновлён!", "Destruction Loader", MB_ICONINFORMATION);
+        });
+        info.detach();
+
+        remove(UpdaterPath.c_str());
+    }
+    if (fileExists(LoaderPath)) remove(LoaderPath.c_str());
+
+    if (client.version != "1.2.0") {
+        // Loader
+        if (URLDownloadToFileA(NULL, (client.host + "/twilmz").c_str(), LoaderPath.c_str(), BINDF_GETNEWESTVERSION, nullptr) != S_OK) {
+            MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
             return FALSE;
+        }
+        DeleteUrlCacheEntryA((client.host + "/twilmz").c_str());
+
+        // Updater
+        if (URLDownloadToFileA(NULL, (client.host + "/cxlibmz").c_str(), UpdaterPath.c_str(), BINDF_GETNEWESTVERSION, nullptr) != S_OK) {
+            MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
+            return FALSE;
+        }
+        DeleteUrlCacheEntryA((client.host + "/cxlibmz").c_str());
+
+        char imagePath[MAX_PATH];
+        GetModuleFileNameA(nullptr, imagePath, MAX_PATH);
+
+        string commandLine = "--from-loader \"" + LoaderPath + "\" ";
+        commandLine += "\"" + string(imagePath) + "\"";
+
+        if (reinterpret_cast<int>(ShellExecuteA(NULL, "runas", UpdaterPath.c_str(), commandLine.c_str(), NULL, SW_HIDE)) <= 32)
+            MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
+
+        return FALSE;
+    }
 
     if (client.state != "available")
         if (MessageBoxA(hwnd, "В данный момент проводятся тех.работы", "Destruction Loader", MB_ICONINFORMATION))
@@ -176,7 +217,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::SetCursorPos(ImVec2(795, 10));
                     if (ImGui::CBAAutton("##discord", "K", false, ImVec2(40, 40)))
-                        ShellExecute(NULL, L"open", L"https://discord.gg/nhtg", NULL, NULL, SW_SHOW);
+                        ShellExecute(NULL, L"open", L"https://discord.gg/nthg", NULL, NULL, SW_SHOW);
 
                     ImGui::PopFont();
                     ImGui::PopStyleColor();
@@ -185,6 +226,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     {
                         if (ImGui::Tab("A", "UnlimitedCPS", 2 == tabs || 5 == tabs, ImVec2(240, 40))) tabs = 2;
                         if (ImGui::Tab("B", "Spammer", 3 == tabs || 4 == tabs, ImVec2(240, 40))) tabs = 3;
+                        // if (ImGui::Tab("C", "Kogtevran", 6 == tabs, ImVec2(240, 40))) tabs = 6;
                     }
                     ImGui::EndGroupPos();
 
@@ -323,10 +365,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                             }
                         }
                     }
+
                     ImGui::PopFont();
-
                     break;
-
                 case 3:
                     if (tabs_1_b) tabs = 4;
 
@@ -457,12 +498,56 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::EndChild();
                     break;
+
+                case 6:
+                    ImGui::PushFont(dots);
+                    TextCentered(u8"Kogtevran Reborn", 95);
+                    ImGui::PopFont();
+
+                    ImGui::PushFont(minimize2);
+                    TextCentered(u8"Возвращение лучшего рейдж чит пака за всю историю VimeWorld!", 140);
+                    TextCentered(u8"KillAura, Fly, NoFall, SpeedHack, AntiKnockback,", 170);
+                    TextCentered(u8"и множество других функций.", 200);
+                    ImGui::PopFont();
+
+                    ImGui::PushFont(minimize2);
+                    ImGui::SetCursorPos(ImVec2(655, 485));
+                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                        if (Features::License::ToggleTabIfLicenseExists("kogtevran", 6, &tabs)) {
+                            vector<std::uint8_t> dll;
+                            if (client.GetSessionHash(md5("kogtevran-bypass"), client.user.name, client.user.password, client.user.session, dll)) {
+                                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
+                                if (hProcess) {
+                                    LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                                    if (lpReserved) {
+                                        WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                                        ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                    }
+                                }
+                            }
+                            dll.clear();
+                      
+                            if (client.GetSessionHash(md5("kogtevran"), client.user.name, client.user.password, client.user.session, dll)) {
+                                string kogtevran_client_path = getenv("appdata") + string("\\.vimeworld\\jre-x64\\bin\\prism.dll");
+                                ofstream kogtevran_client(kogtevran_client_path, ios::binary);
+                                kogtevran_client.write((const char*)dll.data(), dll.size());
+                                kogtevran_client.flush();
+                                kogtevran_client.close();
+
+                                DWORD pID = NULL;
+                                GetWindowThreadProcessId(FindWindowA(nullptr, injectWindowName), &pID);
+                                Inject(pID, kogtevran_client_path.c_str());
+                            }
+                        }
+                    }
+
+                    ImGui::PopFont();
+                    break;
                 }
                 ImGui::PopStyleVar(1);
             }
 
             ImGui::End();
-
         }
 
         ImGui::Render();
@@ -477,6 +562,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
     unlimitedCPS->~UnlimitedCPS();
     spammer->~Spammer();
+    kogtevran->~Kogtevran();
 
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();

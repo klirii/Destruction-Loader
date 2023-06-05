@@ -21,7 +21,9 @@ namespace RestAPI {
 
     class Client {
     public:
+        std::string host;
         UserData user;
+
         std::string version;
         std::string state;
 
@@ -36,7 +38,6 @@ namespace RestAPI {
         bool GetFeatures(std::string username, std::string password, std::string session, json& features);
         bool GetSessionHash(std::string hash, std::string username, std::string password, std::string session, std::vector<std::uint8_t>& dll);
     private:
-        std::string host;
         static const char* prohibitedChars;
         static bool CheckFieldsChars(const char* username, const char* password, const char* email = nullptr);
     };

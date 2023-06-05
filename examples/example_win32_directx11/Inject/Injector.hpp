@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <string>
 
+#pragma warning(disable:6387)
+
 using f_LoadLibraryA = HINSTANCE(WINAPI*)(const char* lpLibFilename);
 using f_GetProcAddress = FARPROC(WINAPI*)(HMODULE hModule, LPCSTR lpProcName);
 using f_DLL_ENTRY_POINT = BOOL(WINAPI*)(void* hDll, DWORD dwReason, void* pReserved);
@@ -46,6 +48,24 @@ struct MANUAL_MAPPING_DATA
 
 void __stdcall Shellcode(MANUAL_MAPPING_DATA* pData);
 HANDLE GetProcessHandleFromHwnd(HWND hwnd);
+
+bool __forceinline Inject(DWORD pID, const char* path) {
+    HANDLE proc_handle;
+    LPVOID RemoteString;
+    LPCVOID LoadLibAddy;
+
+    if (pID == 0) return false;
+    proc_handle = OpenProcess(PROCESS_ALL_ACCESS, false, pID);
+    if (proc_handle == 0) return false;
+    
+    LoadLibAddy = GetProcAddress(GetModuleHandleA("kernel32.dll"), "LoadLibraryA");
+    RemoteString = VirtualAllocEx(proc_handle, NULL, strlen(path), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+    WriteProcessMemory(proc_handle, RemoteString, path, strlen(path), NULL);
+
+    CreateRemoteThread(proc_handle, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLibAddy, RemoteString, NULL, NULL);
+    CloseHandle(proc_handle);
+    return true;
+}
 
 //Note: Exception support only x64 with build params /EHa or /EHc
 bool __forceinline ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool ClearHeader = true, bool ClearNonNeededSections = true, bool AdjustProtections = true, bool SEHExceptionSupport = true, DWORD fdwReason = DLL_PROCESS_ATTACH, LPVOID lpReserved = 0) {

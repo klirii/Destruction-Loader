@@ -49,4 +49,18 @@ namespace Features {
         }
         ~UnlimitedCPS() {delete this;}
     };
+
+    class Kogtevran : public Feature {
+    public:
+        Kogtevran() {
+            this->name = "kogtevran";
+            this->license = "License: ...";
+
+            this->tabs[0] = 6;
+
+            this->isEnabled = false;
+            this->keyCode = NULL;
+        }
+        ~Kogtevran() {delete this;}
+    };
 }
