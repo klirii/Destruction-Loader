@@ -1124,6 +1124,9 @@ bool ImGui::Button(const char* label, const ImVec2& size_arg)
 }
 
 extern ImFont* ico;
+extern ImFont* kogtevran_ico;
+extern ImFont* nohurtcam_ico;
+extern ImFont* velocity_ico;
 extern ImFont* segu;
 struct tab_state
 {
@@ -1172,8 +1175,22 @@ bool ImGui::TabEx(const char* ico0, const char* label, bool selected, const ImVe
     PushStyleColor(ImGuiCol_Text, GetColorU32(it_anim->second.background_color));
     PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0, 0.5f));
 
-    PushFont(ico);
-    RenderTextClipped(bb.Min + ImVec2(15, -5), bb.Max, ico0, NULL, &label_size, style.ButtonTextAlign, &bb);
+    ImVec2 posMin(15, -5);
+    switch (*ico0) {
+    case 'C':
+        PushFont(velocity_ico);
+        posMin.x = 13;
+        break;
+    case 'D':
+        PushFont(nohurtcam_ico);
+        posMin.x = 13;
+        break;
+    default:
+        PushFont(ico);
+        break;
+    }
+
+    RenderTextClipped(bb.Min + posMin, bb.Max, ico0, NULL, &label_size, style.ButtonTextAlign, &bb);
     PopFont();
 
     PushFont(segu);
