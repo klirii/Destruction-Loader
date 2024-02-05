@@ -1,6 +1,7 @@
 #pragma once
-#include <iostream>
 #include "../Features/Features.hpp"
+#include <string>
+#include <fstream>
 
 namespace Configs {
     class ConfigManager {
@@ -31,4 +32,24 @@ namespace Configs {
         static bool configIsLoaded;
         static bool Parse(bool& isEnabled, int& keyCode);
     };
+
+    namespace Velocity {
+        static HWND loader = FindWindowA("Main", "Destruction Loader");
+
+        static std::string path = std::string(getenv("APPDATA")) + "\\.vimeworld\\minigames\\Velocity.ini";
+        static bool loaded = false;
+
+        void Rewrite(Features::Velocity* velocity);
+        void Load(
+            int& horizontal_min,
+            int& horizontal_max,
+            int& vertical_min,
+            int& vertical_max,
+            int& keycode,
+            bool& only_forward,
+            bool& only_moving,
+            bool& enabled
+        );
+        void UpdateState(bool& enabled);
+    }
 }

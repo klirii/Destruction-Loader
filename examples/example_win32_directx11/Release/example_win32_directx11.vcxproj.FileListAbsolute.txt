@@ -1,1 +1,1 @@
-D:\Projects\Destruction Loader\examples\example_win32_directx11\Release\Loader.exe
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\Loader.exe

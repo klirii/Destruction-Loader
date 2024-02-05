@@ -18,10 +18,21 @@ namespace Features {
     }
 
     std::string License::GetLicenseTime(int* tabs) {
-        if (*tabs == 2 || *tabs == 5) return features["unlimitedcps"]->license;
-        else if (*tabs == 3 || *tabs == 4) return features["spammer"]->license;
-        else if (*tabs == 6) return features["kogtevran"]->license;
-        return "License: no available";
+        switch (*tabs) {
+        case 2:
+        case 5:
+            return features["unlimitedcps"]->license;
+        case 3:
+        case 4:
+            return features["spammer"]->license;
+        case 6:
+        case 8:
+            return features["velocity"]->license;
+        case 7:
+            return features["nohurtcam"]->license;
+        default:
+            return "License: no available";
+        }
     }
 
     std::string License::GetLicenseTime(int seconds) {

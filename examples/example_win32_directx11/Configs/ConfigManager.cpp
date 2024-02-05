@@ -146,4 +146,91 @@ namespace Configs {
 
         return false;
     }
+
+    namespace Velocity {
+
+#define GET_INT_VAL(stream, line, param) {	\
+	if (line == #param) {					\
+		std::getline(stream, line);			\
+		param = atoi(line.c_str());			\
+	}										\
+}											\
+
+#define GET_BOOL_VAL(stream, line, param) {		\
+	if (line == #param) {						\
+		std::getline(stream, line);				\
+		param = line == "true" ? true : false;	\
+	}											\
+}                                               \
+
+#define GET_STRING_VAL(stream, line, param) {	\
+	if (line == #param) {						\
+		std::getline(stream, line);				\
+		param = line;                           \
+	}											\
+}                                               \
+
+        void Rewrite(Features::Velocity* velocity) {
+            std::ofstream cfg(path, std::ios::trunc);
+            if (cfg.is_open()) {
+                cfg << "horizontal_min=" << velocity->horizontal_min << std::endl;
+                cfg << "horizontal_max=" << velocity->horizontal_max << std::endl;
+                cfg << "vertical_min=" << velocity->vertical_min << std::endl;
+                cfg << "vertical_max=" << velocity->vertical_max << std::endl;
+                cfg << "only_forward=" << (velocity->only_forward ? "true" : "false") << std::endl;
+                cfg << "only_moving=" << (velocity->only_moving ? "true" : "false") << std::endl;
+                cfg << "enabled=" << (velocity->isEnabled ? "true" : "false") << std::endl;
+                cfg << "keybind=" << Keycodes[velocity->keyCode];
+            }
+            else {
+                MessageBoxA(loader, "Ошибка записи файла!", "Destruction Loader", MB_ICONERROR);
+            }
+        }
+
+        void Load(
+            int& horizontal_min,
+            int& horizontal_max,
+            int& vertical_min,
+            int& vertical_max,
+            int& keycode,
+            bool& only_forward,
+            bool& only_moving,
+            bool& enabled
+        ) {
+            std::ifstream cfg(path);
+            if (cfg.is_open()) {
+                for (std::string line; std::getline(cfg, line, '=');) {
+                    GET_INT_VAL(cfg, line, horizontal_min);
+                    GET_INT_VAL(cfg, line, horizontal_max);
+                    GET_INT_VAL(cfg, line, vertical_min);
+                    GET_INT_VAL(cfg, line, vertical_max);
+
+                    GET_BOOL_VAL(cfg, line, only_forward);
+                    GET_BOOL_VAL(cfg, line, only_moving);
+                    GET_BOOL_VAL(cfg, line, enabled);
+
+                    std::string keybind;
+                    GET_STRING_VAL(cfg, line, keybind);
+                    keycode = InverseKeycodes[keybind];
+                }
+            }
+            else {
+                MessageBoxA(loader, "Ошибка чтения файла!", "Destruction Loader", MB_ICONERROR);
+            }
+        }
+
+        void UpdateState(bool& enabled) {
+            std::ifstream cfg(path);
+
+            if (cfg.is_open()) {
+                for (std::string param, value; std::getline(cfg, param, '=') && std::getline(cfg, value); ) {
+                    if (param == "enabled")
+                        enabled = (value == "true" ? true : false);
+                }
+            }
+            else {
+                MessageBoxA(loader, "Ошибка чтения файла!", "Destruction Loader", MB_ICONERROR);
+            }
+        }
+    }
 }

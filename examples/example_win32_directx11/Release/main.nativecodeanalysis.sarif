@@ -1,0 +1,814 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Features::Feature::isEnabled\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/Features/Features.hpp"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 5
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Features::Feature::{ctor}",
+                  "decoratedName": "??0Feature@Features@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Features::Feature::isEnabled"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Features::Feature::keyCode\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/Features/Features.hpp"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 5
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Features::Feature::{ctor}",
+                  "decoratedName": "??0Feature@Features@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Features::Feature::keyCode"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Features::Feature::tabs\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/Features/Features.hpp"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 5
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Features::Feature::{ctor}",
+                  "decoratedName": "??0Feature@Features@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Features::Feature::tabs"
+          }
+        },
+        {
+          "ruleId": "C28251",
+          "message": {
+            "text": "Несогласованная аннотация для \"WinMain\": данный экземпляр содержит нет аннотаций. См. c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\um\\winbase.h(1037). "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/main.cpp"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WinMain",
+                  "decoratedName": "WinMain",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Возвращаемое значение пропущено: \"freopen\"."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/main.cpp"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 5,
+                  "endLine": 27,
+                  "endColumn": 29
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WinMain",
+                  "decoratedName": "WinMain",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26819",
+          "message": {
+            "text": "Неаннотированная передача управления между метками switch (es.78)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/libs/json/include/nlohmann/detail/input/lexer.hpp"
+                },
+                "region": {
+                  "startLine": 860,
+                  "startColumn": 18
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "nlohmann::detail::lexer<nlohmann::basic_json<std::map,std::vector,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool,__int64,unsigned __int64,double,std::allocator,nlohmann::adl_serializer,std::vector<unsigned char,std::allocator<unsigned char> > >,nlohmann::detail::iterator_input_adapter<char const *> >::scan_comment",
+                  "decoratedName": "?scan_comment@?$lexer@V?$basic_json@Vmap@std@@Vvector@2@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@_N_J_KNVallocator@2@Uadl_serializer@nlohmann@@V?$vector@EV?$allocator@E@std@@@2@@nlohmann@@V?$iterator_input_adapter@PEBD@detail@2@@detail@nlohmann@@AEAA_NXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26819",
+          "message": {
+            "text": "Неаннотированная передача управления между метками switch (es.78)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/libs/json/include/nlohmann/detail/input/lexer.hpp"
+                },
+                "region": {
+                  "startLine": 897,
+                  "startColumn": 17,
+                  "endLine": 897,
+                  "endColumn": 33
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "nlohmann::detail::lexer<nlohmann::basic_json<std::map,std::vector,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool,__int64,unsigned __int64,double,std::allocator,nlohmann::adl_serializer,std::vector<unsigned char,std::allocator<unsigned char> > >,nlohmann::detail::iterator_input_adapter<char const *> >::scan_comment",
+                  "decoratedName": "?scan_comment@?$lexer@V?$basic_json@Vmap@std@@Vvector@2@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@_N_J_KNVallocator@2@Uadl_serializer@nlohmann@@V?$vector@EV?$allocator@E@std@@@2@@nlohmann@@V?$iterator_input_adapter@PEBD@detail@2@@detail@nlohmann@@AEAA_NXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.37.32824.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/Features/Features.hpp"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "87c58d40a88d51d6bcb4caa95e8870f5f58b5236e9f0f4f5b3dd31ad73b40862"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/main.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "8075d1197a65dd8acd46fef85f34273ace295ec39e8090566d0679a29ba44297"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/libs/json/include/nlohmann/detail/input/lexer.hpp"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "f130ad1700612f048b0d879937e843017b374b12e1cf17a5a4abaa066398b8ae"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/main.h"
+          },
+          "hashes": {
+            "sha-256": "7c760d91b128fbe994ac8703758b5282c67e533d58a2d2fe3e19d2394c17e8a0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "9177dc67898d30fe04fae25d4bb3667d8caba34fa6662124048380f9e2249a0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "667920b41cffc02ed57db6b8610ca5518e189816cf31b10b33c6012799693660"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/backends/imgui_impl_win32.h"
+          },
+          "hashes": {
+            "sha-256": "638d70db9396ed372ef4d8714c758ed66032b268a62336bbb5e9fde17d9dc0f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/backends/imgui_impl_dx11.h"
+          },
+          "hashes": {
+            "sha-256": "ac65ad578385fbc45800bb70b144f76cbe2d78a83199d199ef0bf25e7a065005"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/colors.h"
+          },
+          "hashes": {
+            "sha-256": "da0591ae0383c7eb5ce95e97dc43d7f131f2ca2c94947c110431c6f46510189e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/directx/include/d3dx11tex.h"
+          },
+          "hashes": {
+            "sha-256": "478f8ab08cbf8f873e825bdf3928f398ea30a3ebcf13733466c2cff23932c4b3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/directx/include/d3dx11.h"
+          },
+          "hashes": {
+            "sha-256": "c545b43ed4cf702fbd7cb8c40342504c0034206e4171fe84546b4387b74e39bd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/directx/include/d3d11.h"
+          },
+          "hashes": {
+            "sha-256": "3a55b560eedcb277bd1a597ff5855badc423cf0c24cb2e64b8731b5dfd8498e1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/directx/include/d3dx11core.h"
+          },
+          "hashes": {
+            "sha-256": "3357181adc8c86e8bae58ba8acc081adc9acc2ffa595c5965af50366243cd152"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/directx/include/d3dx11async.h"
+          },
+          "hashes": {
+            "sha-256": "709f6379f69458edcbac8a3f02e71e8f31169237f6afbe802dd09a9565e7654f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui_internal.h"
+          },
+          "hashes": {
+            "sha-256": "e71119efec7c0b3e03b5e6587562f721724eb0f917acec7e42210ca955677a78"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imstb_textedit.h"
+          },
+          "hashes": {
+            "sha-256": "952dafd13b3bdfceb7179da7f7d11db14419e7ae3613982741428b7a036b5d27"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/user_circle.h"
+          },
+          "hashes": {
+            "sha-256": "80f23931060f42e55044ff8261427a4e7b35014d4526ac09472f01d7fd390062"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/icon.h"
+          },
+          "hashes": {
+            "sha-256": "4507af29e4f83741df8b76f1391ebf8739d42d25928dbad43df2f3bbbef3c28b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/nohurtcam_icon.h"
+          },
+          "hashes": {
+            "sha-256": "8f880e3a8e616e580f7057f78df82c4ee2aedecb550b9ebce3d99cb724d4ea20"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/velocity_icon.h"
+          },
+          "hashes": {
+            "sha-256": "3dd7d9f3410b6fa2ddf90663a79bd393816d4d6a1d7a84ab08bb87271d4c17f9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/inter.h"
+          },
+          "hashes": {
+            "sha-256": "d363e05903a07770d9475f5a19dcfae87704904c5cd060fa07ddbbd57648be8e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/dots.h"
+          },
+          "hashes": {
+            "sha-256": "ba26902ba460148699c4761651cf119763d7fc90d5b512af87b5e878bebc8649"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/segue.h"
+          },
+          "hashes": {
+            "sha-256": "ab39b61745380f79ded2a70b977c1ed47eeab7a3d85831fc3b8df5159bd29e09"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/resource.h"
+          },
+          "hashes": {
+            "sha-256": "02c64abb4f43d61d4ca9b0595195cf9ca6a8f335063c07a0e80ef9ef0ad3b404"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/restapi/core/client.hpp"
+          },
+          "hashes": {
+            "sha-256": "a158c4c579aea892fc9aaf76cb981d04af8ccea5e95de944e65035ff321ecb05"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/json.hpp"
+          },
+          "hashes": {
+            "sha-256": "7262f190c3a2f2bb334236b3b74acaa1ac1ffb72920c4654bcaf02a7db1a4ec0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/adl_serializer.hpp"
+          },
+          "hashes": {
+            "sha-256": "11fa1edc01753910dba091d4e96f5fb2a2155abb1a323548ce3dc9b169a24018"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/conversions/from_json.hpp"
+          },
+          "hashes": {
+            "sha-256": "12cc521ca690d5097bf1a811da82a7109e338cc32dc87ef7baa2f1b75dbc7929"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/exceptions.hpp"
+          },
+          "hashes": {
+            "sha-256": "f63df2d041329d82f05448a43daa145dd7d28266b4e70621a8491e6ed2c373e2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/value_t.hpp"
+          },
+          "hashes": {
+            "sha-256": "24fef9cdccad9a593db17e366f6e5f97f759ab80748771da9f9533bc2ef90fe4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/string_escape.hpp"
+          },
+          "hashes": {
+            "sha-256": "9dcac101923af37532865f9b04552e54093f21e46b98f4fc0ceb615f2f91384c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/macro_scope.hpp"
+          },
+          "hashes": {
+            "sha-256": "cfcc9928b3c8cb1d7be8dc840e146c5d74868d1e8a077c496690f06e287565ca"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/thirdparty/hedley/hedley.hpp"
+          },
+          "hashes": {
+            "sha-256": "f64ebead5217e6521cc34a78d66ccc2e2bad1ccb2c284d9cff0ea78f78115956"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/detected.hpp"
+          },
+          "hashes": {
+            "sha-256": "47753a00f0ccfa77e1b8798a5d45f78d1677b59949083edc17193b17e6cfe47e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/void_t.hpp"
+          },
+          "hashes": {
+            "sha-256": "4f4920f2a4a6e01aca3c6e67f23bc95488ea4a5659c240d4bedb4e4653c09037"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/input/position_t.hpp"
+          },
+          "hashes": {
+            "sha-256": "74165b5bfc846ec864a1a925f2581954b138156412fe55ec3d777117acd344d9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/cpp_future.hpp"
+          },
+          "hashes": {
+            "sha-256": "c8ea57ed8cb7f3b4421df19c707b376092daecc4e166dab5626d2de711fec09e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/identity_tag.hpp"
+          },
+          "hashes": {
+            "sha-256": "ff3cf9ed5a429c0e47a0e191426038a464f66d7cea34180e30204acb54c4f7dc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/type_traits.hpp"
+          },
+          "hashes": {
+            "sha-256": "720d31380101c6cecdc0a3a6d7e4e332eb516cb2be698ee94ad85787ebded12c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/iterators/iterator_traits.hpp"
+          },
+          "hashes": {
+            "sha-256": "76ffa1c26019b858a89dfc1bc4c2257c9ef7232601f5f3eacf2c8148b465fcb0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/call_std/begin.hpp"
+          },
+          "hashes": {
+            "sha-256": "8af4d4514fd8994c47daad0e4962e2233d349642d603b9738c2a152a79dba3ec"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/call_std/end.hpp"
+          },
+          "hashes": {
+            "sha-256": "d496c413cc108d194918838f1c4f22c4820c91fd56e8684ec22638bc912738f5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/json_fwd.hpp"
+          },
+          "hashes": {
+            "sha-256": "f72caa6116635d2a5e644d292f2df742deeca0b2515ea73a530723d3814abb5e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/conversions/to_json.hpp"
+          },
+          "hashes": {
+            "sha-256": "2ed86af93bcc6900585130a3be362d8c7bbdbcc47a788c17066d9d39d8ec2107"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/iterators/iteration_proxy.hpp"
+          },
+          "hashes": {
+            "sha-256": "208e4b039625682497efb84137bc90cf23c3bd45ebdbdeae6681cace60b3cec7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/byte_container_with_subtype.hpp"
+          },
+          "hashes": {
+            "sha-256": "a67843c9de0e19ab6d28b356ec06350febe757ccb9d62b794cb02e91827bfd8a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/hash.hpp"
+          },
+          "hashes": {
+            "sha-256": "c3df85b0e0678145b99baaf10c98291937dc25d295bc3a03bfb5c9cdc06e2442"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/input/binary_reader.hpp"
+          },
+          "hashes": {
+            "sha-256": "b800a7f80b32d038ca64e2524c4541a7b36c1c44aa4f77334ea52a7365916192"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/input/input_adapters.hpp"
+          },
+          "hashes": {
+            "sha-256": "e5f815c6c96a0781616af2df832de89cde3d4eac0c2585e32e04a0b8907a070b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/input/json_sax.hpp"
+          },
+          "hashes": {
+            "sha-256": "fb4a20edf3fdcc59f830383a5816df853d0c12e038c544367e672653af2b1f7a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/meta/is_sax.hpp"
+          },
+          "hashes": {
+            "sha-256": "e61d51ba39415a1af6fb335db7eacd8967304566e165fe91d8d0d29f240f7af8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/input/parser.hpp"
+          },
+          "hashes": {
+            "sha-256": "381ea6773194135dc754be65b3a92e3f0c1cb7a95d2e81e633b21f48bd483c38"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/iterators/internal_iterator.hpp"
+          },
+          "hashes": {
+            "sha-256": "ac86431bcf82d1b91e6d49124bb8a03d04837ebfdf5ef50ec72ff71995b6e79b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/iterators/primitive_iterator.hpp"
+          },
+          "hashes": {
+            "sha-256": "b9c28ded6b26f1f4a9f05a2be28c7b8f1a5ce4ee6ec10e44f1add08a4787d840"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/iterators/iter_impl.hpp"
+          },
+          "hashes": {
+            "sha-256": "0a47b194b99f22c963ceb33f3fe637ec941b7128486ec6a234d276158551c2a2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/iterators/json_reverse_iterator.hpp"
+          },
+          "hashes": {
+            "sha-256": "d312900dd5cd5e8ed6ceb7bad33ed4972c9ca7e8eb8a9a682825a8894113a624"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/json_pointer.hpp"
+          },
+          "hashes": {
+            "sha-256": "d6b18d22003660f33dcadaee2f57da5f995aff92b827a127a2f4241b196790db"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/json_ref.hpp"
+          },
+          "hashes": {
+            "sha-256": "6b58be24543d20016bf29e656b168a2349e403bb2c1d29968faecb1704a92453"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/output/binary_writer.hpp"
+          },
+          "hashes": {
+            "sha-256": "ca3f44113749e4c13b6d0cb5f437132726ff9c515df50d09d675d19bd15826cf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/output/output_adapters.hpp"
+          },
+          "hashes": {
+            "sha-256": "40b264badf502dbea29591e2b2c40af51c8059bfa9ba2e4f9b8b763c4ebdf651"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/output/serializer.hpp"
+          },
+          "hashes": {
+            "sha-256": "1ee543573c19b73918c427e4d61011d49d73fe74c94ced7fd94ad2451a73163c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/conversions/to_chars.hpp"
+          },
+          "hashes": {
+            "sha-256": "c90f3568eee135b39c0fc9093c8e76d55d14eb5be0a0a9400efeb2e640395185"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/ordered_map.hpp"
+          },
+          "hashes": {
+            "sha-256": "9dcd7ae8d310f725fb31755dc51c18c9104086628c48b1f5343a6f40a2e18ba9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/detail/macro_unscope.hpp"
+          },
+          "hashes": {
+            "sha-256": "c1752a1bda02bf6813dbeccc322d270c2934792f0d9828e7d6eb26cc545cf86a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/json/include/nlohmann/thirdparty/hedley/hedley_undef.hpp"
+          },
+          "hashes": {
+            "sha-256": "17e28db134fd4d5e2127967850ee485aafb79f57583c0b3d092dac244ec3c67f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/restapi/errors/errorhandler.hpp"
+          },
+          "hashes": {
+            "sha-256": "308ccb647cd6548264169fc48d736a11dd978d34dbdb3574d2374d95efa785e0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/restapi/utils/utils.hpp"
+          },
+          "hashes": {
+            "sha-256": "0c704c0497907941a3b75f6433eff1b307ac86beb03d6beab1400e70f8e43b23"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/md5cpp/include/md5.h"
+          },
+          "hashes": {
+            "sha-256": "e665e4175ef3923d366b436cbe4cc40a60e4fec206011495a54f2a79203ba301"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/configs/configmanager.hpp"
+          },
+          "hashes": {
+            "sha-256": "abfd96a18183415a3fb4b5c752491595183c56dff1fec7d21e3c774362dc3b8c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/inject/injector.hpp"
+          },
+          "hashes": {
+            "sha-256": "f16e3a038d3dcae26311d6009735af9a1e176673b9b1151dad85a1306b03b656"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/features/license/license.hpp"
+          },
+          "hashes": {
+            "sha-256": "fef2f0f30a416ac1c61e69d009f5033ef1b1722ff5273402d08d941585273046"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/md5cpp/include/md5.cpp"
+          },
+          "hashes": {
+            "sha-256": "de935126d32ae6c260f1d184ff24966b32f3465fc3b7e560f432247571f7bd01"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/cpp_string_utils-main/include/stringutils.h"
+          },
+          "hashes": {
+            "sha-256": "3adbec333f9ce7efa77218ed5e241ea52288f0051a13e7fb3021a1051e6f645b"
+          }
+        }
+      ]
+    }
+  ]
+}

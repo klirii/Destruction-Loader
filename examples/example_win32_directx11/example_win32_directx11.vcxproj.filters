@@ -114,6 +114,15 @@
     <ClInclude Include="Inject\Injector.hpp">
       <Filter>sources\Inject</Filter>
     </ClInclude>
+    <ClInclude Include="kogtevran_icon.h">
+      <Filter>icons</Filter>
+    </ClInclude>
+    <ClInclude Include="nohurtcam_icon.h">
+      <Filter>icons</Filter>
+    </ClInclude>
+    <ClInclude Include="velocity_icon.h">
+      <Filter>icons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
@@ -168,10 +177,5 @@
     <ResourceCompile Include="example_win32_directx11.rc">
       <Filter>resources</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\resources\logo.ico">
-      <Filter>resources</Filter>
-    </Image>
   </ItemGroup>
 </Project>

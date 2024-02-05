@@ -1,0 +1,113 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26819",
+          "message": {
+            "text": "Неаннотированная передача управления между метками switch (es.78)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/imstb_truetype.h"
+                },
+                "region": {
+                  "startLine": 2148,
+                  "startColumn": 12
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stbtt__run_charstring",
+                  "decoratedName": "?stbtt__run_charstring@@YAHPEBUstbtt_fontinfo@@HPEAUstbtt__csctx@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.37.32824.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Projects/Destruction/Destruction Loader/imstb_truetype.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "5ff5cd1b81b46cd40de015a44f341ed72e05147abfe6d28d8527fb84a10566dc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui_draw.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "b978823ea9e8f8c72c4c33051d8fd3062f0f01feb3f63d751d3a59dbb364cfd9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "9177dc67898d30fe04fae25d4bb3667d8caba34fa6662124048380f9e2249a0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "667920b41cffc02ed57db6b8610ca5518e189816cf31b10b33c6012799693660"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui_internal.h"
+          },
+          "hashes": {
+            "sha-256": "e71119efec7c0b3e03b5e6587562f721724eb0f917acec7e42210ca955677a78"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imstb_textedit.h"
+          },
+          "hashes": {
+            "sha-256": "952dafd13b3bdfceb7179da7f7d11db14419e7ae3613982741428b7a036b5d27"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imstb_rectpack.h"
+          },
+          "hashes": {
+            "sha-256": "2efa3d5f7d003c19743b15155dad9f46d9f9fc783a18893d703b431d3c990972"
+          }
+        }
+      ]
+    }
+  ]
+}

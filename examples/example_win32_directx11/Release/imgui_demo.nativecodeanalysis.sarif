@@ -1,0 +1,153 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C33010",
+          "message": {
+            "text": "Непроверенная нижняя граница перечисления key, используемая в качестве индекса."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/imgui_demo.cpp"
+                },
+                "region": {
+                  "startLine": 5766,
+                  "startColumn": 102,
+                  "endLine": 5766,
+                  "endColumn": 126
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ShowDemoWindowInputs::funcs::IsLegacyNativeDupe",
+                  "decoratedName": "?IsLegacyNativeDupe@funcs@?DI@??ShowDemoWindowInputs@@YAXXZ@SA_NW4ImGuiKey@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Projects/Destruction/Destruction Loader/imgui_demo.cpp"
+                          },
+                          "region": {
+                            "startLine": 5766,
+                            "startColumn": 40
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Projects/Destruction/Destruction Loader/imgui_demo.cpp"
+                          },
+                          "region": {
+                            "startLine": 5766,
+                            "startColumn": 86
+                          }
+                        },
+                        "message": {
+                          "text": "Ветвление на основе условия \"key < 512\". Ветвь \"true\" занята.\nЗначение перечисления \"key\" проверяется на наличие верхней границы."
+                        }
+                      },
+                      "kinds": [
+                        "Combination"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Projects/Destruction/Destruction Loader/imgui_demo.cpp"
+                          },
+                          "region": {
+                            "startLine": 5766,
+                            "startColumn": 102
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Projects/Destruction/Destruction Loader/imgui_demo.cpp"
+                          },
+                          "region": {
+                            "startLine": 5766,
+                            "startColumn": 122
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.37.32824.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Projects/Destruction/Destruction Loader/imgui_demo.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "5d3f45c01870dd98eaf6d30133e180eda8a72d416586bcbdd7274c0f3997dc16"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "9177dc67898d30fe04fae25d4bb3667d8caba34fa6662124048380f9e2249a0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "667920b41cffc02ed57db6b8610ca5518e189816cf31b10b33c6012799693660"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Арифметическое переполнение: использование оператора \"+\" на байтовом значении 4 и приведение результата к байтовому значению 8. Приведите значение к более широкому типу перед вызовом оператора \"+\", чтобы избежать переполнения (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/RestAPI/Utils/Utils.cpp"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 56,
+                  "endLine": 12,
+                  "endColumn": 60
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RestAPI::Utils::rolling_xor",
+                  "decoratedName": "?rolling_xor@Utils@RestAPI@@SA?AV?$vector@EV?$allocator@E@std@@@std@@V34@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Арифметическое переполнение: использование оператора \"+\" на байтовом значении 4 и приведение результата к байтовому значению 8. Приведите значение к более широкому типу перед вызовом оператора \"+\", чтобы избежать переполнения (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/RestAPI/Utils/Utils.cpp"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 81,
+                  "endLine": 22,
+                  "endColumn": 85
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RestAPI::Utils::rolling_xor",
+                  "decoratedName": "?rolling_xor@Utils@RestAPI@@SA?AV?$vector@EV?$allocator@E@std@@@std@@V34@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.37.32824.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Projects/Destruction/Destruction Loader/examples/example_win32_directx11/RestAPI/Utils/Utils.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c42f6d49339662e3a0774399329ac9186ab4b94b4cace25d499181717138bb91"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/restapi/utils/utils.hpp"
+          },
+          "hashes": {
+            "sha-256": "0c704c0497907941a3b75f6433eff1b307ac86beb03d6beab1400e70f8e43b23"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/md5cpp/include/md5.h"
+          },
+          "hashes": {
+            "sha-256": "e665e4175ef3923d366b436cbe4cc40a60e4fec206011495a54f2a79203ba301"
+          }
+        }
+      ]
+    }
+  ]
+}

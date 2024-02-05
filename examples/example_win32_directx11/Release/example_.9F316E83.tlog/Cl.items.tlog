@@ -1,0 +1,14 @@
+C:\Projects\Destruction\Destruction Loader\imgui.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui.obj
+C:\Projects\Destruction\Destruction Loader\imgui_demo.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_demo.obj
+C:\Projects\Destruction\Destruction Loader\imgui_draw.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_draw.obj
+C:\Projects\Destruction\Destruction Loader\imgui_tables.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_tables.obj
+C:\Projects\Destruction\Destruction Loader\imgui_widgets.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_widgets.obj
+C:\Projects\Destruction\Destruction Loader\backends\imgui_impl_dx11.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_impl_dx11.obj
+C:\Projects\Destruction\Destruction Loader\backends\imgui_impl_win32.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_impl_win32.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\ConfigManager.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\License.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Inject\Injector.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\Injector.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\main.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\Client.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Errors\ErrorHandler.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\ErrorHandler.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Utils.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\Utils.obj

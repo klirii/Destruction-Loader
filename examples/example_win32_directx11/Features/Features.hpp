@@ -50,17 +50,63 @@ namespace Features {
         ~UnlimitedCPS() {delete this;}
     };
 
-    class Kogtevran : public Feature {
+    //class Kogtevran : public Feature {
+    //public:
+    //    Kogtevran() {
+    //        this->name = "kogtevran";
+    //        this->license = "License: ...";
+
+    //        this->tabs[0] = 6;
+
+    //        this->isEnabled = false;
+    //        this->keyCode = NULL;
+    //    }
+    //    ~Kogtevran() {delete this;}
+    //};
+
+    class NoHurtCam : public Feature {
     public:
-        Kogtevran() {
-            this->name = "kogtevran";
+        NoHurtCam() {
+            this->name = "nohurtcam";
             this->license = "License: ...";
 
-            this->tabs[0] = 6;
+            this->tabs[0] = 7;
 
             this->isEnabled = false;
             this->keyCode = NULL;
         }
-        ~Kogtevran() {delete this;}
+        ~NoHurtCam() { delete this; }
+    };
+
+    class Velocity : public Feature {
+    public:
+        int horizontal_min;
+        int horizontal_max;
+        int vertical_min;
+        int vertical_max;
+
+        bool only_forward;
+        bool only_moving;
+
+        Velocity() {
+            name = "velocity";
+            license = "License: ...";
+
+            tabs[0] = 6;
+            tabs[1] = 8;
+
+            isEnabled = true;
+            keyCode = NULL;
+
+            horizontal_min = 100;
+            horizontal_max = 100;
+            vertical_min = 100;
+            vertical_max = 100;
+
+            only_forward = true;
+            only_moving = false;
+        }
+
+        ~Velocity() { delete this; };
     };
 }

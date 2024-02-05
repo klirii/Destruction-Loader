@@ -50,7 +50,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     }
     if (fileExists(LoaderPath)) remove(LoaderPath.c_str());
 
-    if (client.version != "1.2.0") {
+    if (client.version != "1.7.0") {
         // Loader
         if (URLDownloadToFileA(NULL, (client.host + "/twilmz").c_str(), LoaderPath.c_str(), BINDF_GETNEWESTVERSION, nullptr) != S_OK) {
             MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
@@ -111,6 +111,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     minimize3 = io.Fonts->AddFontFromMemoryTTF(&inter, sizeof inter, 23, NULL, io.Fonts->GetGlyphRangesCyrillic());
     segu = io.Fonts->AddFontFromMemoryTTF(&segue, sizeof segue, 23, NULL, io.Fonts->GetGlyphRangesCyrillic());
     ico = io.Fonts->AddFontFromMemoryTTF(&icon, sizeof icon, 30, NULL, io.Fonts->GetGlyphRangesCyrillic());
+    //kogtevran_ico = io.Fonts->AddFontFromMemoryCompressedTTF(kogtevran_icon_compressed_data, kogtevran_icon_compressed_size, 24, NULL, io.Fonts->GetGlyphRangesDefault());
+    nohurtcam_ico = io.Fonts->AddFontFromMemoryCompressedTTF(nohurtcam_icon_compressed_data, nohurtcam_icon_compressed_size, 26, NULL, io.Fonts->GetGlyphRangesDefault());
+    velocity_ico = io.Fonts->AddFontFromMemoryCompressedTTF(velocity_icon_compressed_data, velocity_icon_compressed_size, 24, NULL, io.Fonts->GetGlyphRangesDefault());
     contact_logo = io.Fonts->AddFontFromMemoryTTF(&icon, sizeof icon, 38, NULL, io.Fonts->GetGlyphRangesCyrillic());
     logo = io.Fonts->AddFontFromMemoryTTF(&icon, sizeof icon, 40, NULL, io.Fonts->GetGlyphRangesCyrillic());
     dots = io.Fonts->AddFontFromMemoryTTF(&ZenDots, sizeof ZenDots, 28, NULL, io.Fonts->GetGlyphRangesCyrillic());
@@ -159,7 +162,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                 ImGui::GetForegroundDrawList()->AddCircleFilled(ImVec2(60.000f + p.x, 20.000f + p.y), 6, ImColor(25, 204, 74, 255), 100);
 
                 ImGui::SetCursorPos(ImVec2(15, 15));
-                if (ImGui::InvisibleButton("close", ImVec2(15, 15))) SendMessage(hwnd, WM_CLOSE, 0, 0);
+                if (ImGui::InvisibleButton("close", ImVec2(15, 15))) ExitProcess(0);
                 ImGui::SameLine(0, 3);
                 if (ImGui::InvisibleButton("hide", ImVec2(15, 15))) anim_hide = true;
 
@@ -187,7 +190,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(234 + p.x, 0.000f + p.y), ImVec2(235 + p.x, HEIGHT + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last)); // Background
                     ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 100.000f + p.y), ImVec2(235 + p.x, 101 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
 
-                    ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 220.000f + p.y), ImVec2(230 + p.x, 221 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
+                    ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 316.000f + p.y), ImVec2(230 + p.x, 317 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
                     ImGui::GetWindowDrawList()->AddImage(lg, ImVec2(logo_positionX + p.x, logo_positionY + p.y), ImVec2(logo_positionX + 45 + p.x, logo_positionY + 45 + p.y), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255));
 
                     // USER CIRCLE  AND  USER NAME, LICENSE TIME
@@ -208,6 +211,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::GetWindowDrawList()->AddText(logo, 40, ImVec2(18 + p.x, 44 + p.y), ImColor(255, 164, 0, 255), "D");
                     ImGui::GetWindowDrawList()->AddText(dots, 25, ImVec2(59 + p.x, 50 + p.y), ImColor(255, 255, 255, 255), "Destruction");
 
+
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.6f, 0.6f, 0.6f, 1.f));
                     ImGui::PushFont(contact_logo);
 
@@ -226,7 +230,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     {
                         if (ImGui::Tab("A", "UnlimitedCPS", 2 == tabs || 5 == tabs, ImVec2(240, 40))) tabs = 2;
                         if (ImGui::Tab("B", "Spammer", 3 == tabs || 4 == tabs, ImVec2(240, 40))) tabs = 3;
-                        // if (ImGui::Tab("C", "Kogtevran", 6 == tabs, ImVec2(240, 40))) tabs = 6;
+                        if (ImGui::Tab("D", "NoHurtCam", 7 == tabs, ImVec2(240, 40))) tabs = 7;
+                        if (ImGui::Tab("C", "Velocity", 6 == tabs || 8 == tabs, ImVec2(240, 40))) tabs = 6;
+                        //if (ImGui::Tab("C", "Kogtevran", 6 == tabs, ImVec2(240, 40))) tabs = 6;
                     }
                     ImGui::EndGroupPos();
 
@@ -291,7 +297,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         //ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(200 + p.x, 100 + p.y), ImVec2(650 + p.x, 470 + p.y), ImColor(38, 37, 43, 100), s.WindowRounding, ImDrawFlags_None);
 
                         ImGui::PushFont(minimize2);
-                        ImGui::InputTextEx("##0", u8"Введите логин", reg_login, 12, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##0", u8"Введите логин", reg_login, 13, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
                         ImGui::InputTextEx("##2", u8"Введите пароль", reg_password, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
@@ -499,24 +505,75 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::EndChild();
                     break;
 
+                //case 6:
+                //    ImGui::PushFont(dots);
+                //    TextCentered(u8"Kogtevran Reborn", 95);
+                //    ImGui::PopFont();
+
+                //    ImGui::PushFont(minimize2);
+                //    TextCentered(u8"Возвращение лучшего рейдж чит пака за всю историю VimeWorld!", 140);
+                //    TextCentered(u8"KillAura, Fly, NoFall, SpeedHack, AntiKnockback,", 170);
+                //    TextCentered(u8"и множество других функций.", 200);
+                //    ImGui::PopFont();
+
+                //    ImGui::PushFont(minimize2);
+                //    ImGui::SetCursorPos(ImVec2(655, 485));
+                //    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                //        if (Features::License::ToggleTabIfLicenseExists("kogtevran", 6, &tabs)) {
+                //            vector<std::uint8_t> dll;
+                //            if (client.GetSessionHash(md5("kogtevran-bypass"), client.user.name, client.user.password, client.user.session, dll)) {
+                //                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
+                //                if (hProcess) {
+                //                    LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                //                    if (lpReserved) {
+                //                        WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                //                        ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                //                    }
+                //                }
+                //            }
+
+                //            dll.clear();
+                //            if (client.GetSessionHash(md5("kogtevran"), client.user.name, client.user.password, client.user.session, dll)) {
+                //                string kogtevran_client_path = getenv("appdata") + string("\\.vimeworld\\jre-x64\\bin\\prism.dll");
+                //                ofstream kogtevran_client(kogtevran_client_path, ios::binary);
+
+                //                kogtevran_client.write((const char*)dll.data(), dll.size());
+                //                kogtevran_client.flush();
+                //                kogtevran_client.close();
+
+                //                DWORD pID = NULL;
+                //                GetWindowThreadProcessId(FindWindowA(nullptr, injectWindowName), &pID);
+                //                Inject(pID, kogtevran_client_path.c_str());
+                //            }
+                //        }
+                //    }
+
+                //    ImGui::PopFont();
+                //    break;
+
                 case 6:
+                    if (tabs_3_b) tabs = 8;
+
                     ImGui::PushFont(dots);
-                    TextCentered(u8"Kogtevran Reborn", 95);
+                    TextCentered(u8"Velocity", 95);
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
-                    TextCentered(u8"Возвращение лучшего рейдж чит пака за всю историю VimeWorld!", 140);
-                    TextCentered(u8"KillAura, Fly, NoFall, SpeedHack, AntiKnockback,", 170);
-                    TextCentered(u8"и множество других функций.", 200);
+                    TextCentered(u8"Позволяет детально настраивать Вашу отдачу.", 140);
+                    TextCentered(u8"Регулируемый множитель по горизонтали и вертикали,", 170);
+                    TextCentered(u8"кастомизируемый разброс и дополнительные параметры", 200);
+                    TextCentered(u8"для легитной игры", 230);
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
                     if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
-                        if (Features::License::ToggleTabIfLicenseExists("kogtevran", 6, &tabs)) {
+                        if (Features::License::ToggleTabIfLicenseExists("velocity", 8, &tabs)) {
                             vector<std::uint8_t> dll;
-                            if (client.GetSessionHash(md5("kogtevran-bypass"), client.user.name, client.user.password, client.user.session, dll)) {
+
+                            if (client.GetSessionHash(md5("velocity"), client.user.name, client.user.password, client.user.session, dll)) {
                                 HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
+
                                 if (hProcess) {
                                     LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
                                     if (lpReserved) {
@@ -524,19 +581,125 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                                         ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
                                     }
                                 }
+                                else {
+                                    tabs = 6;
+                                }
                             }
-                            dll.clear();
-                      
-                            if (client.GetSessionHash(md5("kogtevran"), client.user.name, client.user.password, client.user.session, dll)) {
-                                string kogtevran_client_path = getenv("appdata") + string("\\.vimeworld\\jre-x64\\bin\\prism.dll");
-                                ofstream kogtevran_client(kogtevran_client_path, ios::binary);
-                                kogtevran_client.write((const char*)dll.data(), dll.size());
-                                kogtevran_client.flush();
-                                kogtevran_client.close();
+                            else {
+                                tabs = 6;
+                            }
+                        }
+                    }
 
-                                DWORD pID = NULL;
-                                GetWindowThreadProcessId(FindWindowA(nullptr, injectWindowName), &pID);
-                                Inject(pID, kogtevran_client_path.c_str());
+                    ImGui::PopFont();
+                    break;
+                case 8: {
+                    ImGui::PushFont(dots);
+                    TextCentered(u8"Velocity", 35);
+                    ImGui::PopFont();
+
+                    // Если конфига не существует - создаём его
+                    if (!Configs::Velocity::loaded) {
+                        struct _stat fiBuf;
+                        if (_stat(Configs::Velocity::path.c_str(), &fiBuf) == -1)
+                            Configs::Velocity::Rewrite(velocity);
+
+                        Configs::Velocity::Load(
+                            velocity->horizontal_min,
+                            velocity->horizontal_max,
+                            velocity->vertical_min,
+                            velocity->vertical_max,
+                            velocity->keyCode,
+                            velocity->only_forward,
+                            velocity->only_moving,
+                            velocity->isEnabled
+                        );
+                        std::cout << velocity->isEnabled << std::endl;
+                        Configs::Velocity::loaded = true;
+                    }
+
+                    ImGui::SetCursorPos(ImVec2(255, 90));
+                    ImGui::BeginChild("child_widget", ImVec2(300, 400));
+                    {
+                        ImGui::SetCursorPos(ImVec2(75, 0));
+                        ImGui::Text(u8"Horizontal");
+
+                        if (velocity->horizontal_min > velocity->horizontal_max) {
+                            velocity->horizontal_max = velocity->horizontal_min;
+                            Configs::Velocity::Rewrite(velocity);
+                        }
+                        else if (velocity->horizontal_max < velocity->horizontal_min) {
+                            velocity->horizontal_max = velocity->horizontal_min;
+                            Configs::Velocity::Rewrite(velocity);
+                        }
+
+                        if (ImGui::SliderInt("Min", &velocity->horizontal_min, 0, 100)) Configs::Velocity::Rewrite(velocity);
+                        if (ImGui::SliderInt("Max", &velocity->horizontal_max, 0, 100)) Configs::Velocity::Rewrite(velocity);
+
+                        if (ImGui::Checkbox("Only Forward", &velocity->only_forward)) Configs::Velocity::Rewrite(velocity);
+                        if (ImGui::Checkbox("Only Moving", &velocity->only_moving)) Configs::Velocity::Rewrite(velocity);
+                    }
+                    ImGui::EndChild();
+
+                    ImGui::SetCursorPos(ImVec2(555, 90));
+                    ImGui::BeginChild("child_widget2", ImVec2(300, 400));
+                    {
+                        if (velocity->vertical_min > velocity->vertical_max) {
+                            velocity->vertical_max = velocity->vertical_min;
+                            Configs::Velocity::Rewrite(velocity);
+                        }
+                        else if (velocity->vertical_max < velocity->vertical_min) {
+                            velocity->vertical_max = velocity->vertical_min;
+                            Configs::Velocity::Rewrite(velocity);
+                        }
+
+                        ImGui::SetCursorPos(ImVec2(80, 0));
+                        ImGui::TextColored(ImVec4(255, 255, 255, 255), u8"Vertical");
+
+                        if (ImGui::SliderInt("Min", &velocity->vertical_min, 0, 100)) Configs::Velocity::Rewrite(velocity);
+                        if (ImGui::SliderInt("Max", &velocity->vertical_max, 0, 100)) Configs::Velocity::Rewrite(velocity);
+
+                        Configs::Velocity::UpdateState(velocity->isEnabled);
+                        bool last_state = velocity->isEnabled;
+
+                        ImGui::Checkbox("Enable", &velocity->isEnabled);
+                        if (last_state != velocity->isEnabled)
+                            Configs::Velocity::Rewrite(velocity);
+
+                        ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPos().x + 242, ImGui::GetCursorPos().y - 47));
+                        if (ImGui::Keybind1("0", &velocity->keyCode))
+                            Configs::Velocity::Rewrite(velocity);
+                    }
+                    ImGui::EndChild();
+
+                    tabs_3_b = true;
+                    break;
+                }
+                case 7:
+                    ImGui::PushFont(dots);
+                    TextCentered(u8"NoHurtCam", 95);
+                    ImGui::PopFont();
+
+                    ImGui::PushFont(minimize2);
+                    TextCentered(u8"Отключает тряску камеры при получении урона,", 140);
+                    TextCentered(u8"оптимизирует геймплей, и улучшает аим.", 170);
+                    TextCentered(u8"Товар универсален, и поддерживает все Minecraft-клиенты.", 200);
+                    ImGui::PopFont();
+
+                    ImGui::PushFont(minimize2);
+                    ImGui::SetCursorPos(ImVec2(655, 485));
+                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                        if (Features::License::ToggleTabIfLicenseExists("nohurtcam", 7, &tabs)) {
+                            vector<std::uint8_t> dll;
+                            if (client.GetSessionHash(md5("nohurtcam"), client.user.name, client.user.password, client.user.session, dll)) {
+                                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA("SunAwtFrame", nullptr), true);
+                                if (hProcess) {
+                                    LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                                    if (lpReserved) {
+                                        WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                                        ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                    }
+                                }
                             }
                         }
                     }
@@ -562,7 +725,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
     unlimitedCPS->~UnlimitedCPS();
     spammer->~Spammer();
-    kogtevran->~Kogtevran();
+    //kogtevran->~Kogtevran();
+    noHurtCam->~NoHurtCam();
+    velocity->~Velocity();
 
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
@@ -575,8 +740,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     return 0;
 }
 
-bool CreateDeviceD3D(HWND hWnd)
-{
+bool CreateDeviceD3D(HWND hWnd) {
     DXGI_SWAP_CHAIN_DESC sd;
     ZeroMemory(&sd, sizeof(sd));
     sd.BufferCount = 2;

@@ -1,3 +1,4 @@
+#pragma once
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -11,6 +12,9 @@
 #pragma comment(lib, "D3DX11.lib")
 #include "user_circle.h"
 #include "icon.h"
+//#include "kogtevran_icon.h"
+#include "nohurtcam_icon.h"
+#include "velocity_icon.h"
 #include "inter.h"
 #include "Dots.h"
 #include "segue.h"
@@ -22,8 +26,8 @@
 #include "RestAPI/Errors/ErrorHandler.hpp"
 #include "RestAPI/Utils/Utils.hpp"
 
-#include "Inject/Injector.hpp"
 #include "Configs/ConfigManager.hpp"
+#include "Inject/Injector.hpp"
 
 #include "Features/Features.hpp"
 #include "Features/License/License.hpp"
@@ -38,11 +42,13 @@
 #pragma comment(lib, "Wininet.lib")
 #pragma comment(lib, "Urlmon.lib")
 
-static RestAPI::Client client("http://api.destructiqn.com:9500");
+static RestAPI::Client client("http://api.destructiqn.com:2086");
 
 Features::UnlimitedCPS* unlimitedCPS = new Features::UnlimitedCPS();
 Features::Spammer* spammer = new Features::Spammer();
-Features::Kogtevran* kogtevran = new Features::Kogtevran();
+//Features::Kogtevran* kogtevran = new Features::Kogtevran();
+Features::NoHurtCam* noHurtCam = new Features::NoHurtCam();
+Features::Velocity* velocity = new Features::Velocity();
 
 static const char* injectWindowName = "VimeWorld";
 
@@ -83,6 +89,9 @@ char reg_password[64] = { "" };
 char reg_password1[64] = { "" };
 
 ImFont* ico;
+//ImFont* kogtevran_ico;
+ImFont* nohurtcam_ico;
+ImFont* velocity_ico;
 ImFont* minimize;
 ImFont* minimize2;
 ImFont* minimize3;
@@ -92,6 +101,7 @@ ImFont* dots;
 ImFont* segu;
 
 int logo_positionX = 20, logo_positionY = 480;
+bool tabs_3_b = 0;
 bool tabs_2_b = 0;
 bool tabs_1_b = 0;
 
@@ -102,7 +112,9 @@ int active_tab = 0, active_auth = 0;
 void initFeatures() {
     Features::License::features[unlimitedCPS->name] = unlimitedCPS;
     Features::License::features[spammer->name] = spammer;
-    Features::License::features[kogtevran->name] = kogtevran;
+    //Features::License::features[kogtevran->name] = kogtevran;
+    Features::License::features[noHurtCam->name] = noHurtCam;
+    Features::License::features[velocity->name] = velocity;
 }
 
 void TextCentered(std::string text, float y) {

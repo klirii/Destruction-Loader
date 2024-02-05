@@ -48,7 +48,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -81,9 +81,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
-    <IncludePath>D:\libs\DirectX\Lib\x64;D:\libs\curl\Release x64\include;D:\libs\json\include;D:\libs\cpp_string_utils-main\include;D:\libs\md5cpp\include;$(IncludePath)</IncludePath>
-    <ExternalIncludePath>D:\libs\DirectX\Include;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>D:\libs\DirectX\Lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\libs\DirectX\Lib\x64;C:\libs\curl\Release x64\include;C:\libs\json\include;C:\libs\cpp_string_utils-main\include;C:\libs\md5cpp\include;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\libs\DirectX\Include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>C:\libs\DirectX\Lib\x64;$(LibraryPath)</LibraryPath>
     <TargetName>Loader</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -139,12 +139,13 @@
       <AdditionalIncludeDirectories>..\..;..\..\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>D:\libs\DirectX\Lib\x64\d3d11.lib;D:\libs\DirectX\Lib\x64\d3dcompiler.lib;D:\libs\DirectX\Lib\x64\dxgi.lib;D:\libs\curl\Release x64\lib\libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\libs\DirectX\Lib\x64\d3d11.lib;C:\libs\DirectX\Lib\x64\d3dcompiler.lib;C:\libs\DirectX\Lib\x64\dxgi.lib;C:\libs\curl\Release x64\lib\libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)/Lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
@@ -166,13 +167,16 @@
     <ClInclude Include="icon.h" />
     <ClInclude Include="Inject\Injector.hpp" />
     <ClInclude Include="inter.h" />
+    <ClInclude Include="kogtevran_icon.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="nohurtcam_icon.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RestAPI\Core\Client.hpp" />
     <ClInclude Include="RestAPI\Errors\ErrorHandler.hpp" />
     <ClInclude Include="RestAPI\Utils\Utils.hpp" />
     <ClInclude Include="segue.h" />
     <ClInclude Include="user_circle.h" />
+    <ClInclude Include="velocity_icon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp" />
@@ -195,9 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="example_win32_directx11.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\resources\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

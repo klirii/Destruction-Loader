@@ -1,0 +1,117 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Арифметическое переполнение: использование оператора \"+\" на байтовом значении 4 и приведение результата к байтовому значению 8. Приведите значение к более широкому типу перед вызовом оператора \"+\", чтобы избежать переполнения (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/libs/cpp_string_utils-main/include/StringUtils.cpp"
+                },
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 38
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "StringUtils::split",
+                  "decoratedName": "?split@StringUtils@@SAGPEBDDPEAPEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Арифметическое переполнение: использование оператора \"+\" на байтовом значении 4 и приведение результата к байтовому значению 8. Приведите значение к более широкому типу перед вызовом оператора \"+\", чтобы избежать переполнения (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/libs/cpp_string_utils-main/include/StringUtils.cpp"
+                },
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 10,
+                  "endLine": 59,
+                  "endColumn": 24
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "StringUtils::split",
+                  "decoratedName": "?split@StringUtils@@SAGPEBDDPEAPEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.37.32824.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/libs/cpp_string_utils-main/include/StringUtils.cpp"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "4f99add2886041c40bd9dcc6c8f50a8d9bfbad2733fd287c2fac35ec0f0dd6ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/restapi/errors/errorhandler.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "d073fef866bfb2147054ba61f27f96b933bcf936c3d069ed6c0c1a77920490f7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/examples/example_win32_directx11/restapi/errors/errorhandler.hpp"
+          },
+          "hashes": {
+            "sha-256": "308ccb647cd6548264169fc48d736a11dd978d34dbdb3574d2374d95efa785e0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/libs/cpp_string_utils-main/include/stringutils.h"
+          },
+          "hashes": {
+            "sha-256": "3adbec333f9ce7efa77218ed5e241ea52288f0051a13e7fb3021a1051e6f645b"
+          }
+        }
+      ]
+    }
+  ]
+}

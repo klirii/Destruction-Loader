@@ -1,0 +1,67 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.37.32824.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui_tables.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "d16dd32ad4128c71da0f565dee78a8fe3218450bcb4c1b4a3a2543ef3660aac3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "9177dc67898d30fe04fae25d4bb3667d8caba34fa6662124048380f9e2249a0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "667920b41cffc02ed57db6b8610ca5518e189816cf31b10b33c6012799693660"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imgui_internal.h"
+          },
+          "hashes": {
+            "sha-256": "e71119efec7c0b3e03b5e6587562f721724eb0f917acec7e42210ca955677a78"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/projects/destruction/destruction loader/imstb_textedit.h"
+          },
+          "hashes": {
+            "sha-256": "952dafd13b3bdfceb7179da7f7d11db14419e7ae3613982741428b7a036b5d27"
+          }
+        }
+      ]
+    }
+  ]
+}

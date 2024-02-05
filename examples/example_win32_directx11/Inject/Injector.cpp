@@ -347,13 +347,20 @@ void __stdcall Shellcode(MANUAL_MAPPING_DATA* pData) {
 		pData->hMod = reinterpret_cast<HINSTANCE>(pBase);
 }
 
-HANDLE GetProcessHandleFromHwnd(HWND hwnd) {
-    if (!hwnd) {
+HANDLE GetProcessHandleFromHwnd(HWND hWindow, bool any_project) {
+    if (!hWindow && !any_project) {
         MessageBoxA(nullptr, "VimeWorld не найден!", "Destruction Loader", MB_ICONERROR);
         return nullptr;
     }
+    else if (!hWindow) {
+        hWindow = FindWindowA("LWJGL", nullptr);
+        if (!hWindow) {
+            MessageBoxA(nullptr, "Игра не найдена!", "Destruction Loader", MB_ICONERROR);
+            return nullptr;
+        }
+    }
 
-    DWORD pid;
-    GetWindowThreadProcessId(hwnd, &pid);
-    return OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+    DWORD pID = NULL;
+    GetWindowThreadProcessId(hWindow, &pID);
+    return OpenProcess(PROCESS_ALL_ACCESS, FALSE, pID);
 }

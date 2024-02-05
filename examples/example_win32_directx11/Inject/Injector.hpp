@@ -47,7 +47,7 @@ struct MANUAL_MAPPING_DATA
 };
 
 void __stdcall Shellcode(MANUAL_MAPPING_DATA* pData);
-HANDLE GetProcessHandleFromHwnd(HWND hwnd);
+HANDLE GetProcessHandleFromHwnd(HWND hWindow, bool any_project = false);
 
 bool __forceinline Inject(DWORD pID, const char* path) {
     HANDLE proc_handle;
