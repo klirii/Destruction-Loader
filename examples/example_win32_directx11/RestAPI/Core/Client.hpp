@@ -16,6 +16,7 @@ namespace RestAPI {
         static bool get(std::string& name, std::string& pass);
         static bool del();
     private:
+        static std::string directory;
         static std::string path;
     };
 

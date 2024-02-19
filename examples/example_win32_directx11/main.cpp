@@ -50,7 +50,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     }
     if (fileExists(LoaderPath)) remove(LoaderPath.c_str());
 
-    if (client.version != "1.7.0") {
+    if (client.version != "1.9.1") {
         // Loader
         if (URLDownloadToFileA(NULL, (client.host + "/twilmz").c_str(), LoaderPath.c_str(), BINDF_GETNEWESTVERSION, nullptr) != S_OK) {
             MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
@@ -692,7 +692,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         if (Features::License::ToggleTabIfLicenseExists("nohurtcam", 7, &tabs)) {
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("nohurtcam"), client.user.name, client.user.password, client.user.session, dll)) {
-                                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA("SunAwtFrame", nullptr), true);
+                                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA("LWJGL", nullptr), true);
                                 if (hProcess) {
                                     LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
                                     if (lpReserved) {

@@ -353,7 +353,7 @@ HANDLE GetProcessHandleFromHwnd(HWND hWindow, bool any_project) {
         return nullptr;
     }
     else if (!hWindow) {
-        hWindow = FindWindowA("LWJGL", nullptr);
+        hWindow = FindWindowA("SunAwtFrame", nullptr);
         if (!hWindow) {
             MessageBoxA(nullptr, "Игра не найдена!", "Destruction Loader", MB_ICONERROR);
             return nullptr;

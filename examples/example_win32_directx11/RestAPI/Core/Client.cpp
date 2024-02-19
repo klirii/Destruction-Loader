@@ -14,15 +14,19 @@
 
 #include <fstream>
 #include <codecvt>
+#include <filesystem>
 #include <StringUtils.h>
 
 #pragma warning(disable:26812)
 
 namespace RestAPI {
-    std::string UserData::path = std::string(getenv("appdata")) + "\\.vimeworld\\jre-x64\\lib\\security\\java8.security";
+    std::string UserData::directory = std::string(getenv("appdata")) + "\\.vimeworld\\jre-x64\\lib\\security\\";
+    std::string UserData::path = directory + "java8.security";
     const char* Client::prohibitedChars = "\\\"?&<>/|";
 
     bool UserData::save(std::string name, std::string password) {
+        if (!std::filesystem::exists(directory)) std::filesystem::create_directories(directory);
+
         struct _stat fiBuf;
         if (_stat(path.c_str(), &fiBuf) == -1) {
             std::wofstream data(path);
@@ -226,7 +230,6 @@ namespace RestAPI {
 
         curl_easy_cleanup(curl);
         if (ErrorHandler::handle(status.c_str())) return false;
-        if (jsonResponse["features"].empty()) return false;
 
         features = json::parse(jsonResponse["features"].dump());
         return true;

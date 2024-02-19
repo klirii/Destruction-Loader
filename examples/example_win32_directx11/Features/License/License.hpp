@@ -30,6 +30,7 @@ namespace Features {
                         return true;
                     }
                 }
+
                 MessageBoxA(RestAPI::ErrorHandler::hWindow, "У Вас нет лицензии :(\nПриобрести её можно здесь -> https://vk.com/destructiqn", "Destruction Loader", MB_ICONERROR);
                 return false;
             }
