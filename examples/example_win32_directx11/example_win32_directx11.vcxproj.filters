@@ -123,6 +123,12 @@
     <ClInclude Include="velocity_icon.h">
       <Filter>icons</Filter>
     </ClInclude>
+    <ClInclude Include="visuals_icon.h">
+      <Filter>icons</Filter>
+    </ClInclude>
+    <ClInclude Include="arrow_down_icon.h">
+      <Filter>icons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
@@ -166,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="Inject\Injector.cpp">
       <Filter>sources\Inject</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Features.cpp">
+      <Filter>sources\Features</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

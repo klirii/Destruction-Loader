@@ -30,6 +30,9 @@ namespace Features {
             return features["velocity"]->license;
         case 7:
             return features["nohurtcam"]->license;
+        case 9:
+        case 10:
+            return features["visuals"]->license;
         default:
             return "License: no available";
         }

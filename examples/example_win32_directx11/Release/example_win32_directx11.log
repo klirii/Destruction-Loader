@@ -1,14 +1,4 @@
-﻿  imgui.cpp
-C:\Projects\Destruction\Destruction Loader\imgui.cpp(12431,19): warning C4189: g: локальная переменная инициализирована, но не использована
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-C:\Projects\Destruction\Destruction Loader\imgui_widgets.cpp(348,10): warning C4189: hovered_mode: локальная переменная инициализирована, но не использована
-C:\Projects\Destruction\Destruction Loader\imgui_widgets.cpp(339,10): warning C4189: popup_open: локальная переменная инициализирована, но не использована
-  imgui_impl_dx11.cpp
-  imgui_impl_win32.cpp
-  ConfigManager.cpp
+﻿  ConfigManager.cpp
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.hpp(39,47): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(12,59): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(13,54): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -27,6 +17,7 @@ C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Conf
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(124,60): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>::codecvt_utf8': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(138,60): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>::codecvt_utf8': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(183,55): warning C4244: аргумент: преобразование "int" в "unsigned char", возможна потеря данных
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp(238,40): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\utility(242,16): warning C4244: инициализация: преобразование "_Ty" в "_Ty1", возможна потеря данных
           with
           [
@@ -66,17 +57,23 @@ C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Conf
           [
               _Facet=std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>
           ]
+  Features.cpp
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.hpp(39,47): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\Features.cpp(142,15): warning C4458: объявление "chams" скрывает член класса
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\Features.hpp(182,15): message : см. объявление "Features::Visuals::chams"
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\Features.cpp(148,15): warning C4458: объявление "chams" скрывает член класса
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\Features.hpp(182,15): message : см. объявление "Features::Visuals::chams"
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\Features.cpp(157,14): warning C4458: объявление "chams" скрывает член класса
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\Features.hpp(182,15): message : см. объявление "Features::Visuals::chams"
   License.cpp
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(25,18): warning C4458: объявление "features" скрывает член класса
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(13,48): message : см. объявление "Features::License::features"
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(41,21): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(42,19): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(43,18): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(44,20): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(64,14): warning C4458: объявление "features" скрывает член класса
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(44,21): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(45,19): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(46,18): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(47,20): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp(67,14): warning C4458: объявление "features" скрывает член класса
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(13,48): message : см. объявление "Features::License::features"
-  Injector.cpp
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Inject\Injector.hpp(71,70): warning C4100: FileSize: неиспользованный формальный параметр
   main.cpp
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Inject\Injector.hpp(71,70): warning C4100: FileSize: неиспользованный формальный параметр
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.hpp(25,18): warning C4458: объявление "features" скрывает член класса
@@ -101,73 +98,46 @@ C:\libs\md5cpp\include\md5.cpp(221,23): warning C4244: =: преобразова
 C:\libs\md5cpp\include\md5.cpp(222,23): warning C4244: =: преобразование "MD5_u32" в "unsigned char", возможна потеря данных
 C:\libs\md5cpp\include\md5.cpp(237,25): warning C4267: аргумент: преобразование из "size_t" в "unsigned long"; возможна потеря данных
 C:\libs\md5cpp\include\md5.cpp(262,24): warning C4267: аргумент: преобразование из "size_t" в "unsigned long"; возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(150,17): warning C4189: style: локальная переменная инициализирована, но не использована
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(164,68): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(164,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(74,13): warning C4311: reinterpret_cast: усечение указателя из "HINSTANCE" в "int"
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(74,13): warning C4302: reinterpret_cast: усечение из "HINSTANCE" к "int"
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(158,17): warning C4189: style: локальная переменная инициализирована, но не использована
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(172,68): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(172,34): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(72,13): warning C4311: reinterpret_cast: усечение указателя из "HINSTANCE" в "int"
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(72,13): warning C4302: reinterpret_cast: усечение из "HINSTANCE" к "int"
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(174,89): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(182,64): warning C4244: аргумент: преобразование "int" в "BYTE", возможна потеря данных
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(446,36): warning C4456: объявление "msg" скрывает предыдущее локальное объявление
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(447,36): warning C4456: объявление "msg" скрывает предыдущее локальное объявление
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(131,13): message : см. объявление "msg"
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(17,88): warning C4100: nCmdShow: неиспользованный формальный параметр
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(17,73): warning C4100: lpCmdLine: неиспользованный формальный параметр
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(17,53): warning C4100: hPrevInstance: неиспользованный формальный параметр
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(12,88): warning C4100: nCmdShow: неиспользованный формальный параметр
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(12,73): warning C4100: lpCmdLine: неиспользованный формальный параметр
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(12,53): warning C4100: hPrevInstance: неиспользованный формальный параметр
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(125,10): warning C4189: show_demo_window: локальная переменная инициализирована, но не использована
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp(126,10): warning C4189: show_another_window: локальная переменная инициализирована, но не использована
-  Client.cpp
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Utils.hpp(11,28): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(23,51): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(33,67): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\codecvt(35,52): message : см. объявление "std::codecvt_utf8"
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(33,58): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>::codecvt_utf8': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(49,63): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\codecvt(35,52): message : см. объявление "std::codecvt_utf8"
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(49,54): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>::codecvt_utf8': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xlocale(254,57): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\codecvt(35,52): message : см. объявление "std::codecvt_utf8"
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(33,35): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::locale::locale<std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>>(const std::locale &,const _Facet *)"
-          with
-          [
-              _Facet=std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xstring(2728,53): warning C4244: аргумент: преобразование "wchar_t" в "const _Elem", возможна потеря данных
-          with
-          [
-              _Elem=char
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xstring(2584,17): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)"
-          with
-          [
-              _Size_type=unsigned __int64,
-              _Iter=wchar_t *,
-              _Sent=wchar_t *,
-              _Size=unsigned __int64
-          ]
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(55,31): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)"
-          with
-          [
-              _Elem=wchar_t,
-              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
-              _Alloc=std::allocator<char>
-          ]
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Core\Client.cpp(55,18): message : см. первую ссылку на "std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string" в "RestAPI::UserData::get"
-  ErrorHandler.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\algorithm(3446,24): warning C4244: =: преобразование "int" в "char", возможна потеря данных
-C:\libs\cpp_string_utils-main\include\StringUtils.cpp(83,2): message : выполняется компиляция ссылки на экземпляр шаблон функции "_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,int(__cdecl *)(int)>(const _InIt,const _InIt,_OutIt,_Fn)"
-          with
-          [
-              _OutIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Elem=char,
-              _InIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Fn=int (__cdecl *)(int)
-          ]
-  Utils.cpp
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Utils.hpp(11,28): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\RestAPI\Utils\Utils.cpp(29,20): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\libs\toml\single_include\toml.hpp(13415,22): warning C4459: объявление "tabs" скрывает глобальное объявление
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(82,5): message : см. объявление "tabs"
+C:\libs\toml\single_include\toml.hpp(15414,15): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::optional<toml::detail::multiline_spacer<toml::type_config>> toml::detail::skip_multiline_spacer<toml::type_config>(toml::detail::location &,toml::detail::context<toml::type_config> &,const bool)"
+C:\libs\toml\single_include\toml.hpp(14772,18): warning C4459: объявление "key" скрывает глобальное объявление
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(84,6): message : см. объявление "key"
+C:\libs\toml\single_include\toml.hpp(15483,17): message : выполняется компиляция ссылки на экземпляр шаблон функции "toml::result<toml::basic_value<toml::type_config>,std::vector<toml::error_info,std::allocator<toml::error_info>>> toml::detail::parse_file<toml::type_config>(toml::detail::location &,toml::detail::context<toml::type_config> &)"
+C:\libs\toml\single_include\toml.hpp(14859,18): warning C4459: объявление "key" скрывает глобальное объявление
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(84,6): message : см. объявление "key"
+C:\libs\toml\single_include\toml.hpp(13725,21): warning C4459: объявление "key" скрывает глобальное объявление
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(84,6): message : см. объявление "key"
+C:\libs\toml\single_include\toml.hpp(14819,29): message : выполняется компиляция ссылки на экземпляр шаблон функции "toml::result<toml::basic_value<toml::type_config> *,toml::error_info> toml::detail::insert_value<toml::type_config>(const toml::detail::inserting_value_kind,std::unordered_map<std::basic_string<char,std::char_traits<char>,std::allocator<char>>,toml::basic_value<toml::type_config>,std::hash<std::basic_string<char,std::char_traits<char>,std::allocator<char>>>,std::equal_to<std::basic_string<char,std::char_traits<char>,std::allocator<char>>>,std::allocator<std::pair<const std::basic_string<char,std::char_traits<char>,std::allocator<char>>,toml::basic_value<toml::type_config>>>> *,const std::vector<std::string,std::allocator<std::string>> &,toml::detail::region,toml::basic_value<toml::type_config>)"
+C:\libs\toml\single_include\toml.hpp(15483,17): message : выполняется компиляция ссылки на экземпляр шаблон функции "toml::result<toml::basic_value<toml::type_config>,std::vector<toml::error_info,std::allocator<toml::error_info>>> toml::detail::parse_file<toml::type_config>(toml::detail::location &,toml::detail::context<toml::type_config> &)"
+C:\libs\toml\single_include\toml.hpp(7376,52): warning C4459: объявление "key" скрывает глобальное объявление
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(84,6): message : см. объявление "key"
+C:\libs\toml\single_include\toml.hpp(7376,10): message : во время компиляции функции-члена класс шаблон "void toml::basic_value<toml::type_config>::throw_key_not_found_error(const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &) const"
+C:\libs\toml\single_include\toml.hpp(7161,44): message : см. первую ссылку на "toml::basic_value<toml::type_config>::throw_key_not_found_error" в "toml::basic_value<toml::type_config>::at"
+C:\libs\toml\single_include\toml.hpp(13861,33): message : см. первую ссылку на "toml::basic_value<toml::type_config>::at" в "toml::detail::insert_value"
+C:\libs\toml\single_include\toml.hpp(8055,41): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "toml::basic_value<toml::type_config>"
+C:\libs\toml\single_include\toml.hpp(13277,14): warning C4459: объявление "key" скрывает глобальное объявление
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.h(84,6): message : см. объявление "key"
+C:\libs\toml\single_include\toml.hpp(14586,21): message : выполняется компиляция ссылки на экземпляр шаблон функции "toml::result<std::pair<std::vector<std::string,std::allocator<std::string>>,toml::detail::region>,toml::error_info> toml::detail::parse_key<toml::type_config>(toml::detail::location &,const toml::detail::context<toml::type_config> &)"
+C:\libs\toml\single_include\toml.hpp(14770,27): message : выполняется компиляция ссылки на экземпляр шаблон функции "toml::result<std::pair<std::vector<std::string,std::allocator<std::string>>,toml::detail::region>,toml::error_info> toml::detail::parse_array_table_key<toml::type_config>(toml::detail::location &,toml::detail::context<toml::type_config> &)"
 LINK : warning LNK4098: библиотека по умолчанию "LIBCMT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
   Создание кода
-  Previous IPDB not found, fall back to full compilation.
-  All 4505 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  3 of 7132 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    72 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   example_win32_directx11.vcxproj -> C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\Loader.exe

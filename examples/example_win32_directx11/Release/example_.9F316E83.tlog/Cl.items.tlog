@@ -6,6 +6,7 @@ C:\Projects\Destruction\Destruction Loader\imgui_widgets.cpp;C:\Projects\Destruc
 C:\Projects\Destruction\Destruction Loader\backends\imgui_impl_dx11.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_impl_dx11.obj
 C:\Projects\Destruction\Destruction Loader\backends\imgui_impl_win32.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\imgui_impl_win32.obj
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Configs\ConfigManager.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\ConfigManager.obj
+C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\Features.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\Features.obj
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Features\License\License.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\License.obj
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Inject\Injector.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\Injector.obj
 C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\main.cpp;C:\Projects\Destruction\Destruction Loader\examples\example_win32_directx11\Release\main.obj

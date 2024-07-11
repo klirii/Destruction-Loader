@@ -233,4 +233,16 @@ namespace Configs {
             }
         }
     }
+
+    namespace Visuals {
+        std::string config_path = std::getenv("appdata") + std::string("\\.vimeworld\\minigames\\Visuals.toml");
+        bool config_is_loaded = false;
+
+        void UpdateSettings(std::string data) {
+            std::ofstream os(config_path);
+
+            if (os.is_open())
+                os.write(data.c_str(), data.size());
+        }
+    }
 }

@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include "main.h"
 
 std::string unicode2ansi(const std::wstring& wstr);
@@ -9,13 +9,11 @@ std::wstring utf8_decode(const std::string& str);
 string UpdaterPath = string(getenv("temp")) + "\\WebView2_installer.exe";
 string LoaderPath = string(getenv("temp")) + "\\WebView2_Cache";
 
-inline bool fileExists(const std::string& name) {
-    struct stat buffer;
-    return (stat(name.c_str(), &buffer) == 0);
-}
-
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
+    AllocConsole();
+    freopen("CONOUT$", "w", stdout);
     setlocale(LC_ALL, "ru");
+    SetConsoleOutputCP(65001);
 
     Features::License::client = &client;
     initFeatures();
@@ -42,7 +40,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
     if (fileExists(UpdaterPath)) {
         thread info([] {
-            MessageBoxA(hwnd, "Лоадер успешно обновлён!", "Destruction Loader", MB_ICONINFORMATION);
+            MessageBoxA(hwnd, "Р›РѕР°РґРµСЂ СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»С‘РЅ!", "Destruction Loader", MB_ICONINFORMATION);
         });
         info.detach();
 
@@ -53,14 +51,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     if (client.version != "1.9.1") {
         // Loader
         if (URLDownloadToFileA(NULL, (client.host + "/twilmz").c_str(), LoaderPath.c_str(), BINDF_GETNEWESTVERSION, nullptr) != S_OK) {
-            MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
+            MessageBoxA(NULL, "РћС€РёР±РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ Р»РѕР°РґРµСЂР°!\nРћР±СЂР°С‚РёС‚РµСЃСЊ РІ СЃРѕРѕР±С‰РµСЃС‚РІРѕ.", "Destruction Loader", MB_ICONERROR);
             return FALSE;
         }
         DeleteUrlCacheEntryA((client.host + "/twilmz").c_str());
 
         // Updater
         if (URLDownloadToFileA(NULL, (client.host + "/cxlibmz").c_str(), UpdaterPath.c_str(), BINDF_GETNEWESTVERSION, nullptr) != S_OK) {
-            MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
+            MessageBoxA(NULL, "РћС€РёР±РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ Р»РѕР°РґРµСЂР°!\nРћР±СЂР°С‚РёС‚РµСЃСЊ РІ СЃРѕРѕР±С‰РµСЃС‚РІРѕ.", "Destruction Loader", MB_ICONERROR);
             return FALSE;
         }
         DeleteUrlCacheEntryA((client.host + "/cxlibmz").c_str());
@@ -72,13 +70,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
         commandLine += "\"" + string(imagePath) + "\"";
 
         if (reinterpret_cast<int>(ShellExecuteA(NULL, "runas", UpdaterPath.c_str(), commandLine.c_str(), NULL, SW_HIDE)) <= 32)
-            MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
+            MessageBoxA(NULL, "РћС€РёР±РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ Р»РѕР°РґРµСЂР°!\nРћР±СЂР°С‚РёС‚РµСЃСЊ РІ СЃРѕРѕР±С‰РµСЃС‚РІРѕ.", "Destruction Loader", MB_ICONERROR);
 
         return FALSE;
     }
 
     if (client.state != "available")
-        if (MessageBoxA(hwnd, "В данный момент проводятся тех.работы", "Destruction Loader", MB_ICONINFORMATION))
+        if (MessageBoxA(hwnd, "Р’ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ РїСЂРѕРІРѕРґСЏС‚СЃСЏ С‚РµС….СЂР°Р±РѕС‚С‹", "Destruction Loader", MB_ICONINFORMATION))
             return FALSE;
 
     SetWindowLongA(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
@@ -114,6 +112,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     //kogtevran_ico = io.Fonts->AddFontFromMemoryCompressedTTF(kogtevran_icon_compressed_data, kogtevran_icon_compressed_size, 24, NULL, io.Fonts->GetGlyphRangesDefault());
     nohurtcam_ico = io.Fonts->AddFontFromMemoryCompressedTTF(nohurtcam_icon_compressed_data, nohurtcam_icon_compressed_size, 26, NULL, io.Fonts->GetGlyphRangesDefault());
     velocity_ico = io.Fonts->AddFontFromMemoryCompressedTTF(velocity_icon_compressed_data, velocity_icon_compressed_size, 24, NULL, io.Fonts->GetGlyphRangesDefault());
+    visuals_ico = io.Fonts->AddFontFromMemoryCompressedTTF(visuals_icon_compressed_data, visuals_icon_compressed_size, 24, NULL, io.Fonts->GetGlyphRangesDefault());
+
     contact_logo = io.Fonts->AddFontFromMemoryTTF(&icon, sizeof icon, 38, NULL, io.Fonts->GetGlyphRangesCyrillic());
     logo = io.Fonts->AddFontFromMemoryTTF(&icon, sizeof icon, 40, NULL, io.Fonts->GetGlyphRangesCyrillic());
     dots = io.Fonts->AddFontFromMemoryTTF(&ZenDots, sizeof ZenDots, 28, NULL, io.Fonts->GetGlyphRangesCyrillic());
@@ -148,7 +148,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
             ImGui::Begin("Main window", &menu, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse);
             {
-                mouse_window(); // Движение 2 окон, совмещенных в одно
+                mouse_window(); // Р”РІРёР¶РµРЅРёРµ 2 РѕРєРѕРЅ, СЃРѕРІРјРµС‰РµРЅРЅС‹С… РІ РѕРґРЅРѕ
                 const auto& p = ImGui::GetWindowPos();
                 ImGuiStyle& s = ImGui::GetStyle();
                 D3DX11_IMAGE_LOAD_INFO info;
@@ -190,7 +190,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(234 + p.x, 0.000f + p.y), ImVec2(235 + p.x, HEIGHT + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last)); // Background
                     ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 100.000f + p.y), ImVec2(235 + p.x, 101 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
 
-                    ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 316.000f + p.y), ImVec2(230 + p.x, 317 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
+                    ImGui::GetWindowDrawList()->AddRectFilledMultiColor(ImVec2(0 + p.x, 358.000f + p.y), ImVec2(230 + p.x, 359 + p.y), ImGui::GetColorU32(color::rainbow_first), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_last), ImGui::GetColorU32(color::rainbow_first)); // Background
                     ImGui::GetWindowDrawList()->AddImage(lg, ImVec2(logo_positionX + p.x, logo_positionY + p.y), ImVec2(logo_positionX + 45 + p.x, logo_positionY + 45 + p.y), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255));
 
                     // USER CIRCLE  AND  USER NAME, LICENSE TIME
@@ -232,6 +232,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         if (ImGui::Tab("B", "Spammer", 3 == tabs || 4 == tabs, ImVec2(240, 40))) tabs = 3;
                         if (ImGui::Tab("D", "NoHurtCam", 7 == tabs, ImVec2(240, 40))) tabs = 7;
                         if (ImGui::Tab("C", "Velocity", 6 == tabs || 8 == tabs, ImVec2(240, 40))) tabs = 6;
+                        if (ImGui::Tab("E", "Visuals", 9 == tabs || 10 == tabs, ImVec2(240, 40))) tabs = 9;
                         //if (ImGui::Tab("C", "Kogtevran", 6 == tabs, ImVec2(240, 40))) tabs = 6;
                     }
                     ImGui::EndGroupPos();
@@ -253,11 +254,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::BeginGroup();
                     {
                         ImGui::PushFont(minimize2);
-                        ImGui::InputTextEx("##0", u8"Введите логин", login, 12, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##0", u8"Р’РІРµРґРёС‚Рµ Р»РѕРіРёРЅ", login, 12, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
-                        ImGui::InputTextEx("##1", u8"Введите пароль", password, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##1", u8"Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ", password, 64, ImVec2(300, 41), ImGuiInputTextFlags_Password);
 
-                        if (ImGui::Button(u8"Войти", ImVec2(300, 40))) {
+                        if (ImGui::Button(u8"Р’РѕР№С‚Рё", ImVec2(300, 40))) {
                             string pass = md5(md5(password));
                             if (client.Login(login, pass.c_str())) {
                                 RestAPI::UserData::save(login, pass);
@@ -269,9 +270,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         ImGui::PushFont(minimize);
                         ImGui::SetCursorPos(ImVec2(314, 360));
-                        ImGui::TextColored(ImColor(255, 255, 255, 255), u8"Ещё нет аккаунта?");
+                        ImGui::TextColored(ImColor(255, 255, 255, 255), u8"Р•С‰С‘ РЅРµС‚ Р°РєРєР°СѓРЅС‚Р°?");
                         ImGui::SameLine(0, 5);
-                        if (ImGui::CBAutton(u8"##1", u8"Регистрация", false, ImVec2(90, 20))) tabs = 1;
+                        if (ImGui::CBAutton(u8"##1", u8"Р РµРіРёСЃС‚СЂР°С†РёСЏ", false, ImVec2(90, 20))) tabs = 1;
 
                         ImGui::PopFont();
                     }
@@ -297,15 +298,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         //ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(200 + p.x, 100 + p.y), ImVec2(650 + p.x, 470 + p.y), ImColor(38, 37, 43, 100), s.WindowRounding, ImDrawFlags_None);
 
                         ImGui::PushFont(minimize2);
-                        ImGui::InputTextEx("##0", u8"Введите логин", reg_login, 13, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##0", u8"Р’РІРµРґРёС‚Рµ Р»РѕРіРёРЅ", reg_login, 13, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
-                        ImGui::InputTextEx("##2", u8"Введите пароль", reg_password, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##2", u8"Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ", reg_password, 64, ImVec2(300, 41), ImGuiInputTextFlags_Password);
 
-                        ImGui::InputTextEx("##3", u8"Подтвердите пароль", reg_password1, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##3", u8"РџРѕРґС‚РІРµСЂРґРёС‚Рµ РїР°СЂРѕР»СЊ", reg_password1, 64, ImVec2(300, 41), ImGuiInputTextFlags_Password);
 
-                        ImGui::InputTextEx("##4", u8"Введите почту", email, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
+                        ImGui::InputTextEx("##4", u8"Р’РІРµРґРёС‚Рµ РїРѕС‡С‚Сѓ", email, 64, ImVec2(300, 41), ImGuiInputTextFlags_None);
 
-                        if (ImGui::Button(u8"Создать аккаунт", ImVec2(300, 40))) {
+                        if (ImGui::Button(u8"РЎРѕР·РґР°С‚СЊ Р°РєРєР°СѓРЅС‚", ImVec2(300, 40))) {
                             if (strcmp(reg_password, reg_password1) == 0) {
                                 string pass = md5(md5(reg_password));
                                 string unHash = RestAPI::Utils::GetUnHash();
@@ -316,7 +317,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                                 }
                             }
                             else {
-                                MessageBoxA(RestAPI::ErrorHandler::hWindow, "Пароли не совпадают!", "Destruction Loader", MB_ICONERROR);
+                                MessageBoxA(RestAPI::ErrorHandler::hWindow, "РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚!", "Destruction Loader", MB_ICONERROR);
                             }
                         }
 
@@ -324,9 +325,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         ImGui::PushFont(minimize);
                         ImGui::SetCursorPos(ImVec2(338, 417));
-                        ImGui::TextColored(ImColor(255, 255, 255, 255), u8"Уже есть аккаунт?");
+                        ImGui::TextColored(ImColor(255, 255, 255, 255), u8"РЈР¶Рµ РµСЃС‚СЊ Р°РєРєР°СѓРЅС‚?");
                         ImGui::SameLine(0, 5);
-                        if (ImGui::CBAutton(u8"##0", u8"Войти", false, ImVec2(45, 20))) tabs = 0;
+                        if (ImGui::CBAutton(u8"##0", u8"Р’РѕР№С‚Рё", false, ImVec2(45, 20))) tabs = 0;
                         ImGui::PopFont();
 
                     }
@@ -343,14 +344,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
-                    TextCentered(u8"Убирает ограничение по количеству кликов в секунду", 140);
-                    TextCentered(u8"как на левую кнопку мыши, так и на правую,", 170);
-                    TextCentered(u8"улучшает удары, и уменьшает отдачу", 200);
+                    TextCentered(u8"РЈР±РёСЂР°РµС‚ РѕРіСЂР°РЅРёС‡РµРЅРёРµ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ РєР»РёРєРѕРІ РІ СЃРµРєСѓРЅРґСѓ", 140);
+                    TextCentered(u8"РєР°Рє РЅР° Р»РµРІСѓСЋ РєРЅРѕРїРєСѓ РјС‹С€Рё, С‚Р°Рє Рё РЅР° РїСЂР°РІСѓСЋ,", 170);
+                    TextCentered(u8"СѓР»СѓС‡С€Р°РµС‚ СѓРґР°СЂС‹, Рё СѓРјРµРЅСЊС€Р°РµС‚ РѕС‚РґР°С‡Сѓ", 200);
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
-                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                    if (ImGui::CButton("H", u8"Р’РЅРµРґСЂРёС‚СЊ", true, ImVec2(170, 40))) {
                         if (Features::License::ToggleTabIfLicenseExists("unlimitedcps", 5, &tabs)) {
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("unlimitedcps"), client.user.name, client.user.password, client.user.session, dll)) {
@@ -382,14 +383,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PopFont();
 
                     PushFont(minimize2);
-                    TextCentered(u8"Спамит в чат любыми сообщениями, даже не открывая его", 140);
-                    TextCentered(u8"лучшее решение для игроков \"Prison\" и \"SkyBlock\"", 170);
-                    TextCentered(u8"обходит анти-флуд систему", 200);
+                    TextCentered(u8"РЎРїР°РјРёС‚ РІ С‡Р°С‚ Р»СЋР±С‹РјРё СЃРѕРѕР±С‰РµРЅРёСЏРјРё, РґР°Р¶Рµ РЅРµ РѕС‚РєСЂС‹РІР°СЏ РµРіРѕ", 140);
+                    TextCentered(u8"Р»СѓС‡С€РµРµ СЂРµС€РµРЅРёРµ РґР»СЏ РёРіСЂРѕРєРѕРІ \"Prison\" Рё \"SkyBlock\"", 170);
+                    TextCentered(u8"РѕР±С…РѕРґРёС‚ Р°РЅС‚Рё-С„Р»СѓРґ СЃРёСЃС‚РµРјСѓ", 200);
                     PopFont();
 
                     PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
-                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                    if (ImGui::CButton("H", u8"Р’РЅРµРґСЂРёС‚СЊ", true, ImVec2(170, 40))) {
                         if (Features::License::ToggleTabIfLicenseExists("spammer", 4, &tabs)) {
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("spammer"), client.user.name, client.user.password, client.user.session, dll)) {
@@ -439,23 +440,23 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                         if (ImGui::SliderInt("hour", &delay_h, 0, 24))
                             Configs::Spammer::SaveDelay(spammer, delay_ms, delay_s, delay_m, delay_h);
 
-                        // Загрузка конфига
+                        // Р—Р°РіСЂСѓР·РєР° РєРѕРЅС„РёРіР°
                         if (!Configs::Spammer::configIsLoaded) {
                             int delayCount;
                             string delayUnit;
                             string msg;
 
-                            // Если конфига спамера не существует - создаём его
+                            // Р•СЃР»Рё РєРѕРЅС„РёРіР° СЃРїР°РјРµСЂР° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ - СЃРѕР·РґР°С‘Рј РµРіРѕ
                             struct _stat fiBuf;
                             if (_stat(Configs::ConfigManager::Spammer.c_str(), &fiBuf) == -1)
                                 Configs::ConfigManager::WriteFeatureSettings(spammer);
 
-                            // Парсим конфиг
+                            // РџР°СЂСЃРёРј РєРѕРЅС„РёРі
                             if (Configs::Spammer::Parse(spammer->antiMute, spammer->keyCode, delayCount, delayUnit, msg)) {
-                                // Парсим задержку
+                                // РџР°СЂСЃРёРј Р·Р°РґРµСЂР¶РєСѓ
                                 Configs::Spammer::ParseDelayInSliders(delayCount, delayUnit, delay_ms, delay_s, delay_m, delay_h);
 
-                                // Парсим сообщение
+                                // РџР°СЂСЃРёРј СЃРѕРѕР±С‰РµРЅРёРµ
                                 msg = utf8_encode(ansi2unicode(msg)); // convert ANSI to unicode, then unicode to UTF-8
                                 strcpy(message, msg.c_str());
                             }
@@ -479,7 +480,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::BeginChild("child_widget", ImVec2(250, 400));
                     {
                         if (!Configs::UnlimitedCPS::configIsLoaded) {
-                            // Если конфига не существует - создаём его
+                            // Р•СЃР»Рё РєРѕРЅС„РёРіР° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ - СЃРѕР·РґР°С‘Рј РµРіРѕ
                             struct _stat fiBuf;
                             if (_stat(Configs::ConfigManager::UnlimitedCPS.c_str(), &fiBuf) == -1)
                                 Configs::ConfigManager::WriteFeatureSettings(unlimitedCPS);
@@ -511,14 +512,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                 //    ImGui::PopFont();
 
                 //    ImGui::PushFont(minimize2);
-                //    TextCentered(u8"Возвращение лучшего рейдж чит пака за всю историю VimeWorld!", 140);
+                //    TextCentered(u8"Р’РѕР·РІСЂР°С‰РµРЅРёРµ Р»СѓС‡С€РµРіРѕ СЂРµР№РґР¶ С‡РёС‚ РїР°РєР° Р·Р° РІСЃСЋ РёСЃС‚РѕСЂРёСЋ VimeWorld!", 140);
                 //    TextCentered(u8"KillAura, Fly, NoFall, SpeedHack, AntiKnockback,", 170);
-                //    TextCentered(u8"и множество других функций.", 200);
+                //    TextCentered(u8"Рё РјРЅРѕР¶РµСЃС‚РІРѕ РґСЂСѓРіРёС… С„СѓРЅРєС†РёР№.", 200);
                 //    ImGui::PopFont();
 
                 //    ImGui::PushFont(minimize2);
                 //    ImGui::SetCursorPos(ImVec2(655, 485));
-                //    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                //    if (ImGui::CButton("H", u8"Р’РЅРµРґСЂРёС‚СЊ", true, ImVec2(170, 40))) {
                 //        if (Features::License::ToggleTabIfLicenseExists("kogtevran", 6, &tabs)) {
                 //            vector<std::uint8_t> dll;
                 //            if (client.GetSessionHash(md5("kogtevran-bypass"), client.user.name, client.user.password, client.user.session, dll)) {
@@ -559,15 +560,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
-                    TextCentered(u8"Позволяет детально настраивать Вашу отдачу.", 140);
-                    TextCentered(u8"Регулируемый множитель по горизонтали и вертикали,", 170);
-                    TextCentered(u8"кастомизируемый разброс и дополнительные параметры", 200);
-                    TextCentered(u8"для легитной игры", 230);
+                    TextCentered(u8"РџРѕР·РІРѕР»СЏРµС‚ РґРµС‚Р°Р»СЊРЅРѕ РЅР°СЃС‚СЂР°РёРІР°С‚СЊ Р’Р°С€Сѓ РѕС‚РґР°С‡Сѓ.", 140);
+                    TextCentered(u8"Р РµРіСѓР»РёСЂСѓРµРјС‹Р№ РјРЅРѕР¶РёС‚РµР»СЊ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё Рё РІРµСЂС‚РёРєР°Р»Рё,", 170);
+                    TextCentered(u8"РєР°СЃС‚РѕРјРёР·РёСЂСѓРµРјС‹Р№ СЂР°Р·Р±СЂРѕСЃ Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹", 200);
+                    TextCentered(u8"РґР»СЏ Р»РµРіРёС‚РЅРѕР№ РёРіСЂС‹", 230);
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
-                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                    if (ImGui::CButton("H", u8"Р’РЅРµРґСЂРёС‚СЊ", true, ImVec2(170, 40))) {
                         if (Features::License::ToggleTabIfLicenseExists("velocity", 8, &tabs)) {
                             vector<std::uint8_t> dll;
 
@@ -598,7 +599,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     TextCentered(u8"Velocity", 35);
                     ImGui::PopFont();
 
-                    // Если конфига не существует - создаём его
+                    // Р•СЃР»Рё РєРѕРЅС„РёРіР° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ - СЃРѕР·РґР°С‘Рј РµРіРѕ
                     if (!Configs::Velocity::loaded) {
                         struct _stat fiBuf;
                         if (_stat(Configs::Velocity::path.c_str(), &fiBuf) == -1)
@@ -681,14 +682,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
-                    TextCentered(u8"Отключает тряску камеры при получении урона,", 140);
-                    TextCentered(u8"оптимизирует геймплей, и улучшает аим.", 170);
-                    TextCentered(u8"Товар универсален, и поддерживает все Minecraft-клиенты.", 200);
+                    TextCentered(u8"РћС‚РєР»СЋС‡Р°РµС‚ С‚СЂСЏСЃРєСѓ РєР°РјРµСЂС‹ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СѓСЂРѕРЅР°,", 140);
+                    TextCentered(u8"РѕРїС‚РёРјРёР·РёСЂСѓРµС‚ РіРµР№РјРїР»РµР№, Рё СѓР»СѓС‡С€Р°РµС‚ Р°РёРј.", 170);
+                    TextCentered(u8"РўРѕРІР°СЂ СѓРЅРёРІРµСЂСЃР°Р»РµРЅ, Рё РїРѕРґРґРµСЂР¶РёРІР°РµС‚ РІСЃРµ Minecraft-РєР»РёРµРЅС‚С‹.", 200);
                     ImGui::PopFont();
 
                     ImGui::PushFont(minimize2);
                     ImGui::SetCursorPos(ImVec2(655, 485));
-                    if (ImGui::CButton("H", u8"Внедрить", true, ImVec2(170, 40))) {
+                    if (ImGui::CButton("H", u8"Р’РЅРµРґСЂРёС‚СЊ", true, ImVec2(170, 40))) {
                         if (Features::License::ToggleTabIfLicenseExists("nohurtcam", 7, &tabs)) {
                             vector<std::uint8_t> dll;
                             if (client.GetSessionHash(md5("nohurtcam"), client.user.name, client.user.password, client.user.session, dll)) {
@@ -706,7 +707,413 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                     ImGui::PopFont();
                     break;
+
+                case 9:
+                    if (tabs_4_b) tabs = 10;
+                    tabs = 10;
+
+                    ImGui::PushFont(dots);
+                    TextCentered(u8"Visuals", 95);
+                    ImGui::PopFont();
+
+                    ImGui::PushFont(minimize2);
+                    TextCentered(u8"РќР°Р±РѕСЂ РїРѕР»РµР·РЅС‹С… РІРёР·СѓР°Р»СЊРЅС‹С… С„СѓРЅРєС†РёР№, РїРѕР·РІРѕР»СЏСЋС‰РёР№ РІРёРґРµС‚СЊ", 140);
+                    TextCentered(u8"РёРіСЂРѕРєРѕРІ, СЃСѓРЅРґСѓРєРё Рё РЅРёРєРё С‡РµСЂРµР· СЃС‚РµРЅС‹. Р’РєР»СЋС‡Р°РµС‚ РІ СЃРµР±СЏ:", 170); 
+                    TextCentered(u8"PlayerESP, ChestESP, Chams, NameTags", 200);
+                    ImGui::PopFont();
+
+                    ImGui::PushFont(minimize2);
+                    ImGui::SetCursorPos(ImVec2(655, 485));
+                    if (ImGui::CButton("H", u8"Р’РЅРµРґСЂРёС‚СЊ", true, ImVec2(170, 40))) {
+                        if (Features::License::ToggleTabIfLicenseExists("visuals", 10, &tabs)) {
+                            vector<std::uint8_t> dll;
+                            if (client.GetSessionHash(md5("visuals"), client.user.name, client.user.password, client.user.session, dll)) {
+                                HANDLE hProcess = GetProcessHandleFromHwnd(FindWindowA(nullptr, injectWindowName));
+                                if (hProcess) {
+                                    LPVOID lpReserved = VirtualAllocEx(hProcess, nullptr, 4096, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+                                    if (lpReserved) {
+                                        WriteProcessMemory(hProcess, lpReserved, client.user.session.c_str(), client.user.session.length(), nullptr);
+                                        ManualMapDll(hProcess, dll.data(), dll.size(), true, true, true, true, DLL_VIMEWORLD_ATTACH, lpReserved);
+                                    }
+                                }
+                                else {
+                                    tabs = 9;
+                                }
+                            }
+                            else {
+                                tabs = 9;
+                            }
+                        }
+                    }
+
+                    ImGui::PopFont();
+                    break;
+
+                case 10: {
+                    ImGui::PushFont(dots);
+                    TextCentered(u8"Visuals", 35);
+                    ImGui::PopFont();
+
+                    if (!Configs::Visuals::config_is_loaded) {
+                        visuals->LoadSettings();
+                        Configs::Visuals::config_is_loaded = true;
+                    }
+
+                    static bool color_picker_enabled = false;
+                    static bool outline_color_picker_enabled = false;
+                    static bool filling_color_picker_enabled = false;
+
+                    static bool chest_esp_color_picker_enabled = false;
+                    static bool chest_esp_outline_color_picker_enabled = false;
+                    static bool chest_esp_filling_color_picker_enabled = false;
+
+                    ImVec2 current_cursor_pos;
+
+                    ImGui::SetCursorPos(ImVec2(255, 90));
+                    ImGui::BeginChild("child_widget", ImVec2(580, 400));
+                    {
+                        ImVec2 window_pos = GetWindowPos();
+
+                        static bool player_esp_show = true;
+                        static bool chest_esp_show = false;
+                        static bool nametags_show = false;
+                        static bool chams_show = false;
+
+                        const char* renderer_module_name = u8"PlayerESP";
+                        ImVec2 renderer_module_button_size = CalcTextSize(renderer_module_name);
+
+                        // Module header rendering
+                        ImGui::SetCursorPos({75, 0});
+                        ImGui::Text(renderer_module_name);
+                        ImVec2 start_cursor_pos = GetCursorPos();
+                        
+                        // Rendering of the arrow next to it
+                        SetCursorPos({75 + 10, 0});
+                        RenderArrow(
+                            GetWindowDrawList(),
+                            ImVec2(window_pos.x + GetCursorPosX() + renderer_module_button_size.x - 12, window_pos.y + GetCursorPosY() + 8 - GetScrollY()),
+                            0xffffffff,
+                            player_esp_show ? ImGuiDir_Up : ImGuiDir_Down,
+                            0.5f
+                        );
+
+                        SetCursorPos({75, 0});
+                        if (ImGui::InvisibleButton("player_esp_settings", ImVec2(renderer_module_button_size.x + 14, renderer_module_button_size.y))) {
+                            chest_esp_show = false;
+                            player_esp_show = !player_esp_show;
+                        }
+
+                        // Rendering of PlayerESP settings
+
+                        const char* modes[] = { "2D", "3D" };
+
+                        const char* color_button_text = u8"Color ";
+                        ImVec2 color_button_size = CalcTextSize(color_button_text);
+                        ImVec2 enable_checkbox_pos;
+
+                        if (player_esp_show) {
+                            static const char* current_mode = visuals->player_esp.mode.c_str();
+
+                            static float player_esp_color[3] = {
+                                visuals->player_esp.box_color.h(), visuals->player_esp.box_color.s(), visuals->player_esp.box_color.v()
+                            };
+                            static float player_esp_outline_color[3] = {
+                                visuals->player_esp.outline_color.h(), visuals->player_esp.outline_color.s(), visuals->player_esp.outline_color.v()
+                            };
+                            static float player_esp_filling_color[4] = {
+                                visuals->player_esp.filling_color.h(), visuals->player_esp.filling_color.s(),
+                                visuals->player_esp.filling_color.v(), visuals->player_esp.filling_color.a()
+                            };
+
+                            hsv_to_rgb(player_esp_color, visuals->player_esp.box_color.color);
+                            hsv_to_rgb(player_esp_outline_color, visuals->player_esp.outline_color.color);
+                            hsv_to_rgb(player_esp_filling_color, visuals->player_esp.filling_color.color);
+
+                            // Mode
+                            SetCursorPos(start_cursor_pos);
+                            ImGui::Text(u8"Mode: ");
+                            SetCursorPos(ImVec2(GetCursorPos().x + 65, start_cursor_pos.y));
+
+                            if (DropdownList("##custom combo", modes, 2, &current_mode)) {
+                                visuals->player_esp.mode = current_mode;
+                                visuals->player_esp.update_mode();
+                            }
+
+                            // Color
+                            SelectEspColor(window_pos, start_cursor_pos, player_esp_color, color_picker_enabled,
+                                outline_color_picker_enabled, filling_color_picker_enabled, visuals->player_esp);
+
+                            // Outline
+                            if (color_picker_enabled) current_cursor_pos = { start_cursor_pos.x, start_cursor_pos.y + 335 };
+                            else current_cursor_pos = { start_cursor_pos.x, start_cursor_pos.y + 70 };
+
+                            SetCursorPos(current_cursor_pos);
+                            if (ImGui::Checkbox("Outline", &visuals->player_esp.outline))
+                                visuals->player_esp.update_outline();
+
+                            SetCursorPos(current_cursor_pos);
+                            RenderArrow(
+                                GetWindowDrawList(),
+                                ImVec2(window_pos.x + GetCursorPosX() + CalcTextSize("Outline").x + 25, window_pos.y + GetCursorPosY() + 5 - GetScrollY()),
+                                0xffffffff,
+                                outline_color_picker_enabled ? ImGuiDir_Up : ImGuiDir_Down,
+                                0.5f
+                            );
+
+                            SetCursorPos(ImVec2(GetCursorPosX() + CalcTextSize("Outline").x + 30, GetCursorPosY() + 5));
+                            if (ImGui::InvisibleButton("player_esp_outline_color_button", ImVec2(20, 15))
+                                && (!color_picker_enabled && !filling_color_picker_enabled))
+                                outline_color_picker_enabled = !outline_color_picker_enabled;
+
+                            if (outline_color_picker_enabled) {
+                                current_cursor_pos.y += 35;
+                                SetCursorPos(current_cursor_pos);
+
+                                if (ImGui::ColorPicker3f(player_esp_outline_color))
+                                    visuals->player_esp.update_outline_color();
+                            }
+
+                            // Filling
+                            if (outline_color_picker_enabled) current_cursor_pos.y += 260;
+                            else current_cursor_pos.y += 30;
+
+                            SetCursorPos(current_cursor_pos);
+                            if (ImGui::Checkbox("Filling", &visuals->player_esp.filling))
+                                visuals->player_esp.update_filling();
+
+                            SetCursorPos(current_cursor_pos);
+                            RenderArrow(
+                                GetWindowDrawList(),
+                                ImVec2(window_pos.x + GetCursorPosX() + CalcTextSize("Filling").x + 25, window_pos.y + GetCursorPosY() + 5 - GetScrollY()),
+                                0xffffffff,
+                                filling_color_picker_enabled ? ImGuiDir_Up : ImGuiDir_Down,
+                                0.5f
+                            );
+
+                            SetCursorPos(ImVec2(GetCursorPosX() + CalcTextSize("Filling").x + 30, GetCursorPosY() + 5));
+                            if (ImGui::InvisibleButton("player_esp_filling_color_button", ImVec2(20, 15))
+                                && (!color_picker_enabled && !outline_color_picker_enabled))
+                                filling_color_picker_enabled = !filling_color_picker_enabled;
+
+                            if (filling_color_picker_enabled) {
+                                current_cursor_pos.y += 35;
+                                SetCursorPos(current_cursor_pos);
+
+                                if (ImGui::ColorPicker4f(player_esp_filling_color))
+                                    visuals->player_esp.update_filling_color();
+                            }
+
+                            if (filling_color_picker_enabled) enable_checkbox_pos = ImVec2(current_cursor_pos.x, current_cursor_pos.y + 260);
+                            else enable_checkbox_pos = ImVec2(current_cursor_pos.x, current_cursor_pos.y + 30);
+
+                            SetCursorPos(enable_checkbox_pos);
+                            if (ImGui::Checkbox("Enable", &visuals->player_esp.enabled))
+                                visuals->player_esp.update_enabled();
+                        }
+
+                        // NameTags
+                        ImVec2 renderer_module_name_pos = { 75, 0 };
+                        if (player_esp_show) renderer_module_name_pos.y = enable_checkbox_pos.y + segu->FontSize + 30;
+                        else renderer_module_name_pos.y = segu->FontSize + 50;
+
+                        renderer_module_name = u8"NameTags";
+                        renderer_module_button_size = CalcTextSize(renderer_module_name);
+
+                        SetCursorPos(renderer_module_name_pos);
+                        ImGui::Text(renderer_module_name);
+
+                        // Rendering of the arrow next to it
+                        SetCursorPos({ renderer_module_name_pos.x + 10, renderer_module_name_pos.y });
+                        RenderArrow(
+                            GetWindowDrawList(),
+                            ImVec2(window_pos.x + GetCursorPosX() + renderer_module_button_size.x - 12, window_pos.y + GetCursorPosY() + 8 - GetScrollY()),
+                            0xffffffff,
+                            nametags_show ? ImGuiDir_Up : ImGuiDir_Down,
+                            0.5f
+                        );
+
+                        SetCursorPos(renderer_module_name_pos);
+                        if (ImGui::InvisibleButton("nametags_settings", ImVec2(renderer_module_button_size.x + 14, renderer_module_button_size.y)))
+                            nametags_show = !nametags_show;
+
+                        if (nametags_show) {
+                            if (ImGui::CheckboxWithCustomLabelID("Enable 3", "Enable", &visuals->name_tags.enabled))
+                                visuals->name_tags.update_enabled();
+                        }
+
+                        // ChestESP
+                        renderer_module_name = u8"ChestESP";
+                        renderer_module_button_size = CalcTextSize(renderer_module_name);
+
+                        ImGui::SetCursorPos(ImVec2(475 - CalcTextSize(renderer_module_name).x, 0));
+                        current_cursor_pos = GetCursorPos();
+                        ImGui::Text(renderer_module_name);
+
+                        // Rendering of the arrow next to it
+                        SetCursorPos({current_cursor_pos.x + 10, current_cursor_pos.y});
+                        RenderArrow(
+                            GetWindowDrawList(),
+                            ImVec2(window_pos.x + GetCursorPosX() + renderer_module_button_size.x - 12, window_pos.y + GetCursorPosY() + 8 - GetScrollY()),
+                            0xffffffff,
+                            chest_esp_show ? ImGuiDir_Up : ImGuiDir_Down,
+                            0.5f
+                        );
+
+                        SetCursorPos(current_cursor_pos);
+                        if (ImGui::InvisibleButton("chest_esp_settings", ImVec2(renderer_module_button_size.x + 14, renderer_module_button_size.y))) {
+                            player_esp_show = false;
+                            chest_esp_show = !chest_esp_show;
+                        }
+
+                        if (chest_esp_show) {
+                            static const char* chest_esp_current_mode = visuals->chest_esp.mode.c_str();
+
+                            static float chest_esp_color[3] = {
+                                visuals->chest_esp.box_color.h(), visuals->chest_esp.box_color.s(), visuals->chest_esp.box_color.v()
+                            };
+                            static float chest_esp_outline_color[3] = {
+                                visuals->chest_esp.outline_color.h(), visuals->chest_esp.outline_color.s(), visuals->chest_esp.outline_color.v()
+                            };
+                            static float chest_esp_filling_color[4] = {
+                                visuals->chest_esp.filling_color.h(), visuals->chest_esp.filling_color.s(),
+                                visuals->chest_esp.filling_color.v(), visuals->chest_esp.filling_color.a()
+                            };
+
+                            visuals->chest_esp.mode = chest_esp_current_mode;
+
+                            hsv_to_rgb(chest_esp_color, visuals->chest_esp.box_color.color);
+                            hsv_to_rgb(chest_esp_outline_color, visuals->chest_esp.outline_color.color);
+                            hsv_to_rgb(chest_esp_filling_color, visuals->chest_esp.filling_color.color);
+
+                            current_cursor_pos.x -= 75;
+                            current_cursor_pos.y = GetCursorPosY();
+
+                            start_cursor_pos = current_cursor_pos;
+
+                            SetCursorPos(current_cursor_pos);
+                            ImGui::Text(u8"Mode: ");
+
+                            SetCursorPos(ImVec2(current_cursor_pos.x + 65, current_cursor_pos.y));
+                            if (DropdownList("##custom combo2", modes, 2, &chest_esp_current_mode)) {
+                                visuals->chest_esp.mode = chest_esp_current_mode;
+                                visuals->chest_esp.update_mode();
+                            }
+
+                            // Color
+                            SelectEspColor(window_pos, current_cursor_pos, chest_esp_color, chest_esp_color_picker_enabled,
+                                chest_esp_outline_color_picker_enabled, chest_esp_filling_color_picker_enabled, visuals->chest_esp);
+
+                            // Outline
+                            if (chest_esp_color_picker_enabled) current_cursor_pos = { current_cursor_pos.x, current_cursor_pos.y + 335 };
+                            else current_cursor_pos = { current_cursor_pos.x, current_cursor_pos.y + 70 };
+
+                            SetCursorPos(current_cursor_pos);
+                            if (ImGui::CheckboxWithCustomLabelID("Outline 2", "Outline", &visuals->chest_esp.outline))
+                                visuals->chest_esp.update_outline();
+
+                            SetCursorPos(current_cursor_pos);
+                            RenderArrow(
+                                GetWindowDrawList(),
+                                ImVec2(window_pos.x + GetCursorPosX() + CalcTextSize("Outline").x + 25, window_pos.y + GetCursorPosY() + 5 - GetScrollY()),
+                                0xffffffff,
+                                chest_esp_outline_color_picker_enabled ? ImGuiDir_Up : ImGuiDir_Down,
+                                0.5f
+                            );
+
+                            SetCursorPos(ImVec2(GetCursorPosX() + CalcTextSize("Outline").x + 30, GetCursorPosY() + 5));
+                            if (ImGui::InvisibleButton("chest_esp_outline_color_button", ImVec2(20, 15))
+                                && (!chest_esp_color_picker_enabled && !chest_esp_filling_color_picker_enabled))
+                                chest_esp_outline_color_picker_enabled = !chest_esp_outline_color_picker_enabled;
+
+                            if (chest_esp_outline_color_picker_enabled) {
+                                current_cursor_pos.y += 35;
+                                SetCursorPos(current_cursor_pos);
+
+                                if (ImGui::ColorPicker3f(chest_esp_outline_color))
+                                    visuals->chest_esp.update_outline_color();
+                            }
+
+                            // Filling
+                            if (chest_esp_outline_color_picker_enabled) current_cursor_pos.y += 260;
+                            else current_cursor_pos.y += 30;
+
+                            SetCursorPos(current_cursor_pos);
+                            if (ImGui::CheckboxWithCustomLabelID("Filling 2", "Filling", &visuals->chest_esp.filling))
+                                visuals->chest_esp.update_filling();
+
+                            SetCursorPos(current_cursor_pos);
+                            RenderArrow(
+                                GetWindowDrawList(),
+                                ImVec2(window_pos.x + GetCursorPosX() + CalcTextSize("Filling").x + 25, window_pos.y + GetCursorPosY() + 5 - GetScrollY()),
+                                0xffffffff,
+                                chest_esp_filling_color_picker_enabled ? ImGuiDir_Up : ImGuiDir_Down,
+                                0.5f
+                            );
+
+                            SetCursorPos(ImVec2(GetCursorPosX() + CalcTextSize("Filling").x + 30, GetCursorPosY() + 5));
+                            if (ImGui::InvisibleButton("chest_esp_filling_color_button", ImVec2(20, 15))
+                                && (!chest_esp_color_picker_enabled && !chest_esp_outline_color_picker_enabled))
+                                chest_esp_filling_color_picker_enabled = !chest_esp_filling_color_picker_enabled;
+
+                            if (chest_esp_filling_color_picker_enabled) {
+                                current_cursor_pos.y += 35;
+                                SetCursorPos(current_cursor_pos);
+
+                                if (ImGui::ColorPicker4f(chest_esp_filling_color))
+                                    visuals->chest_esp.update_filling_color();
+                            }
+
+                            if (chest_esp_filling_color_picker_enabled) enable_checkbox_pos = ImVec2(current_cursor_pos.x, current_cursor_pos.y + 260);
+                            else enable_checkbox_pos = ImVec2(current_cursor_pos.x, current_cursor_pos.y + 30);
+
+                            SetCursorPos(enable_checkbox_pos);
+                            if (ImGui::CheckboxWithCustomLabelID("Enable 2", "Enable", &visuals->chest_esp.enabled))
+                                visuals->chest_esp.update_enabled();
+                        }
+
+                        // Chams
+                        renderer_module_name_pos = { chest_esp_show ? current_cursor_pos.x + 75 : current_cursor_pos.x, 0 };
+                        if (chest_esp_show) renderer_module_name_pos.y = enable_checkbox_pos.y + segu->FontSize + 30;
+                        else renderer_module_name_pos.y = segu->FontSize + 50;
+
+                        renderer_module_name = u8"Chams";
+                        renderer_module_button_size = CalcTextSize(renderer_module_name);
+
+                        SetCursorPos(renderer_module_name_pos);
+                        ImGui::Text(renderer_module_name);
+
+                        // Rendering of the arrow next to it
+                        SetCursorPos({ renderer_module_name_pos.x + 10, renderer_module_name_pos.y });
+                        RenderArrow(
+                            GetWindowDrawList(),
+                            ImVec2(window_pos.x + GetCursorPosX() + renderer_module_button_size.x - 12, window_pos.y + GetCursorPosY() + 8 - GetScrollY()),
+                            0xffffffff,
+                            chams_show ? ImGuiDir_Up : ImGuiDir_Down,
+                            0.5f
+                        );
+
+                        SetCursorPos(renderer_module_name_pos);
+                        if (ImGui::InvisibleButton("chams_settings", ImVec2(renderer_module_button_size.x + 14, renderer_module_button_size.y)))
+                            chams_show = !chams_show;
+
+                        if (chams_show) {
+                            current_cursor_pos = { renderer_module_name_pos.x - 75, GetCursorPosY() };
+                            SetCursorPos(current_cursor_pos);
+                            if (ImGui::Checkbox("Players", &visuals->chams.players))
+                                visuals->chams.update_players();
+
+                            current_cursor_pos.y += 30;
+                            SetCursorPos(current_cursor_pos);
+                            if (ImGui::Checkbox("Chests", &visuals->chams.chests))
+                                visuals->chams.update_chests();
+                        }
+                    }
+
+                    ImGui::EndChild();
+                    break;
                 }
+                }
+
                 ImGui::PopStyleVar(1);
             }
 
@@ -728,6 +1135,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     //kogtevran->~Kogtevran();
     noHurtCam->~NoHurtCam();
     velocity->~Velocity();
+    visuals->~Visuals();
 
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();

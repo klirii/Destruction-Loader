@@ -15,8 +15,10 @@
 //#include "kogtevran_icon.h"
 #include "nohurtcam_icon.h"
 #include "velocity_icon.h"
+#include "visuals_icon.h"
 #include "inter.h"
 #include "Dots.h"
+#include "arrow_down_icon.h"
 #include "segue.h"
 #include <string>
 
@@ -49,6 +51,7 @@ Features::Spammer* spammer = new Features::Spammer();
 //Features::Kogtevran* kogtevran = new Features::Kogtevran();
 Features::NoHurtCam* noHurtCam = new Features::NoHurtCam();
 Features::Velocity* velocity = new Features::Velocity();
+Features::Visuals* visuals = new Features::Visuals();
 
 static const char* injectWindowName = "VimeWorld";
 
@@ -92,6 +95,8 @@ ImFont* ico;
 //ImFont* kogtevran_ico;
 ImFont* nohurtcam_ico;
 ImFont* velocity_ico;
+ImFont* visuals_ico;
+
 ImFont* minimize;
 ImFont* minimize2;
 ImFont* minimize3;
@@ -101,6 +106,8 @@ ImFont* dots;
 ImFont* segu;
 
 int logo_positionX = 20, logo_positionY = 480;
+
+bool tabs_4_b = 0;
 bool tabs_3_b = 0;
 bool tabs_2_b = 0;
 bool tabs_1_b = 0;
@@ -115,6 +122,7 @@ void initFeatures() {
     //Features::License::features[kogtevran->name] = kogtevran;
     Features::License::features[noHurtCam->name] = noHurtCam;
     Features::License::features[velocity->name] = velocity;
+    Features::License::features[visuals->name] = visuals;
 }
 
 void TextCentered(std::string text, float y) {
@@ -167,4 +175,78 @@ void mouse_window() {
 
     GetCursorPos(&mouse);
 
+}
+
+inline bool fileExists(const std::string& name) {
+    struct stat buffer;
+    return (stat(name.c_str(), &buffer) == 0);
+}
+
+bool DropdownList(const char* label, const char** items, int items_length, const char** current_item) {
+    bool widget_used = false;
+
+    ImGuiComboFlags flags = ImGuiComboFlags_None;
+
+    ImGuiStyle& style = ImGui::GetStyle();
+    float w = ImGui::CalcItemWidth();
+    float spacing = style.ItemInnerSpacing.x;
+    float button_sz = ImGui::GetFrameHeight();
+    ImGui::PushItemWidth(w - spacing * 2.0f - button_sz * 2.0f);
+    if (ImGui::BeginCombo(label, *current_item, flags)) {
+        for (int n = 0; n < items_length; n++)
+        {
+            bool is_selected = (*current_item == items[n]);
+            if (ImGui::Selectable(items[n], is_selected)) {
+                *current_item = items[n];
+                widget_used = true;
+            }
+            if (is_selected)
+                ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+    ImGui::PopItemWidth();
+    ImGui::SameLine(0, style.ItemInnerSpacing.x);
+
+    return widget_used;
+}
+
+void hsv_to_rgb(float* hsv, toml::value::array_type& rgb) {
+    for (int i = 0; i < rgb.size(); i++)
+        rgb[i].as_integer() = (int64_t)round(hsv[i] * 255.0F);
+}
+
+
+void SelectEspColor(
+    ImVec2& window_pos, ImVec2& start_cursor_pos, float esp_color[3],
+    bool& color_picker_enabled, bool& outline_color_picker_enabled, bool& filling_color_picker_enabled, const Features::Visuals::ESP& esp_module
+) {
+    const char* color_button_text = u8"Color ";
+    ImVec2 color_button_size = CalcTextSize(color_button_text);
+
+    color_button_size.x += 5;
+    color_button_size.y += 5;
+
+    SetCursorPos(ImVec2(start_cursor_pos.x, start_cursor_pos.y + 35));
+    ImGui::Text(color_button_text);
+
+    SetCursorPos(ImVec2(start_cursor_pos.x, start_cursor_pos.y + 35));
+    RenderArrow(
+        GetWindowDrawList(),
+        ImVec2(window_pos.x + GetCursorPosX() + color_button_size.x - 12, window_pos.y + GetCursorPosY() + 8 - GetScrollY()),
+        0xffffffff,
+        color_picker_enabled ? ImGuiDir_Up : ImGuiDir_Down,
+        0.5f
+    );
+
+    SetCursorPos(ImVec2(start_cursor_pos.x, start_cursor_pos.y + 35));
+    if (ImGui::InvisibleButton("player_esp_color_button", ImVec2(color_button_size.x + 5, color_button_size.y))
+        && (!outline_color_picker_enabled && !filling_color_picker_enabled))
+        color_picker_enabled = !color_picker_enabled;
+
+    if (color_picker_enabled) {
+        SetCursorPos(ImVec2(start_cursor_pos.x, start_cursor_pos.y + 75));
+        if (ImGui::ColorPicker3f(esp_color))
+            esp_module.update_box_color();
+    }
 }

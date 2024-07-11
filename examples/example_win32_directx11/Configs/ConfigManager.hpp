@@ -52,4 +52,11 @@ namespace Configs {
         );
         void UpdateState(bool& enabled);
     }
+
+    namespace Visuals {
+        extern std::string config_path;
+        extern bool config_is_loaded;
+
+        void UpdateSettings(std::string data);
+    }
 }

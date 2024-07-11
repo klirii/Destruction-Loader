@@ -81,7 +81,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
-    <IncludePath>C:\libs\DirectX\Lib\x64;C:\libs\curl\Release x64\include;C:\libs\json\include;C:\libs\cpp_string_utils-main\include;C:\libs\md5cpp\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\libs\DirectX\Lib\x64;C:\libs\curl\Release x64\include;C:\libs\json\include;C:\libs\cpp_string_utils-main\include;C:\libs\md5cpp\include;C:\libs\toml\single_include;$(IncludePath)</IncludePath>
     <ExternalIncludePath>C:\libs\DirectX\Include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>C:\libs\DirectX\Lib\x64;$(LibraryPath)</LibraryPath>
     <TargetName>Loader</TargetName>
@@ -157,6 +157,7 @@
     <ClInclude Include="..\..\imgui_internal.h" />
     <ClInclude Include="..\..\backends\imgui_impl_dx11.h" />
     <ClInclude Include="..\..\backends\imgui_impl_win32.h" />
+    <ClInclude Include="arrow_down_icon.h" />
     <ClInclude Include="colors.h" />
     <ClInclude Include="Configs\ConfigManager.hpp" />
     <ClInclude Include="conversion.hpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="segue.h" />
     <ClInclude Include="user_circle.h" />
     <ClInclude Include="velocity_icon.h" />
+    <ClInclude Include="visuals_icon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp" />
@@ -187,6 +189,7 @@
     <ClCompile Include="..\..\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\..\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="Configs\ConfigManager.cpp" />
+    <ClCompile Include="Features\Features.cpp" />
     <ClCompile Include="Features\License\License.cpp" />
     <ClCompile Include="Inject\Injector.cpp" />
     <ClCompile Include="main.cpp" />
