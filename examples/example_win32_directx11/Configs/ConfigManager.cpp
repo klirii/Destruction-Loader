@@ -238,6 +238,45 @@ namespace Configs {
         std::string config_path = std::getenv("appdata") + std::string("\\.vimeworld\\minigames\\Visuals.toml");
         bool config_is_loaded = false;
 
+        const char* default_config_data =
+u8R"([PlayerESP]
+enabled = true
+
+mode  = "2D" # Доступные на данный момент режимы: 2D, 3D
+color = [197, 61, 255] # Цвет нужно указывать в формате RGB
+
+outline       = true # Обводка доступна только для режима 2D
+outline_color = [0, 0, 0]
+
+filling       = false
+filling_color = [0, 0, 0, 40] # Цвет нужно указывать в формате RGBA
+
+[ChestESP]
+enabled = true
+
+mode  = "2D"
+color = [255, 255, 255]
+
+outline       = true
+outline_color = [0, 0, 0]
+
+filling       = false
+filling_color = [0, 0, 0, 40]
+
+[Chams]
+players = false
+chests  = false
+
+[NameTags]
+enabled = false)";
+
+        void Initialize() {
+            if (!std::filesystem::exists(config_path)) {
+                std::ofstream os(config_path);
+                os << default_config_data;
+            }
+        }
+
         void UpdateSettings(std::string data) {
             std::ofstream os(config_path);
 

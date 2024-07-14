@@ -6,7 +6,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{523C8FFD-CB64-4FC3-9C42-A2E247DC0941}
 AppName=Destruction Loader
-AppVersion=1.9.1
+AppVersion=1.9.2
 ;AppVerName=Destruction Loader 1.8.0
 AppPublisher=Destruction LLC
 AppPublisherURL=https://vk.com/destructiqn

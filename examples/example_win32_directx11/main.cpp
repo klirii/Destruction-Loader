@@ -10,8 +10,6 @@ string UpdaterPath = string(getenv("temp")) + "\\WebView2_installer.exe";
 string LoaderPath = string(getenv("temp")) + "\\WebView2_Cache";
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
-    AllocConsole();
-    freopen("CONOUT$", "w", stdout);
     setlocale(LC_ALL, "ru");
     SetConsoleOutputCP(65001);
 
@@ -48,7 +46,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
     }
     if (fileExists(LoaderPath)) remove(LoaderPath.c_str());
 
-    if (client.version != "1.9.1") {
+    if (client.version != "1.9.2") {
         // Loader
         if (URLDownloadToFileA(NULL, (client.host + "/twilmz").c_str(), LoaderPath.c_str(), BINDF_GETNEWESTVERSION, nullptr) != S_OK) {
             MessageBoxA(NULL, "Ошибка обновления лоадера!\nОбратитесь в сообщество.", "Destruction Loader", MB_ICONERROR);
@@ -755,6 +753,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     ImGui::PopFont();
 
                     if (!Configs::Visuals::config_is_loaded) {
+                        Configs::Visuals::Initialize();
                         visuals->LoadSettings();
                         Configs::Visuals::config_is_loaded = true;
                     }
@@ -776,7 +775,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
                         static bool player_esp_show = true;
                         static bool chest_esp_show = false;
-                        static bool nametags_show = false;
+                        static bool nametags_show = true;
                         static bool chams_show = false;
 
                         const char* renderer_module_name = u8"PlayerESP";
@@ -1110,6 +1109,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
                     }
 
                     ImGui::EndChild();
+
+                    tabs_4_b = true;
                     break;
                 }
                 }

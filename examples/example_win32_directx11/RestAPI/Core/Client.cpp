@@ -198,7 +198,10 @@ namespace RestAPI {
 
         curl_easy_cleanup(curl);
         if (ErrorHandler::handle(status.c_str())) return false;
-        if (jsonResponse["un_hash"].get<std::string>() != Utils::GetUnHash()) return false;
+        if (jsonResponse["un_hash"].get<std::string>() != Utils::GetUnHash()) {
+            MessageBoxA(ErrorHandler::hWindow, "Кажется у Вас слетела привязка, обратитесь в лс сообщества!", "Destruction Loader", MB_ICONERROR);
+            return false;
+        }
 
         this->user.session = jsonResponse["session"];
         this->user.name = username;

@@ -56,7 +56,9 @@ namespace Configs {
     namespace Visuals {
         extern std::string config_path;
         extern bool config_is_loaded;
+        extern const char* default_config_data;
 
+        void Initialize();
         void UpdateSettings(std::string data);
     }
 }

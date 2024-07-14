@@ -93,9 +93,6 @@
     <ClInclude Include="RestAPI\Errors\ErrorHandler.hpp">
       <Filter>sources\RestAPI\Errors</Filter>
     </ClInclude>
-    <ClInclude Include="Features\Features.hpp">
-      <Filter>sources\Features</Filter>
-    </ClInclude>
     <ClInclude Include="Configs\ConfigManager.hpp">
       <Filter>sources\Configs</Filter>
     </ClInclude>
@@ -128,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="arrow_down_icon.h">
       <Filter>icons</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Features.hpp">
+      <Filter>sources\Features</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

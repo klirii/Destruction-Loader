@@ -2,7 +2,7 @@
 #include "../Configs/ConfigManager.hpp"
 
 #define PARSE_ESP_TABLE(config, table_name, esp_instance) {					 \
-	auto table = toml::find(config.unwrap(), table_name);				     \
+	auto table = toml::find(config, table_name);				             \
 																		     \
 	esp_instance.enabled = table.at("enabled").as_boolean();			     \
 																		     \
@@ -17,12 +17,12 @@
 }																		     \
 
 #define PARSE_ON_ENABLE_MODULE_TABLE(config, table_name, on_enable_module_instance) { \
-	auto table = toml::find(config.unwrap(), table_name);					          \
+	auto table = toml::find(config, table_name);					                  \
 	on_enable_module_instance.enabled = table.at("enabled").as_boolean();	          \
 }																					  \
 
 namespace Features {
-    const toml::result<toml::value, std::vector<toml::error_info>> Visuals::config = toml::try_parse(Configs::Visuals::config_path);
+    toml::value Visuals::config;
 
     void format_boolean(std::stringstream& result, const std::string& key, const toml::value& value) {
         result << key << " = " << (value.as_boolean() ? "true" : "false");
@@ -97,64 +97,71 @@ namespace Features {
     }
 
     void Visuals::OnEnableModule::update_enabled() const {
-        auto& some_module = toml::find(config.unwrap(), this->module_name);
+        auto& some_module = toml::find(config, this->module_name);
         const_cast<toml::type_config::boolean_type&>(some_module.at("enabled").as_boolean()) = this->enabled;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::ESP::update_mode() const {
-        auto& esp_module = toml::find(config.unwrap(), this->module_name);
+        auto& esp_module = toml::find(config, this->module_name);
         const_cast<toml::type_config::string_type&>(esp_module.at("mode").as_string()) = this->mode;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::ESP::update_box_color() const {
-        auto& esp_module = toml::find(config.unwrap(), this->module_name);
+        auto& esp_module = toml::find(config, this->module_name);
         const_cast<toml::value::array_type&>(esp_module.at("color").as_array()) = this->box_color.color;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::ESP::update_outline() const {
-        auto& esp_module = toml::find(config.unwrap(), this->module_name);
+        auto& esp_module = toml::find(config, this->module_name);
         const_cast<toml::type_config::boolean_type&>(esp_module.at("outline").as_boolean()) = this->outline;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::ESP::update_outline_color() const {
-        auto& esp_module = toml::find(config.unwrap(), this->module_name);
+        auto& esp_module = toml::find(config, this->module_name);
         const_cast<toml::value::array_type&>(esp_module.at("outline_color").as_array()) = this->outline_color.color;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::ESP::update_filling() const {
-        auto& esp_module = toml::find(config.unwrap(), this->module_name);
+        auto& esp_module = toml::find(config, this->module_name);
         const_cast<toml::type_config::boolean_type&>(esp_module.at("filling").as_boolean()) = this->filling;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::ESP::update_filling_color() const {
-        auto& esp_module = toml::find(config.unwrap(), this->module_name);
+        auto& esp_module = toml::find(config, this->module_name);
         const_cast<toml::value::array_type&>(esp_module.at("filling_color").as_array()) = this->filling_color.color;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::Chams::update_players() {
-        auto& chams = toml::find(config.unwrap(), "Chams");
+        auto& chams = toml::find(config, "Chams");
         const_cast<toml::type_config::boolean_type&>(chams.at("players").as_boolean()) = this->players;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::Chams::update_chests() {
-        auto& chams = toml::find(config.unwrap(), "Chams");
+        auto& chams = toml::find(config, "Chams");
         const_cast<toml::type_config::boolean_type&>(chams.at("chests").as_boolean()) = this->chests;
-        Configs::Visuals::UpdateSettings(format_table(config.unwrap().as_table()));
+        Configs::Visuals::UpdateSettings(format_table(config.as_table()));
     }
 
     void Visuals::LoadSettings() {
+        auto wrapped_config = toml::try_parse(Configs::Visuals::config_path);
+
+        if (!wrapped_config.is_ok())
+            MessageBoxA(NULL, "Ошибка парсинга конфига!", "Destruction Loader", MB_ICONERROR);
+
+        config = wrapped_config.unwrap();
+
         PARSE_ESP_TABLE(config, "PlayerESP", this->player_esp);
         PARSE_ESP_TABLE(config, "ChestESP", this->chest_esp);
 
-        auto chams = toml::find(config.unwrap(), "Chams");
+        auto chams = toml::find(config, "Chams");
 
         this->chams.players = chams.at("players").as_boolean();
         this->chams.chests = chams.at("chests").as_boolean();

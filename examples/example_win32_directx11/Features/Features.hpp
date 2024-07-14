@@ -174,7 +174,7 @@ namespace Features {
             void update_chests();
         };
 
-        static const toml::result<toml::value, std::vector<toml::error_info>> config;
+        static toml::value config;
 
         ESP player_esp = ESP("PlayerESP", {220, 20, 60});
         ESP chest_esp  = ESP("ChestESP", {255, 255, 255});
@@ -182,9 +182,6 @@ namespace Features {
         Chams chams;
 
         Visuals() {
-            if (!config.is_ok())
-                MessageBoxA(NULL, "Ошибка парсинга конфига!", "Destruction Loader", MB_ICONERROR);
-
             this->name = "visuals";
             this->license = "License: ...";
 
